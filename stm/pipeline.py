@@ -36,7 +36,7 @@ WEST = "WEST REGION"
 # ---------------------------------------------------------------------------------------------------------------
 # small writers (LF, rounded, stable column order)
 # ---------------------------------------------------------------------------------------------------------------
-def _round(x, nd=6):
+def _round(x, nd=10):
     if isinstance(x, (float, np.floating)):
         if not np.isfinite(x):
             return None
@@ -339,7 +339,8 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     tot_mod = (P0 * T[None]).sum(axis=(1, 2)) / T.sum()
     tot_obs = obs_res.sum(0) / obs_res.sum()
     summary["mode_choice"] = {
-        "params": dict(zip(L.PARAMS, theta.tolist())), "log_likelihood": ll_m, "converged": bool(opt.success),
+        "params": dict(zip(L.PARAMS, theta.tolist())), "log_likelihood": ll_m, "converged": opt.converged,
+        "max_abs_gradient": opt.max_abs_gradient,
         "value_of_time_note": "b_time is per minute of (generalised) time",
         "share_model": dict(zip(L.MODES, tot_mod.tolist())), "share_census_residence": dict(zip(L.MODES, tot_obs.tolist())),
         "residence_mae_share_points": float(np.mean(np.abs(S_res - share_res_obs)) * 100),
@@ -364,7 +365,7 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
         "region_of_residence": [M.REGIONS[i] for i in gi], "workplace": [te["workplaces"][j] for j in hi],
         "census_commuters": tot_cells[gi, hi], "census_car": sh_obs[gi, hi, 0], "model_car": sh_mod[gi, hi, 0],
         "census_pt": sh_obs[gi, hi, 1], "model_pt": sh_mod[gi, hi, 1]}))
-    log(f"mode choice {np.round(theta, 4).tolist()} converged={opt.success}")
+    log(f"mode choice {np.round(theta, 4).tolist()} converged={opt.converged}")
 
     # ---- e. base assignment ------------------------------------------------------------------------------------------
     acfg = mcfg["assignment"]
@@ -431,11 +432,17 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
             log(f"assignment {name}: {r.iterations} iterations, gap {r.relative_gap:.2e}")
         write_csv(out / "assignment_convergence.csv", pd.DataFrame(conv_rows, columns=["scenario", "iteration",
                                                                                       "relative_gap"]))
+        g = rm.net.graph
+        kc = np.arange(rm.n_road_links, g.n_links)
+        write_csv(out / "connector_flows.csv", pd.DataFrame(
+            {"tail": g.tail[kc], "head": g.head[kc],
+             **{f"flow_{n}": results_flows[n][rm.n_road_links:] for n in ("base_2020", "dm_2030", "ds_2030_jrl")}}),
+            sig=10)
     else:
         lf = pd.read_csv(out / "link_flows.csv")
+        cf = pd.read_csv(out / "connector_flows.csv")
         for name in ("base_2020", "dm_2030", "ds_2030_jrl"):
-            results_flows[name] = np.concatenate([lf[f"flow_{name}"].values,
-                                                  np.zeros(rm.net.graph.n_links - rm.n_road_links)])
+            results_flows[name] = np.concatenate([lf[f"flow_{name}"].values, cf[f"flow_{name}"].values])
 
     # ---- link results, V/C, west --------------------------------------------------------------------------------------
     Ld = rm.links
@@ -452,7 +459,7 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
         lf[f"vc_{name}"] = f / Ld.capacity.values
         tt = rm.net.time(results_flows[name])[: rm.n_road_links]
         lf[f"speed_kmh_{name}"] = Ld.length_km.values / np.maximum(tt, 1e-12)
-    write_csv(out / "link_flows.csv", lf)
+    write_csv(out / "link_flows.csv", lf, sig=10)
     base_vc = lf.vc_base_2020.values
     km = lf.length_km.values
     vc_bins = [0, 0.5, 0.85, 1.0, np.inf]
@@ -540,7 +547,6 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     write_json(out / "summary.json", summary)
     write_json(out / "inputs_used.json", {"model": cfg["model"], "rail_base_year_rule": cfg["rail"]["base_year_rule"],
                                           "rail_speeds": cfg["rail"]["speeds_kmh"]})
-    np.savez_compressed(out / "demand_base_2020.npz", T=np.round(T, 6), Q=np.round(Q0, 6))
     log("done")
     return summary
 

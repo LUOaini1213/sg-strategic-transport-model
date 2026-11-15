@@ -244,8 +244,8 @@
     "value": 7
    },
    "bus_weekdays": {
-    "label": "REAL",
-    "note": "Monday-Friday days less public holidays. July 2026 has 23 weekdays and no public holiday; August 2026 has 21 weekdays less Monday 10 August (National Day falls on Sunday 9 August, so the Monday is a holiday). Holiday list: Ministry of Manpower, Public holidays for 2026 (https://www.mom.gov.sg/employment-practices/public-holidays); not re-verified in this study.",
+    "label": "ASSUMPTION",
+    "note": "Monday-Friday days less public holidays: July 2026 has 23 weekdays and no public holiday; August 2026 has 21 weekdays, less Monday 10 August. The Ministry of Manpower's 2026 list (https://www.mom.gov.sg/employment-practices/public-holidays, retrieved 2026-11-15) gives National Day on Sunday 9 August 2026 and says Monday 10 August 2026 is a public holiday if the rest day falls on 9 August. Whether DataMall files 10 August under WEEKDAY or WEEKENDS/HOLIDAY was not verified; 20 is assumed.",
     "value": {
      "202607": 23,
      "202608": 20
@@ -344,12 +344,12 @@
    },
    "tengah_buildout_by_2030": {
     "label": "ASSUMPTION",
-    "note": "the whole town is taken as completed and occupied by 2030; HDB's completion schedule was not checked",
+    "note": "the whole town is taken as completed and occupied by 2030. This is an upper bound: HDB's completion schedule was not checked, and the split of the 42,000 homes between public and private housing was not verified (all are treated as public housing, the zones' 2020 private-housing share being 0)",
     "value": 1.0
    },
    "tengah_homes": {
     "label": "REAL",
-    "note": "HDB: Tengah town will have about 42,000 new homes (HDB, Tengah town page, https://www.hdb.gov.sg/about-us/history/hdb-towns-your-home/tengah); retrieval status in DATA_SOURCES.md",
+    "note": "HDB: Tengah 'is estimated to provide about 42,000 new homes when fully developed' (Annex B to HDB's 2024 news release on four Tengah BTO projects and ABC Waters certification, https://www.hdb.gov.sg/-/media/hdb-pulse/news/2024/four-tengah-bto-projects-awarded-top-tier-active-beautiful-clean-waters-certification/Annex-B.pdf, retrieved 2026-11-15); the same figure appears in HDB's Tengah Town Design Guide",
     "value": 42000
    },
    "tengah_jobs": {

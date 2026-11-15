@@ -198,7 +198,9 @@ def aon(g: Graph, cost: np.ndarray, origins: np.ndarray, dest_nodes: np.ndarray,
     if np.any(cost < 0) or not np.all(np.isfinite(cost)):
         raise ValueError("link costs must be finite and non-negative")
     demand = np.ascontiguousarray(demand, dtype=np.float64)
-    n_chunks = max(1, min(n_chunks, len(origins)))
+    # small problems run in one chunk: thread start-up would cost more than the work (results do not depend on it
+    # beyond floating-point summation order, which is fixed for a given problem size)
+    n_chunks = 1 if len(origins) < 64 else max(1, min(n_chunks, len(origins)))
     flows, sptt, unreach = _aon(np.asarray(origins, dtype=np.int64), np.asarray(dest_nodes, dtype=np.int64), demand,
                                 g.indptr, g.fs_link, g.head, g.tail, cost, g.n_nodes, n_chunks)
     if unreach:

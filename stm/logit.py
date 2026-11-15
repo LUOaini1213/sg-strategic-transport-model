@@ -66,7 +66,16 @@ def calibrate(T, X, obs_res, res_group, obs_work, work_group, x0=None):
     if x0 is None:
         x0 = np.array([0.0, -1.0, -0.05, 1.0, -0.5, 0.0, 0.0, 0.0])
     n = sum(float(np.sum(o)) for o in (obs_res, obs_work) if o is not None)
-    # scaled to a mean log-likelihood per observation so that the gradient tolerance is meaningful
-    res = minimize(lambda th: -log_likelihood(th, T, X, obs_res, res_group, obs_work, work_group) / n, x0=x0,
-                   method="BFGS", options={"gtol": 1e-7, "maxiter": 5000})
+
+    def obj(th):
+        # scaled to a mean log-likelihood per observation so that the gradient tolerance is meaningful
+        return -log_likelihood(th, T, X, obs_res, res_group, obs_work, work_group) / n
+
+    res = minimize(obj, x0=x0, method="BFGS", options={"gtol": 1e-7, "maxiter": 5000})
+    # BFGS may stop with "precision loss" when finite-difference gradients are noisy; judge convergence by a
+    # central-difference gradient at the solution instead
+    h = 1e-6
+    grad = np.array([(obj(res.x + h * e) - obj(res.x - h * e)) / (2 * h) for e in np.eye(len(res.x))])
+    res.max_abs_gradient = float(np.max(np.abs(grad)))
+    res.converged = bool(res.max_abs_gradient < 1e-5)
     return res.x, -float(res.fun) * n, res

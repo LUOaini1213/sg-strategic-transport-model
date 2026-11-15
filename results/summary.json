@@ -1,108 +1,108 @@
 {
  "assignment": {
   "base_2020": {
-   "average_excess_cost_min": 0.00133813,
-   "car_trips_per_hour": 162844.0,
+   "average_excess_cost_min": 0.001338128999,
+   "car_trips_per_hour": 162844.3215,
    "converged": true,
    "iterations": 40,
-   "relative_gap": 7.38668e-05,
-   "relative_gap_recomputed": 7.38668e-05,
-   "vehicle_hours": 43644.4,
-   "vehicle_km": 2252360.0
+   "relative_gap": 7.386684646e-05,
+   "relative_gap_recomputed": 7.386684646e-05,
+   "vehicle_hours": 43644.36697,
+   "vehicle_km": 2252361.836
   },
   "dm_2030": {
-   "average_excess_cost_min": 0.00175352,
-   "car_trips_per_hour": 166602.0,
+   "average_excess_cost_min": 0.001753520872,
+   "car_trips_per_hour": 166602.0542,
    "converged": true,
    "iterations": 35,
-   "relative_gap": 9.61354e-05,
-   "relative_gap_recomputed": 9.61354e-05,
-   "vehicle_hours": 44946.2,
-   "vehicle_km": 2301870.0
+   "relative_gap": 9.61354316e-05,
+   "relative_gap_recomputed": 9.61354316e-05,
+   "vehicle_hours": 44946.1827,
+   "vehicle_km": 2301869.658
   },
   "ds_2030_jrl": {
-   "average_excess_cost_min": 0.00141755,
-   "car_trips_per_hour": 166076.0,
+   "average_excess_cost_min": 0.001417553011,
+   "car_trips_per_hour": 166076.4339,
    "converged": true,
    "iterations": 36,
-   "relative_gap": 7.77742e-05,
-   "relative_gap_recomputed": 7.77742e-05,
-   "vehicle_hours": 44783.1,
-   "vehicle_km": 2293830.0
+   "relative_gap": 7.777418404e-05,
+   "relative_gap_recomputed": 7.777418404e-05,
+   "vehicle_hours": 44783.11446,
+   "vehicle_km": 2293826.167
   }
  },
  "distribution_bus": {
-  "a": -0.836474,
+  "a": -0.8364737815,
   "am_peak_hour": "07:00-08:00",
-  "b_per_km": 0.241805,
+  "b_per_km": 0.2418048678,
   "calibration": {
-   "coincidence_ratio": 0.77107,
-   "coincidence_ratio_exponential": 0.726546,
-   "geh_lt10_share_pa_pairs": 0.894656,
-   "geh_lt5_share_pa_pairs": 0.768551,
-   "geh_lt5_share_pa_pairs_over_100": 0.286567,
-   "intrazonal_share_model": 0.220705,
-   "intrazonal_share_observed": 0.168926,
-   "mean_km_model": 4.38284,
-   "mean_km_model_exponential": 4.38284,
-   "mean_km_observed": 4.38284,
+   "coincidence_ratio": 0.7710696106,
+   "coincidence_ratio_exponential": 0.7265464719,
+   "geh_lt10_share_pa_pairs": 0.8946559016,
+   "geh_lt5_share_pa_pairs": 0.7685505575,
+   "geh_lt5_share_pa_pairs_over_100": 0.2865671642,
+   "intrazonal_share_model": 0.2207049714,
+   "intrazonal_share_observed": 0.1689256116,
+   "mean_km_model": 4.382841658,
+   "mean_km_model_exponential": 4.382841658,
+   "mean_km_observed": 4.382841658,
    "pa_pairs": 2601,
    "pa_pairs_over_100": 335,
-   "r2_pa_pairs": 0.971061,
-   "r2_pa_pairs_excluding_intra_pa": 0.79821,
-   "r2_zone_pairs": 0.636756,
-   "trips_per_hour": 401547.0
+   "r2_pa_pairs": 0.9710610717,
+   "r2_pa_pairs_excluding_intra_pa": 0.798210271,
+   "r2_zone_pairs": 0.6367555686,
+   "trips_per_hour": 401546.9565
   },
   "calibration_month": "2026-07",
   "deterrence": "gamma",
-  "exponential_b_per_km": 0.424955,
-  "moment_residual": 1.40998e-13,
-  "stop_to_stop_straight_line_mean_km_july": 2.58658,
+  "exponential_b_per_km": 0.4249549494,
+  "moment_residual": 1.409983241e-13,
+  "stop_to_stop_straight_line_mean_km_july": 2.586582434,
   "transfer_to_commute": {
-   "mean_km_model_zone_level": 9.3446,
-   "r2_cells": 0.813902,
-   "srmse_cells": 0.878485
+   "mean_km_model_zone_level": 9.344596994,
+   "r2_cells": 0.8139024322,
+   "srmse_cells": 0.8784846143
   },
   "validation": {
-   "coincidence_ratio": 0.771745,
-   "coincidence_ratio_exponential": 0.725661,
-   "geh_lt10_share_pa_pairs": 0.891196,
-   "geh_lt5_share_pa_pairs": 0.764706,
+   "coincidence_ratio": 0.7717453485,
+   "coincidence_ratio_exponential": 0.7256608531,
+   "geh_lt10_share_pa_pairs": 0.891195694,
+   "geh_lt5_share_pa_pairs": 0.7647058824,
    "geh_lt5_share_pa_pairs_over_100": 0.3,
-   "intrazonal_share_model": 0.220047,
-   "intrazonal_share_observed": 0.170223,
-   "mean_km_model": 4.37881,
-   "mean_km_model_exponential": 4.3791,
-   "mean_km_observed": 4.34455,
+   "intrazonal_share_model": 0.2200474276,
+   "intrazonal_share_observed": 0.1702233719,
+   "mean_km_model": 4.378811189,
+   "mean_km_model_exponential": 4.37910385,
+   "mean_km_observed": 4.344551257,
    "pa_pairs": 2601,
    "pa_pairs_over_100": 340,
-   "r2_pa_pairs": 0.971409,
-   "r2_pa_pairs_excluding_intra_pa": 0.803185,
-   "r2_zone_pairs": 0.63813,
-   "trips_per_hour": 410148.0
+   "r2_pa_pairs": 0.971409398,
+   "r2_pa_pairs_excluding_intra_pa": 0.8031850941,
+   "r2_zone_pairs": 0.6381303906,
+   "trips_per_hour": 410147.85
   },
   "validation_month": "2026-08"
  },
  "distribution_commute": {
-  "a": -0.491654,
-  "b_per_km": 0.0424177,
+  "a": -0.4916543124,
+  "b_per_km": 0.04241767087,
   "cells": 220,
-  "coincidence_ratio_cell_level": 0.959887,
+  "coincidence_ratio_cell_level": 0.9598868522,
   "deterrence": "gamma",
-  "intrazonal_share_model": 0.0139676,
-  "log_likelihood": -8920260.0,
-  "mean_km_cell_level_census": 15.0789,
-  "mean_km_cell_level_model": 15.0764,
-  "mean_km_model_zone_level": 14.2641,
-  "r2_cells": 0.989378,
-  "srmse_cells": 0.132445
+  "intrazonal_share_model": 0.01396764231,
+  "log_likelihood": -8920262.157,
+  "mean_km_cell_level_census": 15.07891568,
+  "mean_km_cell_level_model": 15.07637686,
+  "mean_km_model_zone_level": 14.26408668,
+  "r2_cells": 0.9893782595,
+  "srmse_cells": 0.1324445143
  },
  "generation": {
-  "am_peak_hour_trips": 461928.0,
+  "am_peak_hour_trips": 461927.7947,
   "attendance_factor": 0.9,
-  "census_employed_residents": 2177460.0,
-  "commuters_daily": 1831360.0,
-  "peak_hour_share": 0.280257,
+  "census_employed_residents": 2177456.0,
+  "commuters_daily": 1831365.0,
+  "peak_hour_share": 0.2802571335,
   "zones_with_attractions": 305,
   "zones_with_productions": 234
  },
@@ -118,25 +118,25 @@
    "checks": {
     "base_2020": {
      "X": [
-      0.235799,
-      0.136026,
-      0.132577,
-      0.235799
+      0.2357991503,
+      0.1360255287,
+      0.1325765944,
+      0.2357991503
      ],
-     "Y": 0.204359,
+     "Y": 0.2043592636,
      "approach_flow": [
-      2249.94,
-      1112.5,
-      112.78,
-      133.726
+      2249.937783,
+      1112.504832,
+      112.7797691,
+      133.7258352
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      2.94032,
-      2.68907,
-      22.3758,
-      23.0526
+      2.940322572,
+      2.689073684,
+      22.37575826,
+      23.05263556
      ],
      "growth_factor": [
       1.0,
@@ -144,7 +144,7 @@
       1.0,
       1.0
      ],
-     "max_X": 0.235799,
+     "max_X": 0.2357991503,
      "phases": [
       [
        0,
@@ -158,33 +158,33 @@
     },
     "dm_2030": {
      "X": [
-      0.381308,
-      0.159023,
-      0.0856034,
-      0.381308
+      0.3813082034,
+      0.159023231,
+      0.08560339179,
+      0.3813082034
      ],
-     "Y": 0.330467,
+     "Y": 0.3304671096,
      "approach_flow": [
-      3126.6,
-      1117.66,
-      122.058,
-      362.461
+      3126.597912,
+      1117.659897,
+      122.0584244,
+      362.4613275
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      5.88217,
-      4.9393,
-      17.3473,
-      19.302
+      5.882169817,
+      4.939296265,
+      17.34728494,
+      19.30201622
      ],
      "growth_factor": [
-      1.38964,
-      1.00463,
-      1.08227,
-      2.71048
+      1.389637498,
+      1.004633747,
+      1.082272339,
+      2.710480939
      ],
-     "max_X": 0.381308,
+     "max_X": 0.3813082034,
      "phases": [
       [
        0,
@@ -198,33 +198,33 @@
     },
     "ds_2030_jrl": {
      "X": [
-      0.376153,
-      0.158735,
-      0.0860933,
-      0.376153
+      0.376153454,
+      0.1587347083,
+      0.08609330561,
+      0.376153454
      ],
-     "Y": 0.326,
+     "Y": 0.3259996602,
      "approach_flow": [
-      3093.74,
-      1119.04,
-      121.834,
-      354.872
+      3093.743395,
+      1119.036735,
+      121.8336771,
+      354.8720243
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      5.80543,
-      4.89183,
-      17.4345,
-      19.3484
+      5.805426733,
+      4.891827928,
+      17.4344779,
+      19.34839463
      ],
      "growth_factor": [
-      1.37504,
-      1.00587,
-      1.08028,
-      2.65373
+      1.375035087,
+      1.005871348,
+      1.080279541,
+      2.653728232
      ],
-     "max_X": 0.376153,
+     "max_X": 0.376153454,
      "phases": [
       [
        0,
@@ -245,55 +245,56 @@
    ],
    "junction": 812,
    "xy": [
-    17314.3,
-    36454.3
+    17314.275,
+    36454.2625
    ]
   },
   "junctions_in_west": 153,
-  "max_junction_gf_dm_vs_base": 2.19238,
-  "median_junction_gf_dm_vs_base": 1.02788
+  "max_junction_gf_dm_vs_base": 2.192379929,
+  "median_junction_gf_dm_vs_base": 1.027883346
  },
  "mode_choice": {
   "converged": true,
   "holdout_cells": 206,
-  "holdout_r2_car_share": 0.614758,
-  "holdout_r2_pt_share": 0.789577,
-  "holdout_weighted_mae_car_points": 3.034,
-  "holdout_weighted_mae_pt_points": 3.5528,
-  "log_likelihood": -3168750.0,
+  "holdout_r2_car_share": 0.6147577765,
+  "holdout_r2_pt_share": 0.7895766936,
+  "holdout_weighted_mae_car_points": 3.033999349,
+  "holdout_weighted_mae_pt_points": 3.552798104,
+  "log_likelihood": -3168747.644,
+  "max_abs_gradient": 3.205768984e-06,
   "params": {
-   "asc_car": -1.84908,
-   "asc_other": -3.576,
-   "b_central": -0.275516,
-   "b_dist_other": 0.00467734,
-   "b_ind_car": 0.53527,
-   "b_ind_other": 1.97961,
-   "b_priv": 2.18474,
-   "b_time": -0.00904497
+   "asc_car": -1.849084016,
+   "asc_other": -3.576003073,
+   "b_central": -0.2755156943,
+   "b_dist_other": 0.004677344155,
+   "b_ind_car": 0.5352698763,
+   "b_ind_other": 1.979610154,
+   "b_priv": 2.184740111,
+   "b_time": -0.009044971607
   },
-  "residence_mae_share_points": 2.00039,
-  "residence_r2_car_share": 0.918138,
+  "residence_mae_share_points": 2.000390207,
+  "residence_r2_car_share": 0.9181382458,
   "share_census_residence": {
-   "car": 0.267988,
-   "other": 0.0919492,
-   "pt": 0.640063
+   "car": 0.2679881887,
+   "other": 0.09194916095,
+   "pt": 0.6400626504
   },
   "share_model": {
-   "car": 0.267925,
-   "other": 0.0889475,
-   "pt": 0.643128
+   "car": 0.2679249408,
+   "other": 0.08894752154,
+   "pt": 0.6431275377
   },
   "value_of_time_note": "b_time is per minute of (generalised) time",
-  "workplace_mae_share_points": 2.54455,
-  "workplace_r2_car_share": 0.365379
+  "workplace_mae_share_points": 2.544551385,
+  "workplace_r2_car_share": 0.3653794846
  },
  "network": {
   "connectors": 1992,
-  "lanes_from_tag_share": 0.928992,
-  "road_km_directed": 2912.41,
+  "lanes_from_tag_share": 0.9289915966,
+  "road_km_directed": 2912.4058,
   "road_links": 23800,
   "road_nodes": 17477,
-  "speed_from_tag_share": 0.961176
+  "speed_from_tag_share": 0.9611764706
  },
  "pt_network": {
   "jrl_positions_from_osm": [
@@ -319,29 +320,29 @@
    "JW4",
    "JW5"
   ],
-  "rail_faster_share_of_commuters_base": 0.928775,
+  "rail_faster_share_of_commuters_base": 0.928774579,
   "stations_base": 186,
   "stations_with_jrl": 210
  },
  "road": {
   "share_km_by_vc_bin": {
    "base_2020": [
-    0.850965,
-    0.0963549,
-    0.0227706,
-    0.0299093
+    0.8509652398,
+    0.0963548761,
+    0.02277062489,
+    0.02990925921
    ],
    "dm_2030": [
-    0.846984,
-    0.0987064,
-    0.0225116,
-    0.0317979
+    0.8469840295,
+    0.09870643713,
+    0.02251159505,
+    0.03179793832
    ],
    "ds_2030_jrl": [
-    0.848517,
-    0.0980755,
-    0.0217584,
-    0.0316486
+    0.8485174696,
+    0.09807554977,
+    0.02175836897,
+    0.0316486116
    ]
   },
   "vc_bins": [
@@ -350,81 +351,81 @@
    "0.85-1.0",
    ">1.0"
   ],
-  "west_km": 775.053,
+  "west_km": 775.0528,
   "west_km_vc_over_0_85_base": 25.9214,
   "west_km_vc_over_0_85_dm": 29.6417,
   "west_km_vc_over_0_85_ds": 28.3307,
   "west_links": 6028,
   "west_links_vc_down_by_0_05_ds_vs_dm": 40,
   "west_links_vc_up_by_0_05_ds_vs_dm": 8,
-  "west_mean_vc_base": 0.165678,
-  "west_mean_vc_dm": 0.174275,
-  "west_mean_vc_ds": 0.172349
+  "west_mean_vc_base": 0.1656784283,
+  "west_mean_vc_dm": 0.1742746941,
+  "west_mean_vc_ds": 0.1723494106
  },
  "runtime_s": null,
  "scenario_2030": {
-  "commuters_daily_2030": 1892580.0,
-  "jrl_mean_pt_time_change_min_tengah_commuters": -2.16932,
-  "jrl_mean_pt_time_change_min_west_commuters": -1.53411,
-  "jrl_share_west_commuters_saving_5min_or_more": 0.113241,
+  "commuters_daily_2030": 1892579.676,
+  "jrl_mean_pt_time_change_min_tengah_commuters": -2.169315412,
+  "jrl_mean_pt_time_change_min_west_commuters": -1.534108602,
+  "jrl_share_west_commuters_saving_5min_or_more": 0.1132412273,
   "mode_shares": {
    "base_2020": {
     "all": {
-     "car": 0.267925,
-     "other": 0.0889475,
-     "pt": 0.643128
+     "car": 0.2679249408,
+     "other": 0.08894752154,
+     "pt": 0.6431275377
     },
-    "car_trips_per_hour": 162844.0,
+    "car_trips_per_hour": 162844.3215,
     "west_residents": {
-     "car": 0.246964,
-     "other": 0.102327,
-     "pt": 0.650708
+     "car": 0.2469643978,
+     "other": 0.1023274576,
+     "pt": 0.6507081446
     }
    },
    "dm_2030": {
     "all": {
-     "car": 0.265184,
-     "other": 0.0893172,
-     "pt": 0.645499
+     "car": 0.2651842751,
+     "other": 0.08931716338,
+     "pt": 0.6454985615
     },
-    "car_trips_per_hour": 166602.0,
+    "car_trips_per_hour": 166602.0542,
     "tengah_residents": {
-     "car": 0.188999,
-     "other": 0.111245,
-     "pt": 0.699756
+     "car": 0.1889991677,
+     "other": 0.1112448274,
+     "pt": 0.6997560049
     },
     "west_residents": {
-     "car": 0.239606,
-     "other": 0.103053,
-     "pt": 0.657341
+     "car": 0.2396056163,
+     "other": 0.1030529839,
+     "pt": 0.6573413999
     }
    },
    "ds_2030_jrl": {
     "all": {
-     "car": 0.264356,
-     "other": 0.0889837,
-     "pt": 0.64666
+     "car": 0.2643562788,
+     "other": 0.08898367666,
+     "pt": 0.6466600446
     },
-    "car_trips_per_hour": 166076.0,
+    "car_trips_per_hour": 166076.4339,
     "tengah_residents": {
-     "car": 0.186448,
-     "other": 0.109848,
-     "pt": 0.703704
+     "car": 0.1864482728,
+     "other": 0.1098480972,
+     "pt": 0.70370363
     },
     "west_residents": {
-     "car": 0.237591,
-     "other": 0.10208,
-     "pt": 0.660329
+     "car": 0.2375908806,
+     "other": 0.1020797815,
+     "pt": 0.6603293379
     }
    }
   },
   "tengah": {
-   "commuters": 61214.7,
-   "commuters_per_resident_west": 0.470159,
+   "commuters": 61214.67563,
+   "commuters_per_resident_west": 0.470158799,
    "homes": 42000.0,
-   "mean_residential_gpr_used": 2.78776,
+   "mean_residential_gpr_used": 2.787755102,
    "population": 130200.0,
-   "tengah_jobs_attracted": 3891.66
+   "tengah_jobs_attracted": 3891.661032
   }
  },
  "zones": {

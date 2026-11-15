@@ -1,0 +1,31 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: "Check out repository"
+        uses: actions/checkout@v4
+
+      - name: "Set up Python 3.11"
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: "Install pinned dependencies"
+        run: python -m pip install -r requirements.txt
+
+      - name: "Download the Sioux Falls test network (pinned commit, SHA-256 checked; not redistributed here)"
+        run: |
+          python -m pip install requests==2.32.3
+          python scripts/fetch_data.py --only sioux_falls
+
+      - name: "Run tests (offline from here on; includes a full re-run of the model compared with results/)"
+        env:
+          STM_REQUIRE_SIOUX_FALLS: "1"
+        run: python -m pytest

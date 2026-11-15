@@ -4,7 +4,7 @@
   "period": {
     "am_peak_hour": {"value": 7, "label": "DERIVED", "note": "07:00-07:59, the weekday morning hour with most bus tap-ins in LTA DataMall origin-destination volumes (July and August 2026)"},
     "morning_window": {"value": [5, 10], "label": "ASSUMPTION", "note": "tap-in hours 05:00-10:59 taken as the outbound morning window when deriving the peak-hour share"},
-    "bus_weekdays": {"value": {"202607": 23, "202608": 20}, "label": "REAL", "note": "Monday-Friday days less public holidays. July 2026 has 23 weekdays and no public holiday; August 2026 has 21 weekdays less Monday 10 August (National Day falls on Sunday 9 August, so the Monday is a holiday). Holiday list: Ministry of Manpower, Public holidays for 2026 (https://www.mom.gov.sg/employment-practices/public-holidays); not re-verified in this study."}
+    "bus_weekdays": {"value": {"202607": 23, "202608": 20}, "label": "ASSUMPTION", "note": "Monday-Friday days less public holidays: July 2026 has 23 weekdays and no public holiday; August 2026 has 21 weekdays, less Monday 10 August. The Ministry of Manpower's 2026 list (https://www.mom.gov.sg/employment-practices/public-holidays, retrieved 2026-11-15) gives National Day on Sunday 9 August 2026 and says Monday 10 August 2026 is a public holiday if the rest day falls on 9 August. Whether DataMall files 10 August under WEEKDAY or WEEKENDS/HOLIDAY was not verified; 20 is assumed."}
   },
   "generation": {
     "attendance_factor": {"value": 0.9, "label": "ASSUMPTION", "note": "share of employed residents with a fixed workplace who travel to it on an average weekday (leave, sickness, shifts, hybrid work)"},
@@ -66,8 +66,8 @@
     "connectors_per_zone": {"value": 3, "label": "ASSUMPTION", "note": "nearest road nodes on non-motorway links, preferring nodes inside the zone"}
   },
   "scenario_2030": {
-    "tengah_homes": {"value": 42000, "label": "REAL", "note": "HDB: Tengah town will have about 42,000 new homes (HDB, Tengah town page, https://www.hdb.gov.sg/about-us/history/hdb-towns-your-home/tengah); retrieval status in DATA_SOURCES.md"},
-    "tengah_buildout_by_2030": {"value": 1.0, "label": "ASSUMPTION", "note": "the whole town is taken as completed and occupied by 2030; HDB's completion schedule was not checked"},
+    "tengah_homes": {"value": 42000, "label": "REAL", "note": "HDB: Tengah 'is estimated to provide about 42,000 new homes when fully developed' (Annex B to HDB's 2024 news release on four Tengah BTO projects and ABC Waters certification, https://www.hdb.gov.sg/-/media/hdb-pulse/news/2024/four-tengah-bto-projects-awarded-top-tier-active-beautiful-clean-waters-certification/Annex-B.pdf, retrieved 2026-11-15); the same figure appears in HDB's Tengah Town Design Guide"},
+    "tengah_buildout_by_2030": {"value": 1.0, "label": "ASSUMPTION", "note": "the whole town is taken as completed and occupied by 2030. This is an upper bound: HDB's completion schedule was not checked, and the split of the 42,000 homes between public and private housing was not verified (all are treated as public housing, the zones' 2020 private-housing share being 0)"},
     "persons_per_home": {"value": 3.1, "label": "ASSUMPTION", "note": "close to the Census 2020 average resident household size; not taken from a specific table"},
     "other_growth": {"value": "none", "label": "ASSUMPTION", "note": "outside Tengah, 2030 population and jobs are held at 2020 levels so that the scenarios isolate Tengah and the JRL"},
     "tengah_jobs": {"value": "Tengah's MP2019 non-residential parcels x job weights x (jobs per weight unit in the West Region)", "label": "ASSUMPTION"},
