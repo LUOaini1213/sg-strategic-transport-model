@@ -78,6 +78,22 @@ def job_weights(inp: dict, cfg: dict, nz: int) -> np.ndarray:
     return np.bincount(lu.zone.values - 1, weights=wt.values, minlength=nz)
 
 
+INDUSTRIAL = ("BUSINESS 1", "BUSINESS 2", "BUSINESS 1 - WHITE", "BUSINESS 2 - WHITE", "PORT / AIRPORT")
+
+
+def industrial_share(inp: dict, cfg: dict, nz: int) -> np.ndarray:
+    """Share of each zone's job weight that lies on industrial or port land."""
+    g = cfg["model"]["generation"]
+    w = v(g["job_weight_per_m2_gfa"])
+    pr = v(g["plot_ratio_defaults"])
+    lu = inp["landuse"]
+    gfa = lu.gfa_numeric_gpr_m2 + lu.site_area_gpr_lnd_m2 * pr["LND"] + lu.site_area_gpr_other_code_m2 * pr["other_codes"]
+    wt = (gfa * lu.lu_desc.map(w).fillna(0.0)).values
+    ind = np.bincount(lu.zone.values - 1, weights=wt * lu.lu_desc.isin(INDUSTRIAL).values, minlength=nz)
+    tot = np.bincount(lu.zone.values - 1, weights=wt, minlength=nz)
+    return np.divide(ind, tot, out=np.zeros(nz), where=tot > 0)
+
+
 def pa_title(name: str) -> str:
     return name.strip().upper()
 

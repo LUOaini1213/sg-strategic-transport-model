@@ -1,13 +1,14 @@
 """Multinomial logit mode choice (car, public transport, other), calibrated to aggregate mode shares.
 
 Utilities for an origin-destination pair (i, j), times in minutes, distance in km:
-    V_car   = asc_car + b_time * t_car_ij + b_priv * private_i + b_central * central_j
+    V_car   = asc_car + b_time * t_car_ij + b_priv * private_i + b_central * central_j + b_ind_car * industrial_j
     V_pt    =           b_time * g_pt_ij
-    V_other = asc_other + b_dist_other * d_ij
+    V_other = asc_other + b_dist_other * d_ij + b_ind_other * industrial_j
 P_m = exp(V_m) / sum_k exp(V_k).
 
-private_i = share of zone i's residents in condominiums, other apartments and landed housing (Census 2020);
-central_j = 1 if zone j is in URA's Central Area.
+private_i    = share of zone i's residents in condominiums, other apartments and landed housing (Census 2020);
+central_j    = 1 if zone j is in URA's Central Area;
+industrial_j = share of zone j's job weight on industrial and port land (MP2019 Business 1/2, Port/Airport).
 
 Calibration maximises the (pseudo) log-likelihood of observed mode counts on two margins at once: by planning
 area of residence and by planning area of workplace, each modelled share being the trip-weighted average of the
@@ -19,7 +20,7 @@ import numpy as np
 from scipy.optimize import minimize
 
 MODES = ("car", "pt", "other")
-PARAMS = ("asc_car", "asc_other", "b_time", "b_priv", "b_central", "b_dist_other")
+PARAMS = ("asc_car", "asc_other", "b_time", "b_priv", "b_central", "b_dist_other", "b_ind_car", "b_ind_other")
 
 
 def probabilities(V: np.ndarray) -> np.ndarray:
@@ -29,11 +30,12 @@ def probabilities(V: np.ndarray) -> np.ndarray:
     return e / e.sum(axis=0, keepdims=True)
 
 
-def utilities(theta, t_car, g_pt, dist, private, central) -> np.ndarray:
-    asc_car, asc_other, b_time, b_priv, b_central, b_dist = theta
-    v_car = asc_car + b_time * t_car + b_priv * private[:, None] + b_central * central[None, :]
+def utilities(theta, t_car, g_pt, dist, private, central, industrial) -> np.ndarray:
+    asc_car, asc_other, b_time, b_priv, b_central, b_dist, b_ind_car, b_ind_other = theta
+    v_car = (asc_car + b_time * t_car + b_priv * private[:, None] + b_central * central[None, :]
+             + b_ind_car * industrial[None, :])
     v_pt = b_time * g_pt
-    v_other = asc_other + b_dist * dist
+    v_other = asc_other + b_dist * dist + b_ind_other * industrial[None, :]
     return np.stack([v_car, v_pt, np.broadcast_to(v_other, v_car.shape)])
 
 
@@ -62,7 +64,9 @@ def log_likelihood(theta, T, X, obs_res, res_group, obs_work, work_group) -> flo
 def calibrate(T, X, obs_res, res_group, obs_work, work_group, x0=None):
     """Maximum (pseudo) likelihood estimates. Returns (theta, log-likelihood, optimiser result)."""
     if x0 is None:
-        x0 = np.array([0.0, -1.0, -0.05, 1.0, -0.5, 0.0])
-    res = minimize(lambda th: -log_likelihood(th, T, X, obs_res, res_group, obs_work, work_group), x0=x0,
-                   method="BFGS", options={"gtol": 1e-6, "maxiter": 2000})
-    return res.x, -float(res.fun), res
+        x0 = np.array([0.0, -1.0, -0.05, 1.0, -0.5, 0.0, 0.0, 0.0])
+    n = sum(float(np.sum(o)) for o in (obs_res, obs_work) if o is not None)
+    # scaled to a mean log-likelihood per observation so that the gradient tolerance is meaningful
+    res = minimize(lambda th: -log_likelihood(th, T, X, obs_res, res_group, obs_work, work_group) / n, x0=x0,
+                   method="BFGS", options={"gtol": 1e-7, "maxiter": 5000})
+    return res.x, -float(res.fun) * n, res

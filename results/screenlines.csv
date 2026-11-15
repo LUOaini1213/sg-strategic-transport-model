@@ -1,0 +1,5 @@
+screenline,scenario,links_crossing,assigned_eastbound,demand_crossing_eastbound,assigned_westbound,demand_crossing_westbound
+x = 21 km (West | rest),base_2020,68,28260.16,17472.2,29761.65,21238.9
+x = 21 km (West | rest),ds_2030_jrl,68,30885.01,19843.57,28989.48,20264.57
+x = 30 km (central),base_2020,77,33123.85,25761.89,41106.22,32500.04
+x = 30 km (central),ds_2030_jrl,77,34523.36,27155.94,40495.41,31890.69

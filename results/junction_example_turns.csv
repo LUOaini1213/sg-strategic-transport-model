@@ -1,0 +1,43 @@
+scenario,from_road,from_link,to_road,to_link,pcu_per_hour
+base_2020,Bukit Batok Road,5697,,5690,67.91215
+base_2020,Bukit Batok Road,5697,,7457,258.4079
+base_2020,Bukit Batok Road,5697,Jurong Town Hall Road,23711,1923.618
+base_2020,Jurong Town Hall Road,5699,,5690,182.1864
+base_2020,Jurong Town Hall Road,5699,Bukit Batok Road,5693,237.0932
+base_2020,Jurong Town Hall Road,5699,,7457,693.2252
+base_2020,,5707,,5690,3.275482
+base_2020,,5707,Bukit Batok Road,5693,4.262636
+base_2020,,5707,,7457,12.46331
+base_2020,,5707,Jurong Town Hall Road,23711,92.77834
+base_2020,,7460,,5690,3.883823
+base_2020,,7460,Bukit Batok Road,5693,5.054316
+base_2020,,7460,,7457,14.77807
+base_2020,,7460,Jurong Town Hall Road,23711,110.0096
+dm_2030,Bukit Batok Road,5697,,5690,218.4427
+dm_2030,Bukit Batok Road,5697,,7457,371.6436
+dm_2030,Bukit Batok Road,5697,Jurong Town Hall Road,23711,2536.512
+dm_2030,Jurong Town Hall Road,5699,,5690,327.4154
+dm_2030,Jurong Town Hall Road,5699,Bukit Batok Road,5693,233.2022
+dm_2030,Jurong Town Hall Road,5699,,7457,557.0423
+dm_2030,,5707,,5690,8.123484
+dm_2030,,5707,Bukit Batok Road,5693,5.785965
+dm_2030,,5707,,7457,13.82074
+dm_2030,,5707,Jurong Town Hall Road,23711,94.32823
+dm_2030,,7460,,5690,24.12327
+dm_2030,,7460,Bukit Batok Road,5693,17.18184
+dm_2030,,7460,,7457,41.0417
+dm_2030,,7460,Jurong Town Hall Road,23711,280.1145
+ds_2030_jrl,Bukit Batok Road,5697,,5690,205.1108
+ds_2030_jrl,Bukit Batok Road,5697,,7457,365.2212
+ds_2030_jrl,Bukit Batok Road,5697,Jurong Town Hall Road,23711,2523.411
+ds_2030_jrl,Jurong Town Hall Road,5699,,5690,319.0037
+ds_2030_jrl,Jurong Town Hall Road,5699,Bukit Batok Road,5693,232.0138
+ds_2030_jrl,Jurong Town Hall Road,5699,,7457,568.0192
+ds_2030_jrl,,5707,,5690,7.705831
+ds_2030_jrl,,5707,Bukit Batok Road,5693,5.604509
+ds_2030_jrl,,5707,,7457,13.72103
+ds_2030_jrl,,5707,Jurong Town Hall Road,23711,94.8023
+ds_2030_jrl,,7460,,5690,22.44522
+ds_2030_jrl,,7460,Bukit Batok Road,5693,16.32458
+ds_2030_jrl,,7460,,7457,39.96605
+ds_2030_jrl,,7460,Jurong Town Hall Road,23711,276.1362
