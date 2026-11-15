@@ -9,8 +9,8 @@ from stm import gravity as G
 from stm import junction as J
 from stm import logit as L
 from stm import stats as S
-from stm.assignment import (Network, assign, bpr_derivative, bpr_integral, bpr_time, equilibrium_gap, line_search,
-                            relative_gap)
+from stm.assignment import (Network, assign, bpr_derivative, bpr_integral, bpr_time, descent_or_fw, equilibrium_gap,
+                            line_search, relative_gap)
 from stm.paths import Graph, aon, shortest_path_tree, skim
 
 
@@ -106,6 +106,8 @@ def test_r2_and_srmse_hand():
     assert S.r_squared([1, 2, 3], [2, 4, 6]) == pytest.approx(1.0)
     # errors (1, -1): RMSE 1, mean observed 2 -> SRMSE 0.5
     assert S.srmse([2, 2], [1, 3]) == pytest.approx(0.5)
+    # errors (1, 1): RMSE 1; standardised by the observed mean 2 (not the modelled mean 3) -> 0.5
+    assert S.srmse([2, 4], [1, 3]) == pytest.approx(0.5)
     assert S.share_within([1, 6, 4, 10], 5) == pytest.approx(0.5)
 
 
@@ -116,6 +118,10 @@ def test_logit_shares_hand():
     assert P == pytest.approx([1 / 6, 2 / 6, 3 / 6])
     # adding a constant to every utility changes nothing
     assert L.probabilities(np.array([5.0, 5 + math.log(2), 5 + math.log(3)])) == pytest.approx([1 / 6, 2 / 6, 3 / 6])
+    # with several OD pairs, each pair is normalised over the modes on its own: pair 2 has equal utilities -> 1/3 each
+    P2 = L.probabilities(np.array([[0.0, 0.0], [math.log(2), 0.0], [math.log(3), 0.0]]))
+    assert P2[:, 0] == pytest.approx([1 / 6, 2 / 6, 3 / 6])
+    assert P2[:, 1] == pytest.approx([1 / 3, 1 / 3, 1 / 3])
 
 
 def test_utilities_hand():
@@ -126,6 +132,13 @@ def test_utilities_hand():
     V = L.utilities(theta, t_car, g_pt, dist, np.array([0.25]), np.array([1.0]), np.array([0.5]))
     # car: 0.5 - 1.0 + 0.5 - 0.3 + 0.2 = -0.1; pt: -3.0; other: -1.0 - 0.8 + 0.5 = -1.3
     assert V[:, 0, 0] == pytest.approx([-0.1, -3.0, -1.3])
+    # two zones: the private-housing share belongs to the origin, the Central Area flag to the destination
+    V2 = L.utilities(theta, np.zeros((2, 2)), np.zeros((2, 2)), np.zeros((2, 2)), np.array([0.0, 0.5]),
+                     np.array([0.0, 1.0]), np.array([0.0, 0.0]))
+    # car utility from zone 1 (private .5) to zone 0 (not central): 0.5 + 2.0 * 0.5 = 1.5
+    assert V2[0, 1, 0] == pytest.approx(1.5)
+    # from zone 0 (private 0) to zone 1 (central): 0.5 - 0.3 = 0.2
+    assert V2[0, 0, 1] == pytest.approx(0.2)
 
 
 def test_group_shares_by_origin_and_destination():
@@ -203,6 +216,18 @@ def test_gap_and_line_search_hand():
     xe = x + lam * np.array([-1500.0, 1500.0])
     assert xe == pytest.approx([1100.0, 400.0], abs=1e-6)
     assert net.time(xe) == pytest.approx([21.0, 21.0], abs=1e-8)
+
+
+def test_descent_safeguard_hand():
+    t = np.array([1.0, 2.0])
+    x = np.array([1.0, 1.0])
+    y = np.array([0.0, 2.0])
+    # s - x = (1, 1): t . (s - x) = 1 + 2 = 3 >= 0, not a descent direction -> fall back to y
+    s, restarted = descent_or_fw(t, x, np.array([2.0, 2.0]), y)
+    assert restarted and s.tolist() == [0.0, 2.0]
+    # s - x = (-1, 0): t . (s - x) = -1 < 0 -> keep s
+    s, restarted = descent_or_fw(t, x, np.array([0.0, 1.0]), y)
+    assert not restarted and s.tolist() == [0.0, 1.0]
 
 
 def _braess_like():

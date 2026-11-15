@@ -32,6 +32,6 @@ Nothing here suggests that any analysis is endorsed by or attributed to the Gove
 
 ## Not used
 
-- No traffic counts (none are published for Singapore roads).
+- No traffic counts (there are no public link-level counts for Singapore's roads).
 - No LTA DataMall train origin-destination data, traffic speed bands or traffic images.
 - No DataMall AccountKey is stored in this repository or used by its scripts.

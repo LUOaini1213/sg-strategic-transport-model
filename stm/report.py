@@ -207,7 +207,8 @@ def context() -> dict:
         [[n.replace("_", " "), f(chk[n]["Y"], 3), f(chk[n]["cycle_s"], 0), f(chk[n]["max_X"], 3),
           i(chk[n]["approaches_over_practical_X"])] for n in ("base_2020", "dm_2030", "ds_2030_jrl")])
     c.update(sf_obj=f(sf["published_objective_1e5"], 8), sf_obj_pub=f(sf["published_flows_objective_1e5"], 8),
-             sf_gap_pub=f"{sf['published_flows_relative_gap']:.1e}",
+             sf_gap_pub=("below 1e-12 in absolute value" if abs(sf["published_flows_relative_gap"]) < 1e-12
+                         else f"{sf['published_flows_relative_gap']:.1e}"),
              sf_bfw6_it=i(sf["bfw_1e-06"]["iterations"]), sf_bfw6_gap=f"{sf['bfw_1e-06']['relative_gap']:.1e}",
              sf_bfw6_obj=f(sf["bfw_1e-06"]["objective_1e5"], 6), sf_bfw6_rel=f"{sf['bfw_1e-06']['objective_rel_diff']:.1e}",
              sf_bfw6_maxrel=pct(sf["bfw_1e-06"]["max_rel_flow_diff"], 2), sf_bfw6_maxabs=f(sf["bfw_1e-06"]["max_abs_flow_diff"], 1),

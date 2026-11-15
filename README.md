@@ -2,7 +2,7 @@
 
 **A reproducible strategic (four-step) transport model of Singapore for the weekday AM peak hour: 332 URA Master Plan 2019 subzones, commuting from the Census of Population 2020, gravity distribution calibrated to Census and to LTA DataMall bus origin-destination data, logit mode choice, user-equilibrium assignment on the OpenStreetMap road network, and a 2030 test of Tengah with and without the Jurong Region Line.**
 
-> **Read this first.** This is a personal desk study. It is **not an LTA or URA model**, not a consultancy study, and it has not been reviewed by either agency. It uses public data plus stated assumptions, and every input is labelled REAL, DERIVED, ASSUMPTION or ILLUSTRATIVE in the [data provenance](#data-provenance) section. **Singapore publishes no link traffic counts, so the road side of this model is not calibrated or validated against counts; only plausibility checks are reported.** The demand model covers resident commuters with a fixed workplace (Census 2020); all other road traffic enters through one assumed factor.
+> **Read this first.** This is a personal desk study. It is **not an LTA or URA model**, not a consultancy study, and it has not been reviewed by either agency. It uses public data plus stated assumptions, and every input is labelled REAL, DERIVED, ASSUMPTION or ILLUSTRATIVE in the [data provenance](#data-provenance) section. **There are no public link-level traffic counts for Singapore's roads, so the road side of this model is not calibrated or validated against counts; only plausibility checks are reported.** The demand model covers resident commuters with a fixed workplace (Census 2020); all other road traffic enters through one assumed factor.
 
 <!-- README.md is generated from docs/README.template.md by scripts/run_all.py. Do not edit README.md by hand. -->
 
@@ -32,7 +32,7 @@ All values are generated from the files in [`results/`](results/) by `scripts/ru
 | Mode shares, 2020 | car 26.8% / PT 64.3% / other 8.9% modelled; Census 26.8% / 64.0% / 9.2% | `results/summary.json` |
 | Mode choice on held-out cells | 206 region x workplace cells: R2 0.61 (car share), 0.79 (PT share); weighted mean absolute error 3.0 and 3.6 points | `results/mode_shares_holdout_cells.csv` |
 | Assignment, 2020 AM peak hour | 162,844 car trips/h; relative gap 7.4e-05 after 40 iterations (recomputed independently: 7.4e-05) | `results/summary.json`, `assignment_convergence.csv` |
-| Sioux Falls check | the published equilibrium flows give relative gap -3.7e-16 and objective 42.31335287 in this code (published optimum 42.31335287); this code at gap 8.6e-07: objective 42.313359, largest link-flow difference 0.01% | `results/sioux_falls_check.json` |
+| Sioux Falls check | the published equilibrium flows give relative gap below 1e-12 in absolute value and objective 42.31335287 in this code (published optimum 42.31335287); this code at gap 8.6e-07: objective 42.313359, largest link-flow difference 0.01% | `results/sioux_falls_check.json` |
 | Road plausibility, 2020 | 5.3% of directed link-km above V/C 0.85, 3.0% above 1.0; flow-weighted mean speed 78 km/h on expressways, 39 km/h on primary roads | `results/vc_by_class_base.csv` |
 | Tengah, 2030 | 42,000 homes x 3.1 persons = 130,200 residents, 61,215 commuters; 3,758 extra car trips/h | `results/summary.json` |
 | Jurong Region Line, 2030 | West Region residents' PT share +0.30 points (65.7% -> 66.0%), Tengah +0.39 points; -526 car trips/h; links in the West with V/C down by 0.05+: 40, up by 0.05+: 8 | `results/summary.json`, `scenario_mode_share_west.csv` |
@@ -121,7 +121,7 @@ Link costs follow the BPR function t = t0 (1 + 0.15 (v/c)^4) (Bureau of Public R
 | 2030 without JRL | 166,602 | 35 | 9.6e-05 | 44,946 | 2,301,870 |
 | 2030 with JRL | 166,076 | 36 | 7.8e-05 | 44,783 | 2,293,826 |
 
-**Verification on Sioux Falls** (bstabler/TransportationNetworks, pinned commit; `tests/test_sioux_falls.py`). The published best-known flows have relative gap -3.7e-16 and Beckmann objective 42.31335287 (x 10^5) in this code, the published optimum being 42.31335287. Run to gap 8.6e-07 (970 iterations), this code reaches objective 42.313359 (relative difference 1.3e-07) with every link flow within 0.01% (1.6 vehicles) of the published one. To gap 1e-4, bi-conjugate FW needs 93 iterations and plain FW 1,049.
+**Verification on Sioux Falls** (bstabler/TransportationNetworks, pinned commit; `tests/test_sioux_falls.py`). The published best-known flows have relative gap below 1e-12 in absolute value and Beckmann objective 42.31335287 (x 10^5) in this code, the published optimum being 42.31335287. Run to gap 8.6e-07 (970 iterations), this code reaches objective 42.313359 (relative difference 1.3e-07) with every link flow within 0.01% (1.6 vehicles) of the published one. To gap 1e-4, bi-conjugate FW needs 93 iterations and plain FW 1,049.
 
 AequilibraE 1.7.2 was also installed (Windows, Python 3.11, in a separate environment, because it pulls NumPy 2.4 and pandas 3.1) and runs Sioux Falls. The model uses its own implementation so that every formula is hand-checked and mutation-tested inside this repository.
 
@@ -196,7 +196,7 @@ Every model parameter, with its status and note, generated from `config/model.js
 
 | Parameter (config/model.json) | Value | Status | Note / source |
 |---|---|---|---|
-| `seed` | 20261115 | ASSUMPTION | fixed seed; the pipeline is deterministic, the seed is used only for jitter in figures |
+| `seed` | 20261115 | ASSUMPTION | recorded for completeness: the model uses no random numbers (the tests use their own fixed seeds) |
 | `period.am_peak_hour` | 7 | DERIVED | 07:00-07:59, the weekday morning hour with most bus tap-ins in LTA DataMall origin-destination volumes (July and August 2026) |
 | `period.morning_window` | 5, 10 | ASSUMPTION | tap-in hours 05:00-10:59 taken as the outbound morning window when deriving the peak-hour share |
 | `period.bus_weekdays` | 202607: 23; 202608: 20 | ASSUMPTION | Monday-Friday days less public holidays: July 2026 has 23 weekdays and no public holiday; August 2026 has 21 weekdays, less Monday 10 August. The Ministry of Manpower's 2026 list (https://www.mom.gov.sg/employment-practices/public-holidays, retrieved 2026-11-15) gives National Day on Sunday 9 August 2026 and says Monday 10 August 2026 is a public holiday if the rest day falls on 9 August. Whether DataMall files 10 August under WEEKDAY or WEEKENDS/HOLIDAY was not verified; 20 is assumed. |
@@ -232,7 +232,7 @@ Every model parameter, with its status and note, generated from `config/model.js
 | `assignment.rgap_target` | 0.0001 | ASSUMPTION | relative gap = (TSTT - SPTT) / SPTT |
 | `assignment.max_iter` | 3000 | ASSUMPTION |  |
 | `assignment.car_occupancy` | 1.2 | ASSUMPTION | persons per car or taxi on the commute; not verified |
-| `assignment.background_factor` | 1.6 | ASSUMPTION | AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between jobs, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything |
+| `assignment.background_factor` | 1.6 | ASSUMPTION | AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between fares, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything |
 | `assignment.lanes_default` | motorway: 3; motorway_link: 1; trunk: 3; trunk_link: 1; primary: 2; primary_link: 1; secondary: 2; secondary_link: 1; tertiary: 1; tertiary_link: 1 | ASSUMPTION | lanes per direction where OpenStreetMap has no lanes tag |
 | `assignment.capacity_per_lane` | motorway: 1900; motorway_link: 1500; trunk: 1400; trunk_link: 1200; primary: 1000; primary_link: 1000; secondary: 850; secondary_link: 850; tertiary: 700; tertiary_link: 700 | ASSUMPTION | pcu/h/lane, hourly link capacity used in the BPR function (signal losses included for at-grade roads) |
 | `assignment.speed_default_kmh` | motorway: 90; motorway_link: 50; trunk: 70; trunk_link: 50; primary: 60; primary_link: 50; secondary: 50; secondary_link: 40; tertiary: 50; tertiary_link: 40 | ASSUMPTION | where OpenStreetMap has no maxspeed tag |
@@ -284,9 +284,9 @@ python mutation/run_mutants.py    # optional: mutation test of the test suite
 
 ## Tests and mutation testing
 
-(not counted) tests. The formula tests compare against numbers worked out by hand in the test file (Furness balancing, deterrence functions, coincidence ratio, GEH, logit shares, BPR time, integral and derivative, relative gap and line search on a two-link network, a Braess-type network, Webster's cycle and delay, Furness turning flows), parameter-recovery tests for the three calibration routines, the Sioux Falls check, and a full re-run of the pipeline compared with the committed results and this README.
+-1 tests. The formula tests compare against numbers worked out by hand in the test file (Furness balancing, deterrence functions, coincidence ratio, GEH, logit shares, BPR time, integral and derivative, relative gap and line search on a two-link network, a Braess-type network, Webster's cycle and delay, Furness turning flows), parameter-recovery tests for the three calibration routines, the Sioux Falls check, and a full re-run of the pipeline compared with the committed results and this README.
 
-`mutation/run_mutants.py` copies the repository, plants one deliberate bug at a time in the core logic and runs the suite. **(not run) of (not run) mutants killed** ((not run) of (not run) also without the two snapshot tests that compare a fresh run with the committed results). Survivors: (not run). Details: `results/mutation_report.json`.
+`mutation/run_mutants.py` copies the repository, plants one deliberate bug at a time in the core logic and runs the suite. **28 of 30 mutants killed** (28 of 30 also without the two snapshot tests that compare a fresh run with the committed results). Survivors: M08: not explained; M18: not explained. Details: `results/mutation_report.json`.
 
 ## Licence
 

@@ -4,7 +4,7 @@
 
 Personal desk study, not an LTA or URA model. This report sets out what the model was calibrated to, what it was checked against without being fitted to it, and what could not be checked. Every number is generated from `results/`.
 
-**Summary.** Two observed matrices exist: the Census 2020 commuter matrix at region x planning-area level, and LTA DataMall bus rides at stop level. The commuter gravity model is calibrated to the first; a bus-ride gravity model is calibrated to one month of the second and checked on another month. Mode choice is calibrated to Census mode shares on two margins and checked on cells it never sees individually. **Road flows cannot be validated: Singapore publishes no traffic counts, so this model was not calibrated to counts and claims no road validation.** The road checks below are plausibility checks.
+**Summary.** Two observed matrices exist: the Census 2020 commuter matrix at region x planning-area level, and LTA DataMall bus rides at stop level. The commuter gravity model is calibrated to the first; a bus-ride gravity model is calibrated to one month of the second and checked on another month. Mode choice is calibrated to Census mode shares on two margins and checked on cells it never sees individually. **Road flows cannot be validated: there are no public link-level traffic counts for Singapore's roads, so this model was not calibrated to counts and claims no road validation.** The road checks below are plausibility checks.
 
 ## 1. Commuter distribution against the Census matrix (calibration)
 
@@ -79,7 +79,7 @@ Sioux Falls (24 zones, 76 links, 360,600 trips): the published best-known flows 
 
 ## 5. Roads: plausibility only
 
-No traffic counts are published for Singapore roads, and none were used. The road assignment is therefore **not calibrated or validated**; the checks below test only whether the outputs are internally consistent and not absurd.
+No public link-level traffic counts exist for Singapore's roads, and none were used. The road assignment is therefore **not calibrated or validated**; the checks below test only whether the outputs are internally consistent and not absurd.
 
 Share of directed link-km by volume/capacity:
 

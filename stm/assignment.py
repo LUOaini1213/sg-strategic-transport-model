@@ -112,6 +112,14 @@ def relative_gap(tstt: float, sptt: float) -> float:
     return (tstt - sptt) / sptt
 
 
+def descent_or_fw(t: np.ndarray, x: np.ndarray, s: np.ndarray, y: np.ndarray):
+    """Keep the target s if s - x is a descent direction at link costs t; otherwise fall back to the FW target y.
+    Returns (target, restarted)."""
+    if float(np.dot(t, s - x)) >= 0.0:
+        return y, True
+    return s, False
+
+
 def _bfw_target(net: Network, x, y, s1, s2, tau, delta=1e-4):
     """Bi-conjugate target s_k (Mitradjieva & Lindberg 2013, section 3.2), with tau the previous step length."""
     h = net.derivative(x)  # diagonal Hessian of Z at x
@@ -167,11 +175,10 @@ def assign(net: Network, origins, dest_nodes, demand, method: str = "bfw", rgap_
             s = a * s1 + (1.0 - a) * y
         else:
             s = y
-        d = s - x
-        if float(np.dot(t, d)) >= 0.0:  # not a descent direction: restart with FW
-            s = y
-            d = y - x
+        s, restarted = descent_or_fw(t, x, s, y)
+        if restarted:  # not a descent direction: restart with FW
             s1 = s2 = None
+        d = s - x
         lam = line_search(net, x, d)
         x = x + lam * d
         s2, s1, tau = s1, s, lam

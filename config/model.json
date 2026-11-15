@@ -1,6 +1,6 @@
 {
   "_about": "Every model parameter, with its status. REAL = published or observed data; DERIVED = computed in this repository from REAL data; ASSUMPTION = chosen by the author, not sourced; ILLUSTRATIVE = used only in a worked example. results/inputs_used.json echoes this file.",
-  "seed": {"value": 20261115, "label": "ASSUMPTION", "note": "fixed seed; the pipeline is deterministic, the seed is used only for jitter in figures"},
+  "seed": {"value": 20261115, "label": "ASSUMPTION", "note": "recorded for completeness: the model uses no random numbers (the tests use their own fixed seeds)"},
   "period": {
     "am_peak_hour": {"value": 7, "label": "DERIVED", "note": "07:00-07:59, the weekday morning hour with most bus tap-ins in LTA DataMall origin-destination volumes (July and August 2026)"},
     "morning_window": {"value": [5, 10], "label": "ASSUMPTION", "note": "tap-in hours 05:00-10:59 taken as the outbound morning window when deriving the peak-hour share"},
@@ -52,7 +52,7 @@
     "rgap_target": {"value": 1e-4, "label": "ASSUMPTION", "note": "relative gap = (TSTT - SPTT) / SPTT"},
     "max_iter": {"value": 3000, "label": "ASSUMPTION"},
     "car_occupancy": {"value": 1.2, "label": "ASSUMPTION", "note": "persons per car or taxi on the commute; not verified"},
-    "background_factor": {"value": 1.6, "label": "ASSUMPTION", "note": "AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between jobs, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything"},
+    "background_factor": {"value": 1.6, "label": "ASSUMPTION", "note": "AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between fares, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything"},
     "lanes_default": {"label": "ASSUMPTION", "note": "lanes per direction where OpenStreetMap has no lanes tag",
       "value": {"motorway": 3, "motorway_link": 1, "trunk": 3, "trunk_link": 1, "primary": 2, "primary_link": 1, "secondary": 2, "secondary_link": 1, "tertiary": 1, "tertiary_link": 1}},
     "capacity_per_lane": {"label": "ASSUMPTION", "note": "pcu/h/lane, hourly link capacity used in the BPR function (signal losses included for at-grade roads)",

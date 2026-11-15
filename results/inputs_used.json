@@ -4,7 +4,7 @@
   "assignment": {
    "background_factor": {
     "label": "ASSUMPTION",
-    "note": "AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between jobs, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything",
+    "note": "AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between fares, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything",
     "value": 1.6
    },
    "bpr_alpha": {
@@ -359,7 +359,7 @@
   },
   "seed": {
    "label": "ASSUMPTION",
-   "note": "fixed seed; the pipeline is deterministic, the seed is used only for jitter in figures",
+   "note": "recorded for completeness: the model uses no random numbers (the tests use their own fixed seeds)",
    "value": 20261115
   }
  },
