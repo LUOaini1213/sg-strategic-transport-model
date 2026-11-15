@@ -1,0 +1,7 @@
+# Only for scripts/fetch_data.py and scripts/prepare_inputs.py (rebuilding data/inputs/ from raw downloads).
+-r requirements.txt
+requests==2.32.3
+shapely==2.0.6
+pyproj==3.7.0
+pyogrio==0.10.0
+geopandas==1.0.1

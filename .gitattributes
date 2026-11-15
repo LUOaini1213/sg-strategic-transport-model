@@ -1,0 +1,10 @@
+# LF everywhere: data/inputs/manifest.csv and the tests pin SHA-256 hashes of LF bytes.
+* text=auto eol=lf
+*.png binary
+*.jpg binary
+*.pdf binary
+*.gz binary
+*.zip binary
+*.npy binary
+*.npz binary
+*.parquet binary

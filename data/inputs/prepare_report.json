@@ -1,0 +1,20 @@
+{
+ "bus": {
+  "202607_trips_stop_not_in_zone": 946764,
+  "202607_weekday_trips": 96813602,
+  "202608_trips_stop_not_in_zone": 814423,
+  "202608_weekday_trips": 85560932,
+  "stops": 5209,
+  "stops_outside_zones": 4
+ },
+ "lta_stations": 188,
+ "rail_codes": 239,
+ "roads": {
+  "components": 1214,
+  "km_all": 3009.0,
+  "km_kept": 2912.4,
+  "links": 23800,
+  "nodes": 17477,
+  "ways": 45227
+ }
+}

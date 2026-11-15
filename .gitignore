@@ -1,0 +1,10 @@
+.venv/
+.venv-*/
+__pycache__/
+*.pyc
+.pytest_cache/
+# raw downloads (large or not redistributable); scripts/fetch_data.py gets them again
+data/raw/
+mutation/_work/
+*.nbi
+*.nbc

@@ -1,0 +1,84 @@
+{
+  "_about": "Every model parameter, with its status. REAL = published or observed data; DERIVED = computed in this repository from REAL data; ASSUMPTION = chosen by the author, not sourced; ILLUSTRATIVE = used only in a worked example. results/inputs_used.json echoes this file.",
+  "seed": {"value": 20261115, "label": "ASSUMPTION", "note": "fixed seed; the pipeline is deterministic, the seed is used only for jitter in figures"},
+  "period": {
+    "am_peak_hour": {"value": 7, "label": "DERIVED", "note": "07:00-07:59, the weekday morning hour with most bus tap-ins in LTA DataMall origin-destination volumes (July and August 2026)"},
+    "morning_window": {"value": [5, 10], "label": "ASSUMPTION", "note": "tap-in hours 05:00-10:59 taken as the outbound morning window when deriving the peak-hour share"},
+    "bus_weekdays": {"value": {"202607": 23, "202608": 20}, "label": "REAL", "note": "Monday-Friday days less public holidays. July 2026 has 23 weekdays and no public holiday; August 2026 has 21 weekdays less Monday 10 August (National Day falls on Sunday 9 August, so the Monday is a holiday). Holiday list: Ministry of Manpower, Public holidays for 2026 (https://www.mom.gov.sg/employment-practices/public-holidays); not re-verified in this study."}
+  },
+  "generation": {
+    "attendance_factor": {"value": 0.9, "label": "ASSUMPTION", "note": "share of employed residents with a fixed workplace who travel to it on an average weekday (leave, sickness, shifts, hybrid work)"},
+    "production_weight": {"value": "pop_20_64", "label": "ASSUMPTION", "note": "employed residents of a planning area are spread over its subzones in proportion to Census 2020 residents aged 20-64"},
+    "plot_ratio_defaults": {"value": {"LND": 1.4, "other_codes": 1.0}, "label": "ASSUMPTION", "note": "MP2019 parcels whose GPR is a code (LND landed housing; EVA, SDP, NA) get these plot ratios when floor area is estimated"},
+    "job_weight_per_m2_gfa": {"label": "ASSUMPTION", "note": "relative jobs per m2 of estimated floor area by MP2019 land-use class; they only share the Census workplace total of a planning area among its subzones, so only ratios within a planning area matter",
+      "value": {"COMMERCIAL": 1.0, "WHITE": 1.0, "BUSINESS PARK": 0.8, "BUSINESS PARK - WHITE": 0.8, "BUSINESS 1 - WHITE": 0.6, "BUSINESS 2 - WHITE": 0.5,
+                "COMMERCIAL / INSTITUTION": 0.8, "HOTEL": 0.3, "BUSINESS 1": 0.5, "BUSINESS 2": 0.35,
+                "COMMERCIAL & RESIDENTIAL": 0.3, "RESIDENTIAL WITH COMMERCIAL AT 1ST STOREY": 0.1, "CIVIC & COMMUNITY INSTITUTION": 0.5,
+                "EDUCATIONAL INSTITUTION": 0.4, "HEALTH & MEDICAL CARE": 0.8, "RESIDENTIAL / INSTITUTION": 0.3, "PLACE OF WORSHIP": 0.1,
+                "PORT / AIRPORT": 0.3, "UTILITY": 0.1, "TRANSPORT FACILITIES": 0.2, "SPECIAL USE": 0.2, "RESIDENTIAL": 0.02}}
+  },
+  "distribution": {
+    "cost": {"value": "road network distance (km) along the free-flow shortest-time path between zone centroids", "label": "ASSUMPTION"},
+    "intrazonal_factor": {"value": 0.5, "label": "ASSUMPTION", "note": "intrazonal distance = factor x distance to the nearest other zone centroid"},
+    "deterrence": {"value": "gamma: f(c) = c^a * exp(-b c)", "label": "ASSUMPTION", "note": "functional form; a and b are calibrated"},
+    "tld_bin_km": {"value": 1.0, "label": "ASSUMPTION", "note": "bin width for trip-length distributions and the coincidence ratio"},
+    "furness_tol": {"value": 1e-9, "label": "ASSUMPTION"}
+  },
+  "mode_choice": {
+    "modes": {"value": ["car", "pt", "other"], "label": "ASSUMPTION", "note": "car = car only + taxi/private-hire car only; pt = any combination of MRT/LRT and public bus (including with other modes); other = private chartered bus/van, lorry/pickup, motorcycle/scooter, others. 'No transport required' is left out of the trip matrix."},
+    "car_terminal_min": {"value": 6.0, "label": "ASSUMPTION", "note": "parking and walking at both ends of a car trip"},
+    "car_speed_factor": {"value": 1.0, "label": "ASSUMPTION", "note": "car times in mode choice are free-flow network times (no supply-demand feedback)"},
+    "central_area": {"value": "CA_IND = Y in the MP2019 subzone layer", "label": "REAL", "note": "URA Central Area flag in the Master Plan 2019 subzone boundary data"}
+  },
+  "pt": {
+    "walk_speed_kmh": {"value": 4.8, "label": "ASSUMPTION"},
+    "walk_detour": {"value": 1.3, "label": "ASSUMPTION", "note": "walking or feeder distance / straight-line distance"},
+    "max_walk_km": {"value": 1.2, "label": "ASSUMPTION", "note": "beyond this a station is reached by feeder bus"},
+    "max_access_km": {"value": 4.0, "label": "ASSUMPTION", "note": "stations further than this from a zone centroid are not connected to it"},
+    "feeder_speed_kmh": {"value": 15.0, "label": "ASSUMPTION"},
+    "feeder_wait_min": {"value": 5.0, "label": "ASSUMPTION"},
+    "rail_wait_min": {"value": 2.5, "label": "ASSUMPTION", "note": "half of a 5-minute peak headway"},
+    "transfer_walk_min": {"value": 3.0, "label": "ASSUMPTION"},
+    "transfer_penalty_min": {"value": 5.0, "label": "ASSUMPTION"},
+    "bus_speed_kmh": {"value": 16.0, "label": "ASSUMPTION", "note": "bus-only alternative: road distance at this speed, including stops"},
+    "bus_access_walk_min": {"value": 5.0, "label": "ASSUMPTION", "note": "each end"},
+    "bus_wait_min": {"value": 5.0, "label": "ASSUMPTION"},
+    "walk_weight": {"value": 2.0, "label": "ASSUMPTION", "note": "weight of walking time relative to in-vehicle time"},
+    "wait_weight": {"value": 2.0, "label": "ASSUMPTION", "note": "weight of waiting time relative to in-vehicle time"}
+  },
+  "assignment": {
+    "bpr_alpha": {"value": 0.15, "label": "REAL", "note": "Bureau of Public Roads (1964), Traffic Assignment Manual, U.S. Department of Commerce"},
+    "bpr_beta": {"value": 4.0, "label": "REAL", "note": "as above"},
+    "rgap_target": {"value": 1e-4, "label": "ASSUMPTION", "note": "relative gap = (TSTT - SPTT) / SPTT"},
+    "max_iter": {"value": 3000, "label": "ASSUMPTION"},
+    "car_occupancy": {"value": 1.2, "label": "ASSUMPTION", "note": "persons per car or taxi on the commute; not verified"},
+    "background_factor": {"value": 1.6, "label": "ASSUMPTION", "note": "AM peak-hour car traffic / modelled resident commuter car traffic. The model has no goods vehicles, buses, taxis between jobs, non-work trips, non-resident workers or workers without a fixed workplace; this single factor stands in for all of them and is not calibrated to anything"},
+    "lanes_default": {"label": "ASSUMPTION", "note": "lanes per direction where OpenStreetMap has no lanes tag",
+      "value": {"motorway": 3, "motorway_link": 1, "trunk": 3, "trunk_link": 1, "primary": 2, "primary_link": 1, "secondary": 2, "secondary_link": 1, "tertiary": 1, "tertiary_link": 1}},
+    "capacity_per_lane": {"label": "ASSUMPTION", "note": "pcu/h/lane, hourly link capacity used in the BPR function (signal losses included for at-grade roads)",
+      "value": {"motorway": 1900, "motorway_link": 1500, "trunk": 1400, "trunk_link": 1200, "primary": 1000, "primary_link": 1000, "secondary": 850, "secondary_link": 850, "tertiary": 700, "tertiary_link": 700}},
+    "speed_default_kmh": {"label": "ASSUMPTION", "note": "where OpenStreetMap has no maxspeed tag",
+      "value": {"motorway": 90, "motorway_link": 50, "trunk": 70, "trunk_link": 50, "primary": 60, "primary_link": 50, "secondary": 50, "secondary_link": 40, "tertiary": 50, "tertiary_link": 40}},
+    "free_flow_speed_factor": {"label": "ASSUMPTION", "note": "free-flow speed = factor x speed limit (at-grade roads lose time at signals even when empty)",
+      "value": {"motorway": 1.0, "motorway_link": 0.9, "trunk": 0.85, "trunk_link": 0.85, "primary": 0.75, "primary_link": 0.75, "secondary": 0.7, "secondary_link": 0.7, "tertiary": 0.65, "tertiary_link": 0.65}},
+    "connector_speed_kmh": {"value": 20.0, "label": "ASSUMPTION"},
+    "connector_detour": {"value": 1.3, "label": "ASSUMPTION"},
+    "connectors_per_zone": {"value": 3, "label": "ASSUMPTION", "note": "nearest road nodes on non-motorway links, preferring nodes inside the zone"}
+  },
+  "scenario_2030": {
+    "tengah_homes": {"value": 42000, "label": "REAL", "note": "HDB: Tengah town will have about 42,000 new homes (HDB, Tengah town page, https://www.hdb.gov.sg/about-us/history/hdb-towns-your-home/tengah); retrieval status in DATA_SOURCES.md"},
+    "tengah_buildout_by_2030": {"value": 1.0, "label": "ASSUMPTION", "note": "the whole town is taken as completed and occupied by 2030; HDB's completion schedule was not checked"},
+    "persons_per_home": {"value": 3.1, "label": "ASSUMPTION", "note": "close to the Census 2020 average resident household size; not taken from a specific table"},
+    "other_growth": {"value": "none", "label": "ASSUMPTION", "note": "outside Tengah, 2030 population and jobs are held at 2020 levels so that the scenarios isolate Tengah and the JRL"},
+    "tengah_jobs": {"value": "Tengah's MP2019 non-residential parcels x job weights x (jobs per weight unit in the West Region)", "label": "ASSUMPTION"},
+    "jrl_stations": {"value": "24 stations (all three stages, JS2A left out)", "label": "REAL", "note": "LTA Jurong Region Line page; see config/rail.json"}
+  },
+  "junction": {
+    "saturation_flow_pcu_per_lane": {"value": 1900, "label": "ASSUMPTION", "note": "base saturation flow per approach lane; HCM 2000 uses 1,900 pc/h/ln as the base value"},
+    "lost_time_per_phase_s": {"value": 4.0, "label": "ASSUMPTION"},
+    "cycle_min_s": {"value": 60, "label": "ASSUMPTION"},
+    "cycle_max_s": {"value": 150, "label": "ASSUMPTION"},
+    "practical_x": {"value": 0.9, "label": "ASSUMPTION", "note": "degree of saturation treated as the practical limit"},
+    "min_approach_flow": {"value": 50, "label": "ASSUMPTION", "note": "pcu/h; approaches below this are left out of the phase plan"}
+  }
+}

@@ -1,0 +1,240 @@
+code,name,x,y,osm_railway_tag,osm_type,osm_id
+BP1,Choa Chu Kang,18119.4,40744.2,station,node,4939484913
+BP10,Fajar,21050.9,40726.9,station,node,1840733410
+BP11,Segar,20906.8,41079.9,station,node,1840733437
+BP2,South View,18202.7,40249.1,station,node,1840733442
+BP7,Petir,20578.3,39971.9,station,node,1840733434
+BP8,Pending,21093.5,39797.1,station,node,1840733433
+BP9,Bangkit,21248.4,40223.5,station,node,1840733396
+CC1,Dhoby Ghaut,29353.9,31313.5,station,way,739472746
+CC10,MacPherson,34273.6,34274.6,station,way,534060665
+CC11,Tai Seng,34093.6,35300.9,station,way,823759106
+CC12,Bartley,33170.0,36108.2,station,way,743648503
+CC13,Serangoon,32429.5,36912.0,station,way,743648501
+CC14,Lorong Chuan,31413.5,37075.2,station,way,823759107
+CC15,Bishan,29765.5,37021.5,station,way,665452427
+CC16,Marymount,28674.4,36750.2,station,way,823759108
+CC17,Caldecott,28724.3,35524.6,station,way,663177167
+CC18,Bukit Brown,27705.4,35111.2,station,way,1008913159
+CC19,Botanic Gardens,26028.6,33837.0,station,way,743554291
+CC2,Bras Basah,29939.3,31032.5,station,way,743763992
+CC20,Farrer Road,25137.1,33312.3,station,way,743554290
+CC21,Holland Village,23863.2,32691.4,station,way,743554288
+CC22,Buona Vista,23236.4,32123.0,station,way,823046125
+CC23,one-north,22888.2,31334.1,station,way,823759109
+CC24,Kent Ridge,22571.7,30644.5,station,way,823759110
+CC25,Haw Par Villa,22276.6,29473.2,station,way,823759111
+CC26,Pasir Panjang,23323.3,28733.7,station,way,743648511
+CC27,Labrador Park,24630.9,28309.0,station,way,823789585
+CC28,Telok Blangah,25382.4,28142.1,station,way,823789586
+CC29,HarbourFront,26690.4,27542.8,station,node,10538809251
+CC3,Esplanade,30491.8,30620.5,station,way,823759102
+CC30,Keppel,27691.9,28106.2,station,way,1008913156
+CC31,Cantonment,28399.0,28395.8,station,way,1008913157
+CC32,Prince Edward Road,29519.6,28415.7,station,way,1008913158
+CC33,Marina Bay,30428.6,28646.6,station,way,298087574
+CC34,Bayfront,30922.1,29433.7,station,way,743622459
+CC4,Promenade,31035.5,30619.7,station,way,823759103
+CC5,Nicoll Highway,31398.1,31355.3,station,way,823759104
+CC6,Stadium,32694.6,31700.7,station,way,172473528
+CC7,Mountbatten,33491.3,32082.9,station,way,823759105
+CC8,Dakota,34142.8,32295.4,station,way,743648507
+CC9,Paya Lebar,34553.3,33313.1,station,way,823759101
+CG,Tanah Merah,40546.9,34377.2,station,way,1335904251
+CG1,Expo,42322.1,35231.4,station,way,534060681
+CG2,Changi Airport,45278.8,37728.8,station,way,231290543
+CP4,Punggol,35683.2,43016.5,station,way,1113644053
+CR1,Changi Terminal 5,45623.1,34050.7,construction,way,1463148237
+CR14,Turf City,23638.9,35888.8,station,way,1096259938
+CR15,King Albert Park,22379.5,35181.7,station,way,1096259941
+CR16,Maju,21717.4,34503.9,station,way,1096259942
+CR17,Clementi,20485.7,33172.4,station,way,1096259943
+CR18,West Coast,19612.4,32540.2,station,way,1096259944
+CR19,Jurong Lake District,17595.4,34364.1,station,way,1096259940
+CR20,,16029.4,34011.7,station,way,1546902345
+CR21,,14485.7,32943.3,station,way,1546945487
+CR22,,10134.6,32729.0,station,way,1546945488
+CR23,Gul Circle,8858.5,33258.7,station,way,1546945489
+CR5,Pasir Ris,40893.1,39247.0,station,way,824832473
+CR6,Bright Hill,28086.8,38367.0,station,way,298087602
+DE1,,19120.2,42506.6,stop,node,12495744205
+DT1,Bukit Panjang,20030.4,40118.7,station,way,743551048
+DT10,Stevens,27157.4,33595.9,station,way,298087596
+DT11,Newton,28514.0,32794.8,station,way,665452941
+DT12,Little India,29776.9,32136.7,station,way,743566214
+DT13,Rochor,30146.5,31808.7,station,way,739472747
+DT14,Bugis,30537.1,31394.4,station,way,743564833
+DT15,Promenade,31035.5,30619.7,station,way,823759103
+DT16,Bayfront,30922.1,29433.7,station,way,743622459
+DT17,Downtown,30145.7,29112.2,station,way,743599218
+DT18,Telok Ayer,29681.9,29408.0,station,way,743622458
+DT19,Chinatown,29174.3,29663.6,station,way,743599219
+DT2,Cashew,20359.6,39072.0,station,way,743648512
+DT20,Fort Canning,29207.1,30538.3,station,way,743648516
+DT21,Bencoolen,29875.3,31215.2,station,way,824481778
+DT22,Jalan Besar,30469.7,31967.2,station,way,739472748
+DT23,Bendemeer,31299.0,32879.4,station,way,398116869
+DT24,Geylang Bahru,32282.2,33750.4,station,way,627548969
+DT25,Mattar,33553.5,34353.4,station,way,534060662
+DT26,MacPherson,34273.6,34274.6,station,way,534060665
+DT27,Ubi,35343.1,34679.6,station,way,534060668
+DT28,Kaki Bukit,36420.7,35260.4,station,way,398116872
+DT29,Bedok North,37425.3,35216.1,station,way,534060687
+DT3,Hillview,20677.0,38262.5,station,way,743648513
+DT30,Bedok Reservoir,39024.0,35416.6,station,way,607376584
+DT31,Tampines West,39695.8,36427.5,station,way,534060671
+DT32,Tampines,40278.7,37422.0,station,way,397901195
+DT33,Tampines East,41535.5,37562.3,station,way,534060674
+DT34,Upper Changi,42248.8,35983.4,station,way,534060678
+DT35,Expo,42322.1,35231.4,station,way,534060681
+DT37,Sungei Bedok,41750.5,33611.2,station,way,298087598
+DT4,Hume,20848.8,37401.5,station,way,1218269603
+DT5,Beauty World,21604.7,35910.4,station,way,743648514
+DT6,King Albert Park,22499.0,35318.1,station,way,824481775
+DT7,Sixth Avenue,23987.7,34786.1,station,way,824481777
+DT8,Tan Kah Kee,25123.6,34216.6,station,way,743648515
+DT9,Botanic Gardens,26028.6,33837.0,station,way,743554291
+EW1,Pasir Ris,40893.1,39247.0,station,way,824832473
+EW10,Kallang,32231.3,32640.9,station,node,206493462
+EW11,Lavender,31298.7,32191.5,station,way,743596794
+EW12,Bugis,30537.1,31394.4,station,way,743564833
+EW13,City Hall,30141.7,30608.3,station,way,743621008
+EW14,Raffles Place,30033.5,29546.4,station,way,743563592
+EW15,Tanjong Pagar,29408.7,28787.4,station,way,640462128
+EW17,Tiong Bahru,27280.3,29841.4,station,way,743561351
+EW18,Redhill,26158.2,30226.8,station,node,208526059
+EW19,Queenstown,24963.8,30778.3,station,node,208527368
+EW2,Tampines,40278.7,37422.0,station,way,397901195
+EW20,Commonwealth,24103.7,31643.1,station,node,209390589
+EW21,Buona Vista,23236.4,32123.0,station,way,823046125
+EW22,Dover,21911.5,32635.2,station,node,209451013
+EW23,Clementi,20485.7,33172.4,station,way,1096259943
+EW24,Jurong East,17869.9,35034.0,station,node,209451066
+EW25,Chinese Garden,16785.3,36063.1,station,node,209451088
+EW26,Lakeside,15466.0,36266.1,station,node,209451110
+EW27,Boon Lay,13809.9,35636.0,station,node,385877670
+EW28,Pioneer,12874.8,35529.7,station,node,385878107
+EW29,Joo Koon,10739.3,34440.2,station,node,385878948
+EW3,Simei,41360.5,36148.8,station,node,1767623973
+EW30,Gul Circle,8784.2,33544.8,station,node,1547412240
+EW31,Tuas Crescent,7476.7,33713.2,station,node,1547515539
+EW32,Tuas West Road,6437.7,34696.7,station,node,1547519833
+EW33,Tuas Link,6126.4,35829.3,station,node,1547550796
+EW4,Tanah Merah,40546.9,34377.2,station,way,1335904251
+EW5,Bedok,38783.9,34023.2,station,node,207725957
+EW6,Kembangan,36859.6,33698.7,station,node,1619228568
+EW7,Eunos,35742.5,33562.6,station,node,2957207984
+EW8,Paya Lebar,34553.3,33313.1,station,way,823759101
+EW9,Aljunied,33518.9,33192.1,station,node,206477134
+JE1,Tengah Plantation,16880.9,37715.8,station,node,5629901708
+JE2,Tengah Park,17259.2,37155.5,station,node,5629901713
+JE3,Bukit Batok West,17584.9,36407.6,station,node,5629901679
+JE4,Toh Guan,17904.1,35801.2,station,node,5629904070
+JE5,Jurong East,17869.9,35034.0,station,node,209451066
+JE6,Jurong Town Hall,18196.3,34293.9,station,node,5629904028
+JE7,Pandan Reservoir,18149.1,33633.1,station,node,5629903715
+JS10,Tukang,14195.2,34173.2,station,node,5629904220
+JS11,Jurong Hill,14299.2,33427.8,station,node,5629904201
+JS12,Jurong Pier,14324.3,32813.2,station,node,5629904186
+JS2,Choa Chu Kang West,17614.8,40132.3,station,node,5629904494
+JS3,Tengah,16512.2,38696.0,station,node,5629904473
+JS4,Hong Kah,16068.9,37798.9,station,node,5629904474
+JS5,Corporation,14700.1,37231.3,station,node,5629904470
+JS6,Jurong West,14085.6,36812.5,station,node,5629904462
+JS7,Bahar Junction,13425.3,36438.7,station,node,5629904571
+JS8,Boon Lay,13809.9,35636.0,station,node,385877670
+JS9,Enterprise,14113.7,35000.4,station,node,5629904413
+JW2,Tawas,12260.5,36974.6,station,node,5629903684
+JW3,Nanyang Gateway,11680.5,37320.3,station,node,5629903991
+JW4,Nanyang Crescent,11062.6,36741.1,station,node,5629903986
+JW5,Peng Kang Hill,10780.5,36113.6,station,node,5629903933
+NE1,HarbourFront,26690.4,27542.8,station,node,10538809251
+NE10,Potong Pasir,31973.2,34856.4,station,way,743648499
+NE11,Woodleigh,32170.3,35673.6,station,way,743648500
+NE12,Serangoon,32429.5,36912.0,station,way,743648501
+NE13,Kovan,33763.7,38027.8,station,way,743648502
+NE15,Buangkok,34651.7,40557.8,station,way,796799968
+NE16,Sengkang,34908.2,41494.8,station,way,824237598
+NE17,Punggol,35683.2,43016.5,station,way,1113644053
+NE18,Punggol Coast,36584.3,44093.8,station,way,557899832
+NE4,Chinatown,29174.3,29663.6,station,way,743599219
+NE5,Clarke Quay,29454.2,30055.2,station,way,743599220
+NE6,Dhoby Ghaut,29353.9,31313.5,station,way,739472746
+NE7,Little India,29776.9,32136.7,station,way,743566214
+NE8,Farrer Park,30343.5,32736.4,station,way,743566215
+NE9,Boon Keng,31153.0,33517.7,station,way,743566216
+NS1,Jurong East,17869.9,35034.0,station,node,209451066
+NS10,Admiralty,24398.9,46923.9,station,node,1840733395
+NS11,Sembawang,26524.0,47858.8,station,node,1840733438
+NS12,Canberra,27591.8,47194.8,station,way,429057527
+NS13,Yishun,28190.3,45679.5,station,node,1840733456
+NS14,Khatib,27966.5,44350.0,station,node,4538914740
+NS15,Yio Chu Kang,29292.9,40416.9,station,node,206529415
+NS16,Ang Mo Kio,29803.3,39122.0,station,node,7678872567
+NS17,Bishan,29765.5,37021.5,station,way,665452427
+NS18,Braddell,29497.9,35868.3,station,way,665452428
+NS19,Toa Payoh,29543.0,34997.2,station,way,743655242
+NS2,Bukit Batok,18682.0,36797.6,station,node,1839617627
+NS20,Novena,29191.0,33650.6,station,way,743655241
+NS21,Newton,28514.0,32794.8,station,way,665452941
+NS22,Orchard,27807.8,31739.7,station,way,298087585
+NS23,Somerset,28604.0,31404.9,station,way,796380532
+NS24,Dhoby Ghaut,29353.9,31313.5,station,way,739472746
+NS25,City Hall,30141.7,30608.3,station,way,743621008
+NS26,Raffles Place,30033.5,29546.4,station,way,743563592
+NS27,Marina Bay,30428.6,28646.6,station,way,298087574
+NS28,Marina South Pier,31293.2,28196.8,station,way,665451220
+NS3,Bukit Gombak,18930.7,37885.1,station,node,1840733403
+NS3A,Brickland,18670.4,38946.7,construction,way,1195545435
+NS4,Choa Chu Kang,18096.2,40807.0,station,node,2440006258
+NS5,Yew Tee,18438.5,42149.8,station,node,1840733455
+NS7,Kranji,20062.1,45219.1,station,node,1840733423
+NS8,Marsiling,21412.6,46032.0,station,node,1840733426
+NS9,Woodlands,22908.7,46440.5,station,way,298087607
+PTC,Punggol,35683.2,43016.5,station,way,1113644053
+SE1,Compassvale,35469.2,41824.3,station,node,1840734575
+SE2,Rumbia,36085.5,41487.9,station,node,1840734605
+SE3,Bakau,36023.7,41104.5,station,node,1840734571
+SE4,Kangkar,35666.2,40653.4,station,node,1840734595
+SE5,Ranggung,35127.1,40666.4,station,node,268259662
+STC,Sengkang,34908.2,41494.8,station,way,824237598
+SW1,Cheng Lim,34729.7,42020.4,station,node,390912052
+SW2,Farmway,34221.6,42120.3,station,node,390918399
+SW3,Kupang,33333.7,42231.8,station,node,391188031
+SW4,Thanggam,32709.2,42135.6,station,node,391188200
+SW5,Fernvale,32781.0,41535.2,station,node,391187489
+SW6,Layar,33198.6,41555.2,station,node,391189258
+SW7,Tongkang,33843.5,41259.3,station,node,391189922
+SW8,Renjong,34367.2,40963.1,station,node,391190166
+TE1,Woodlands North,22688.9,47776.1,station,way,298087604
+TE10,Mount Pleasant,28219.3,34531.2,station,way,298087581
+TE11,Stevens,27157.4,33595.9,station,way,298087596
+TE12,Napier,26419.7,32120.1,station,way,298087582
+TE13,Orchard Boulevard,26925.2,31766.5,station,way,298087583
+TE14,Orchard,27807.8,31739.7,station,way,298087585
+TE15,Great World,27998.7,30760.0,station,way,298087553
+TE16,Havelock,28034.1,30115.2,station,way,298087555
+TE18,Maxwell,29177.7,29234.2,station,way,298087579
+TE19,Shenton Way,29947.8,28884.3,station,way,298087589
+TE2,Woodlands,22908.7,46440.5,station,way,298087607
+TE20,Marina Bay,30428.6,28646.6,station,way,298087574
+TE21,Marina South,31286.9,28526.8,station,way,298087575
+TE22,Gardens by the Bay,31871.8,29093.8,station,way,298087552
+TE22A,Founders' Memorial,31942.2,30383.3,station,way,467689347
+TE23,Tanjong Rhu,32463.3,31083.3,station,way,298087557
+TE24,Katong Park,33831.3,31156.8,station,way,298087559
+TE25,Tanjong Katong,35138.4,31325.3,station,way,857650977
+TE26,Marine Parade,36178.7,31784.2,station,way,298087577
+TE27,Marine Terrace,37068.8,32111.1,station,way,298087578
+TE28,Siglap,38757.5,32472.3,station,way,298087592
+TE29,Bayshore,40103.7,32807.3,station,way,298087542
+TE3,Woodlands South,23606.7,45434.5,station,way,298087605
+TE30,Bedok South,40879.2,33213.7,station,way,298087544
+TE31,Sungei Bedok,41750.5,33611.2,station,way,298087598
+TE32,Changi Terminal 5,45623.1,34050.7,construction,way,1463148237
+TE4,Springleaf,26274.1,42228.7,station,way,298087594
+TE5,Lentor,28383.0,40719.2,station,way,298087561
+TE6,Mayflower,28390.7,39352.1,station,way,298087580
+TE7,Bright Hill,28086.8,38367.0,station,way,298087602
+TE8,Upper Thomson,27972.2,37375.3,station,way,298087600
+TE9,Caldecott,28724.3,35524.6,station,way,663177167

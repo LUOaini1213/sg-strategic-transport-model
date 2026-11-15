@@ -1,0 +1,1441 @@
+workplace,region_of_residence,mode,persons
+Total,TOTAL,total,2177456
+Ang Mo Kio,TOTAL,total,47633
+Bedok,TOTAL,total,59224
+Bishan,TOTAL,total,28514
+Boon Lay,TOTAL,total,19238
+Bukit Batok,TOTAL,total,33475
+Bukit Merah,TOTAL,total,102606
+Bukit Panjang,TOTAL,total,8881
+Bukit Timah,TOTAL,total,20951
+Changi,TOTAL,total,63053
+Choa Chu Kang,TOTAL,total,12888
+Clementi,TOTAL,total,38244
+Downtown Core,TOTAL,total,280589
+Geylang,TOTAL,total,115101
+Hougang,TOTAL,total,43240
+Jurong East,TOTAL,total,61478
+Jurong West,TOTAL,total,44909
+Kallang,TOTAL,total,62510
+Marine Parade,TOTAL,total,12621
+Museum,TOTAL,total,12329
+Newton,TOTAL,total,13496
+Novena,TOTAL,total,42172
+Orchard,TOTAL,total,43874
+Outram,TOTAL,total,37784
+Pasir Ris,TOTAL,total,23628
+Paya Lebar,TOTAL,total,13212
+Pioneer,TOTAL,total,36579
+Punggol,TOTAL,total,9186
+Queenstown,TOTAL,total,129905
+Rochor,TOTAL,total,31152
+Seletar,TOTAL,total,5265
+Sembawang,TOTAL,total,39772
+Sengkang,TOTAL,total,17301
+Serangoon,TOTAL,total,38008
+Singapore River,TOTAL,total,17889
+Southern Islands,TOTAL,total,7884
+Sungei Kadut,TOTAL,total,20577
+Tampines,TOTAL,total,83159
+Tanglin,TOTAL,total,11517
+Toa Payoh,TOTAL,total,53392
+Tuas,TOTAL,total,41999
+Western Islands,TOTAL,total,13125
+Western Water Catchment,TOTAL,total,27900
+Woodlands,TOTAL,total,43383
+Yishun,TOTAL,total,41337
+Other Planning Areas or Outside Singapore,TOTAL,total,22721
+No Fixed Location for Work,TOTAL,total,174780
+Works from Home,TOTAL,total,68974
+Total,TOTAL,pt,1257434
+Ang Mo Kio,TOTAL,pt,27503
+Bedok,TOTAL,pt,32322
+Bishan,TOTAL,pt,16237
+Boon Lay,TOTAL,pt,9770
+Bukit Batok,TOTAL,pt,16631
+Bukit Merah,TOTAL,pt,65661
+Bukit Panjang,TOTAL,pt,4824
+Bukit Timah,TOTAL,pt,12559
+Changi,TOTAL,pt,34752
+Choa Chu Kang,TOTAL,pt,7258
+Clementi,TOTAL,pt,21042
+Downtown Core,TOTAL,pt,215346
+Geylang,TOTAL,pt,66951
+Hougang,TOTAL,pt,24258
+Jurong East,TOTAL,pt,37934
+Jurong West,TOTAL,pt,24577
+Kallang,TOTAL,pt,40248
+Marine Parade,TOTAL,pt,7930
+Museum,TOTAL,pt,9463
+Newton,TOTAL,pt,9553
+Novena,TOTAL,pt,29131
+Orchard,TOTAL,pt,33591
+Outram,TOTAL,pt,27827
+Pasir Ris,TOTAL,pt,12507
+Paya Lebar,TOTAL,pt,7296
+Pioneer,TOTAL,pt,17198
+Punggol,TOTAL,pt,5316
+Queenstown,TOTAL,pt,86318
+Rochor,TOTAL,pt,21147
+Seletar,TOTAL,pt,2777
+Sembawang,TOTAL,pt,21088
+Sengkang,TOTAL,pt,9825
+Serangoon,TOTAL,pt,21788
+Singapore River,TOTAL,pt,13184
+Southern Islands,TOTAL,pt,6275
+Sungei Kadut,TOTAL,pt,9974
+Tampines,TOTAL,pt,49398
+Tanglin,TOTAL,pt,7884
+Toa Payoh,TOTAL,pt,31864
+Tuas,TOTAL,pt,17858
+Western Islands,TOTAL,pt,5297
+Western Water Catchment,TOTAL,pt,17255
+Woodlands,TOTAL,pt,22630
+Yishun,TOTAL,pt,21799
+Other Planning Areas or Outside Singapore,TOTAL,pt,12599
+No Fixed Location for Work,TOTAL,pt,60789
+Works from Home,TOTAL,pt,0
+Total,TOTAL,car_taxi,526477
+Ang Mo Kio,TOTAL,car_taxi,13369
+Bedok,TOTAL,car_taxi,16720
+Bishan,TOTAL,car_taxi,8068
+Boon Lay,TOTAL,car_taxi,5874
+Bukit Batok,TOTAL,car_taxi,11115
+Bukit Merah,TOTAL,car_taxi,27440
+Bukit Panjang,TOTAL,car_taxi,1636
+Bukit Timah,TOTAL,car_taxi,6422
+Changi,TOTAL,car_taxi,18740
+Choa Chu Kang,TOTAL,car_taxi,2088
+Clementi,TOTAL,car_taxi,11727
+Downtown Core,TOTAL,car_taxi,56608
+Geylang,TOTAL,car_taxi,34270
+Hougang,TOTAL,car_taxi,11120
+Jurong East,TOTAL,car_taxi,15928
+Jurong West,TOTAL,car_taxi,11342
+Kallang,TOTAL,car_taxi,15672
+Marine Parade,TOTAL,car_taxi,3095
+Museum,TOTAL,car_taxi,2422
+Newton,TOTAL,car_taxi,3375
+Novena,TOTAL,car_taxi,10206
+Orchard,TOTAL,car_taxi,8756
+Outram,TOTAL,car_taxi,7536
+Pasir Ris,TOTAL,car_taxi,5948
+Paya Lebar,TOTAL,car_taxi,4156
+Pioneer,TOTAL,car_taxi,11011
+Punggol,TOTAL,car_taxi,1454
+Queenstown,TOTAL,car_taxi,34104
+Rochor,TOTAL,car_taxi,7686
+Seletar,TOTAL,car_taxi,1594
+Sembawang,TOTAL,car_taxi,10522
+Sengkang,TOTAL,car_taxi,2771
+Serangoon,TOTAL,car_taxi,10814
+Singapore River,TOTAL,car_taxi,3939
+Southern Islands,TOTAL,car_taxi,973
+Sungei Kadut,TOTAL,car_taxi,7002
+Tampines,TOTAL,car_taxi,21225
+Tanglin,TOTAL,car_taxi,3000
+Toa Payoh,TOTAL,car_taxi,15295
+Tuas,TOTAL,car_taxi,12593
+Western Islands,TOTAL,car_taxi,4187
+Western Water Catchment,TOTAL,car_taxi,7681
+Woodlands,TOTAL,car_taxi,10715
+Yishun,TOTAL,car_taxi,9917
+Other Planning Areas or Outside Singapore,TOTAL,car_taxi,6905
+No Fixed Location for Work,TOTAL,car_taxi,29454
+Works from Home,TOTAL,car_taxi,0
+Total,TOTAL,other,180639
+Ang Mo Kio,TOTAL,other,3481
+Bedok,TOTAL,other,6045
+Bishan,TOTAL,other,2189
+Boon Lay,TOTAL,other,3497
+Bukit Batok,TOTAL,other,2924
+Bukit Merah,TOTAL,other,5467
+Bukit Panjang,TOTAL,other,504
+Bukit Timah,TOTAL,other,1135
+Changi,TOTAL,other,9387
+Choa Chu Kang,TOTAL,other,904
+Clementi,TOTAL,other,3881
+Downtown Core,TOTAL,other,6385
+Geylang,TOTAL,other,10057
+Hougang,TOTAL,other,4270
+Jurong East,TOTAL,other,5784
+Jurong West,TOTAL,other,4718
+Kallang,TOTAL,other,3559
+Marine Parade,TOTAL,other,879
+Museum,TOTAL,other,315
+Newton,TOTAL,other,450
+Novena,TOTAL,other,1701
+Orchard,TOTAL,other,1066
+Outram,TOTAL,other,1151
+Pasir Ris,TOTAL,other,3608
+Paya Lebar,TOTAL,other,1678
+Pioneer,TOTAL,other,8247
+Punggol,TOTAL,other,767
+Queenstown,TOTAL,other,7220
+Rochor,TOTAL,other,1316
+Seletar,TOTAL,other,894
+Sembawang,TOTAL,other,6028
+Sengkang,TOTAL,other,1703
+Serangoon,TOTAL,other,3175
+Singapore River,TOTAL,other,556
+Southern Islands,TOTAL,other,599
+Sungei Kadut,TOTAL,other,3402
+Tampines,TOTAL,other,7399
+Tanglin,TOTAL,other,511
+Toa Payoh,TOTAL,other,3492
+Tuas,TOTAL,other,11398
+Western Islands,TOTAL,other,3629
+Western Water Catchment,TOTAL,other,2594
+Woodlands,TOTAL,other,4958
+Yishun,TOTAL,other,4272
+Other Planning Areas or Outside Singapore,TOTAL,other,2859
+No Fixed Location for Work,TOTAL,other,20588
+Works from Home,TOTAL,other,0
+Total,TOTAL,none,212907
+Ang Mo Kio,TOTAL,none,3281
+Bedok,TOTAL,none,4137
+Bishan,TOTAL,none,2020
+Boon Lay,TOTAL,none,98
+Bukit Batok,TOTAL,none,2805
+Bukit Merah,TOTAL,none,4038
+Bukit Panjang,TOTAL,none,1917
+Bukit Timah,TOTAL,none,835
+Changi,TOTAL,none,174
+Choa Chu Kang,TOTAL,none,2637
+Clementi,TOTAL,none,1594
+Downtown Core,TOTAL,none,2249
+Geylang,TOTAL,none,3823
+Hougang,TOTAL,none,3591
+Jurong East,TOTAL,none,1832
+Jurong West,TOTAL,none,4272
+Kallang,TOTAL,none,3032
+Marine Parade,TOTAL,none,718
+Museum,TOTAL,none,128
+Newton,TOTAL,none,118
+Novena,TOTAL,none,1133
+Orchard,TOTAL,none,460
+Outram,TOTAL,none,1270
+Pasir Ris,TOTAL,none,1566
+Paya Lebar,TOTAL,none,83
+Pioneer,TOTAL,none,123
+Punggol,TOTAL,none,1650
+Queenstown,TOTAL,none,2263
+Rochor,TOTAL,none,1003
+Seletar,TOTAL,none,0
+Sembawang,TOTAL,none,2134
+Sengkang,TOTAL,none,3003
+Serangoon,TOTAL,none,2232
+Singapore River,TOTAL,none,210
+Southern Islands,TOTAL,none,37
+Sungei Kadut,TOTAL,none,199
+Tampines,TOTAL,none,5137
+Tanglin,TOTAL,none,122
+Toa Payoh,TOTAL,none,2741
+Tuas,TOTAL,none,150
+Western Islands,TOTAL,none,12
+Western Water Catchment,TOTAL,none,370
+Woodlands,TOTAL,none,5080
+Yishun,TOTAL,none,5349
+Other Planning Areas or Outside Singapore,TOTAL,none,358
+No Fixed Location for Work,TOTAL,none,63950
+Works from Home,TOTAL,none,68974
+Total,CENTRAL REGION,total,472830
+Ang Mo Kio,CENTRAL REGION,total,7393
+Bedok,CENTRAL REGION,total,9637
+Bishan,CENTRAL REGION,total,7252
+Boon Lay,CENTRAL REGION,total,2252
+Bukit Batok,CENTRAL REGION,total,4954
+Bukit Merah,CENTRAL REGION,total,32285
+Bukit Panjang,CENTRAL REGION,total,626
+Bukit Timah,CENTRAL REGION,total,5287
+Changi,CENTRAL REGION,total,9153
+Choa Chu Kang,CENTRAL REGION,total,848
+Clementi,CENTRAL REGION,total,6463
+Downtown Core,CENTRAL REGION,total,90786
+Geylang,CENTRAL REGION,total,29056
+Hougang,CENTRAL REGION,total,6258
+Jurong East,CENTRAL REGION,total,9237
+Jurong West,CENTRAL REGION,total,4657
+Kallang,CENTRAL REGION,total,18440
+Marine Parade,CENTRAL REGION,total,3915
+Museum,CENTRAL REGION,total,3645
+Newton,CENTRAL REGION,total,3950
+Novena,CENTRAL REGION,total,12705
+Orchard,CENTRAL REGION,total,13189
+Outram,CENTRAL REGION,total,12859
+Pasir Ris,CENTRAL REGION,total,2439
+Paya Lebar,CENTRAL REGION,total,1765
+Pioneer,CENTRAL REGION,total,3925
+Punggol,CENTRAL REGION,total,499
+Queenstown,CENTRAL REGION,total,35551
+Rochor,CENTRAL REGION,total,10177
+Seletar,CENTRAL REGION,total,681
+Sembawang,CENTRAL REGION,total,3307
+Sengkang,CENTRAL REGION,total,1346
+Serangoon,CENTRAL REGION,total,5611
+Singapore River,CENTRAL REGION,total,5608
+Southern Islands,CENTRAL REGION,total,1920
+Sungei Kadut,CENTRAL REGION,total,2310
+Tampines,CENTRAL REGION,total,11726
+Tanglin,CENTRAL REGION,total,3600
+Toa Payoh,CENTRAL REGION,total,16081
+Tuas,CENTRAL REGION,total,4462
+Western Islands,CENTRAL REGION,total,1754
+Western Water Catchment,CENTRAL REGION,total,4280
+Woodlands,CENTRAL REGION,total,3608
+Yishun,CENTRAL REGION,total,4081
+Other Planning Areas or Outside Singapore,CENTRAL REGION,total,4801
+No Fixed Location for Work,CENTRAL REGION,total,30759
+Works from Home,CENTRAL REGION,total,17695
+Total,CENTRAL REGION,pt,265695
+Ang Mo Kio,CENTRAL REGION,pt,4385
+Bedok,CENTRAL REGION,pt,5774
+Bishan,CENTRAL REGION,pt,3553
+Boon Lay,CENTRAL REGION,pt,975
+Bukit Batok,CENTRAL REGION,pt,2456
+Bukit Merah,CENTRAL REGION,pt,18016
+Bukit Panjang,CENTRAL REGION,pt,398
+Bukit Timah,CENTRAL REGION,pt,2750
+Changi,CENTRAL REGION,pt,4896
+Choa Chu Kang,CENTRAL REGION,pt,486
+Clementi,CENTRAL REGION,pt,3470
+Downtown Core,CENTRAL REGION,pt,63969
+Geylang,CENTRAL REGION,pt,14827
+Hougang,CENTRAL REGION,pt,3821
+Jurong East,CENTRAL REGION,pt,5306
+Jurong West,CENTRAL REGION,pt,2395
+Kallang,CENTRAL REGION,pt,9868
+Marine Parade,CENTRAL REGION,pt,2136
+Museum,CENTRAL REGION,pt,2581
+Newton,CENTRAL REGION,pt,2422
+Novena,CENTRAL REGION,pt,7551
+Orchard,CENTRAL REGION,pt,9052
+Outram,CENTRAL REGION,pt,8344
+Pasir Ris,CENTRAL REGION,pt,1303
+Paya Lebar,CENTRAL REGION,pt,951
+Pioneer,CENTRAL REGION,pt,1638
+Punggol,CENTRAL REGION,pt,286
+Queenstown,CENTRAL REGION,pt,21783
+Rochor,CENTRAL REGION,pt,6334
+Seletar,CENTRAL REGION,pt,251
+Sembawang,CENTRAL REGION,pt,1699
+Sengkang,CENTRAL REGION,pt,882
+Serangoon,CENTRAL REGION,pt,3331
+Singapore River,CENTRAL REGION,pt,3723
+Southern Islands,CENTRAL REGION,pt,1522
+Sungei Kadut,CENTRAL REGION,pt,1073
+Tampines,CENTRAL REGION,pt,7224
+Tanglin,CENTRAL REGION,pt,2185
+Toa Payoh,CENTRAL REGION,pt,8046
+Tuas,CENTRAL REGION,pt,1897
+Western Islands,CENTRAL REGION,pt,688
+Western Water Catchment,CENTRAL REGION,pt,2524
+Woodlands,CENTRAL REGION,pt,1848
+Yishun,CENTRAL REGION,pt,2555
+Other Planning Areas or Outside Singapore,CENTRAL REGION,pt,2364
+No Fixed Location for Work,CENTRAL REGION,pt,12158
+Works from Home,CENTRAL REGION,pt,0
+Total,CENTRAL REGION,car_taxi,131794
+Ang Mo Kio,CENTRAL REGION,car_taxi,2594
+Bedok,CENTRAL REGION,car_taxi,3032
+Bishan,CENTRAL REGION,car_taxi,1974
+Boon Lay,CENTRAL REGION,car_taxi,1041
+Bukit Batok,CENTRAL REGION,car_taxi,2160
+Bukit Merah,CENTRAL REGION,car_taxi,9052
+Bukit Panjang,CENTRAL REGION,car_taxi,213
+Bukit Timah,CENTRAL REGION,car_taxi,1788
+Changi,CENTRAL REGION,car_taxi,3516
+Choa Chu Kang,CENTRAL REGION,car_taxi,332
+Clementi,CENTRAL REGION,car_taxi,2291
+Downtown Core,CENTRAL REGION,car_taxi,23320
+Geylang,CENTRAL REGION,car_taxi,8497
+Hougang,CENTRAL REGION,car_taxi,1905
+Jurong East,CENTRAL REGION,car_taxi,3267
+Jurong West,CENTRAL REGION,car_taxi,1996
+Kallang,CENTRAL REGION,car_taxi,4643
+Marine Parade,CENTRAL REGION,car_taxi,844
+Museum,CENTRAL REGION,car_taxi,916
+Newton,CENTRAL REGION,car_taxi,1296
+Novena,CENTRAL REGION,car_taxi,3684
+Orchard,CENTRAL REGION,car_taxi,3443
+Outram,CENTRAL REGION,car_taxi,2968
+Pasir Ris,CENTRAL REGION,car_taxi,849
+Paya Lebar,CENTRAL REGION,car_taxi,691
+Pioneer,CENTRAL REGION,car_taxi,1657
+Punggol,CENTRAL REGION,car_taxi,169
+Queenstown,CENTRAL REGION,car_taxi,10658
+Rochor,CENTRAL REGION,car_taxi,2472
+Seletar,CENTRAL REGION,car_taxi,324
+Sembawang,CENTRAL REGION,car_taxi,1239
+Sengkang,CENTRAL REGION,car_taxi,366
+Serangoon,CENTRAL REGION,car_taxi,1970
+Singapore River,CENTRAL REGION,car_taxi,1556
+Southern Islands,CENTRAL REGION,car_taxi,269
+Sungei Kadut,CENTRAL REGION,car_taxi,950
+Tampines,CENTRAL REGION,car_taxi,3907
+Tanglin,CENTRAL REGION,car_taxi,1233
+Toa Payoh,CENTRAL REGION,car_taxi,4521
+Tuas,CENTRAL REGION,car_taxi,1847
+Western Islands,CENTRAL REGION,car_taxi,702
+Western Water Catchment,CENTRAL REGION,car_taxi,1498
+Woodlands,CENTRAL REGION,car_taxi,1528
+Yishun,CENTRAL REGION,car_taxi,1336
+Other Planning Areas or Outside Singapore,CENTRAL REGION,car_taxi,2023
+No Fixed Location for Work,CENTRAL REGION,car_taxi,5258
+Works from Home,CENTRAL REGION,car_taxi,0
+Total,CENTRAL REGION,other,22845
+Ang Mo Kio,CENTRAL REGION,other,303
+Bedok,CENTRAL REGION,other,698
+Bishan,CENTRAL REGION,other,443
+Boon Lay,CENTRAL REGION,other,231
+Bukit Batok,CENTRAL REGION,other,245
+Bukit Merah,CENTRAL REGION,other,1404
+Bukit Panjang,CENTRAL REGION,other,7
+Bukit Timah,CENTRAL REGION,other,172
+Changi,CENTRAL REGION,other,713
+Choa Chu Kang,CENTRAL REGION,other,29
+Clementi,CENTRAL REGION,other,632
+Downtown Core,CENTRAL REGION,other,1492
+Geylang,CENTRAL REGION,other,2339
+Hougang,CENTRAL REGION,other,470
+Jurong East,CENTRAL REGION,other,588
+Jurong West,CENTRAL REGION,other,239
+Kallang,CENTRAL REGION,other,1034
+Marine Parade,CENTRAL REGION,other,257
+Museum,CENTRAL REGION,other,56
+Newton,CENTRAL REGION,other,133
+Novena,CENTRAL REGION,other,424
+Orchard,CENTRAL REGION,other,276
+Outram,CENTRAL REGION,other,377
+Pasir Ris,CENTRAL REGION,other,260
+Paya Lebar,CENTRAL REGION,other,115
+Pioneer,CENTRAL REGION,other,604
+Punggol,CENTRAL REGION,other,33
+Queenstown,CENTRAL REGION,other,1133
+Rochor,CENTRAL REGION,other,471
+Seletar,CENTRAL REGION,other,107
+Sembawang,CENTRAL REGION,other,338
+Sengkang,CENTRAL REGION,other,82
+Serangoon,CENTRAL REGION,other,283
+Singapore River,CENTRAL REGION,other,182
+Southern Islands,CENTRAL REGION,other,104
+Sungei Kadut,CENTRAL REGION,other,287
+Tampines,CENTRAL REGION,other,525
+Tanglin,CENTRAL REGION,other,98
+Toa Payoh,CENTRAL REGION,other,967
+Tuas,CENTRAL REGION,other,718
+Western Islands,CENTRAL REGION,other,364
+Western Water Catchment,CENTRAL REGION,other,258
+Woodlands,CENTRAL REGION,other,180
+Yishun,CENTRAL REGION,other,178
+Other Planning Areas or Outside Singapore,CENTRAL REGION,other,310
+No Fixed Location for Work,CENTRAL REGION,other,2686
+Works from Home,CENTRAL REGION,other,0
+Total,CENTRAL REGION,none,52495
+Ang Mo Kio,CENTRAL REGION,none,112
+Bedok,CENTRAL REGION,none,132
+Bishan,CENTRAL REGION,none,1282
+Boon Lay,CENTRAL REGION,none,6
+Bukit Batok,CENTRAL REGION,none,93
+Bukit Merah,CENTRAL REGION,none,3813
+Bukit Panjang,CENTRAL REGION,none,9
+Bukit Timah,CENTRAL REGION,none,577
+Changi,CENTRAL REGION,none,27
+Choa Chu Kang,CENTRAL REGION,none,0
+Clementi,CENTRAL REGION,none,71
+Downtown Core,CENTRAL REGION,none,2005
+Geylang,CENTRAL REGION,none,3393
+Hougang,CENTRAL REGION,none,62
+Jurong East,CENTRAL REGION,none,76
+Jurong West,CENTRAL REGION,none,26
+Kallang,CENTRAL REGION,none,2895
+Marine Parade,CENTRAL REGION,none,678
+Museum,CENTRAL REGION,none,91
+Newton,CENTRAL REGION,none,99
+Novena,CENTRAL REGION,none,1045
+Orchard,CENTRAL REGION,none,418
+Outram,CENTRAL REGION,none,1169
+Pasir Ris,CENTRAL REGION,none,27
+Paya Lebar,CENTRAL REGION,none,9
+Pioneer,CENTRAL REGION,none,26
+Punggol,CENTRAL REGION,none,10
+Queenstown,CENTRAL REGION,none,1977
+Rochor,CENTRAL REGION,none,900
+Seletar,CENTRAL REGION,none,0
+Sembawang,CENTRAL REGION,none,31
+Sengkang,CENTRAL REGION,none,16
+Serangoon,CENTRAL REGION,none,26
+Singapore River,CENTRAL REGION,none,146
+Southern Islands,CENTRAL REGION,none,24
+Sungei Kadut,CENTRAL REGION,none,0
+Tampines,CENTRAL REGION,none,70
+Tanglin,CENTRAL REGION,none,83
+Toa Payoh,CENTRAL REGION,none,2548
+Tuas,CENTRAL REGION,none,0
+Western Islands,CENTRAL REGION,none,0
+Western Water Catchment,CENTRAL REGION,none,0
+Woodlands,CENTRAL REGION,none,53
+Yishun,CENTRAL REGION,none,13
+Other Planning Areas or Outside Singapore,CENTRAL REGION,none,105
+No Fixed Location for Work,CENTRAL REGION,none,10656
+Works from Home,CENTRAL REGION,none,17695
+Total,EAST REGION,total,369922
+Ang Mo Kio,EAST REGION,total,4438
+Bedok,EAST REGION,total,26406
+Bishan,EAST REGION,total,2873
+Boon Lay,EAST REGION,total,1018
+Bukit Batok,EAST REGION,total,2165
+Bukit Merah,EAST REGION,total,13763
+Bukit Panjang,EAST REGION,total,226
+Bukit Timah,EAST REGION,total,1546
+Changi,EAST REGION,total,25746
+Choa Chu Kang,EAST REGION,total,414
+Clementi,EAST REGION,total,2566
+Downtown Core,EAST REGION,total,50621
+Geylang,EAST REGION,total,27112
+Hougang,EAST REGION,total,6068
+Jurong East,EAST REGION,total,4151
+Jurong West,EAST REGION,total,1928
+Kallang,EAST REGION,total,10524
+Marine Parade,EAST REGION,total,4347
+Museum,EAST REGION,total,1850
+Newton,EAST REGION,total,2392
+Novena,EAST REGION,total,5182
+Orchard,EAST REGION,total,6336
+Outram,EAST REGION,total,5686
+Pasir Ris,EAST REGION,total,11839
+Paya Lebar,EAST REGION,total,3939
+Pioneer,EAST REGION,total,2694
+Punggol,EAST REGION,total,1053
+Queenstown,EAST REGION,total,15664
+Rochor,EAST REGION,total,5210
+Seletar,EAST REGION,total,1225
+Sembawang,EAST REGION,total,2593
+Sengkang,EAST REGION,total,1738
+Serangoon,EAST REGION,total,3837
+Singapore River,EAST REGION,total,2765
+Southern Islands,EAST REGION,total,935
+Sungei Kadut,EAST REGION,total,1140
+Tampines,EAST REGION,total,38829
+Tanglin,EAST REGION,total,1545
+Toa Payoh,EAST REGION,total,7553
+Tuas,EAST REGION,total,2736
+Western Islands,EAST REGION,total,1279
+Western Water Catchment,EAST REGION,total,3177
+Woodlands,EAST REGION,total,2209
+Yishun,EAST REGION,total,2593
+Other Planning Areas or Outside Singapore,EAST REGION,total,3771
+No Fixed Location for Work,EAST REGION,total,31701
+Works from Home,EAST REGION,total,12537
+Total,EAST REGION,pt,208662
+Ang Mo Kio,EAST REGION,pt,2249
+Bedok,EAST REGION,pt,12988
+Bishan,EAST REGION,pt,1381
+Boon Lay,EAST REGION,pt,367
+Bukit Batok,EAST REGION,pt,1000
+Bukit Merah,EAST REGION,pt,8687
+Bukit Panjang,EAST REGION,pt,110
+Bukit Timah,EAST REGION,pt,809
+Changi,EAST REGION,pt,15389
+Choa Chu Kang,EAST REGION,pt,234
+Clementi,EAST REGION,pt,1143
+Downtown Core,EAST REGION,pt,37820
+Geylang,EAST REGION,pt,16391
+Hougang,EAST REGION,pt,3483
+Jurong East,EAST REGION,pt,2062
+Jurong West,EAST REGION,pt,927
+Kallang,EAST REGION,pt,7085
+Marine Parade,EAST REGION,pt,2758
+Museum,EAST REGION,pt,1445
+Newton,EAST REGION,pt,1659
+Novena,EAST REGION,pt,3196
+Orchard,EAST REGION,pt,4833
+Outram,EAST REGION,pt,4057
+Pasir Ris,EAST REGION,pt,6148
+Paya Lebar,EAST REGION,pt,2311
+Pioneer,EAST REGION,pt,1079
+Punggol,EAST REGION,pt,674
+Queenstown,EAST REGION,pt,9196
+Rochor,EAST REGION,pt,3108
+Seletar,EAST REGION,pt,666
+Sembawang,EAST REGION,pt,1129
+Sengkang,EAST REGION,pt,1145
+Serangoon,EAST REGION,pt,2229
+Singapore River,EAST REGION,pt,1962
+Southern Islands,EAST REGION,pt,707
+Sungei Kadut,EAST REGION,pt,390
+Tampines,EAST REGION,pt,22998
+Tanglin,EAST REGION,pt,1092
+Toa Payoh,EAST REGION,pt,4663
+Tuas,EAST REGION,pt,878
+Western Islands,EAST REGION,pt,465
+Western Water Catchment,EAST REGION,pt,1974
+Woodlands,EAST REGION,pt,1152
+Yishun,EAST REGION,pt,1400
+Other Planning Areas or Outside Singapore,EAST REGION,pt,2211
+No Fixed Location for Work,EAST REGION,pt,11016
+Works from Home,EAST REGION,pt,0
+Total,EAST REGION,car_taxi,94918
+Ang Mo Kio,EAST REGION,car_taxi,1767
+Bedok,EAST REGION,car_taxi,6797
+Bishan,EAST REGION,car_taxi,1215
+Boon Lay,EAST REGION,car_taxi,486
+Bukit Batok,EAST REGION,car_taxi,894
+Bukit Merah,EAST REGION,car_taxi,4292
+Bukit Panjang,EAST REGION,car_taxi,116
+Bukit Timah,EAST REGION,car_taxi,609
+Changi,EAST REGION,car_taxi,6365
+Choa Chu Kang,EAST REGION,car_taxi,140
+Clementi,EAST REGION,car_taxi,1172
+Downtown Core,EAST REGION,car_taxi,11217
+Geylang,EAST REGION,car_taxi,8026
+Hougang,EAST REGION,car_taxi,1851
+Jurong East,EAST REGION,car_taxi,1712
+Jurong West,EAST REGION,car_taxi,784
+Kallang,EAST REGION,car_taxi,2859
+Marine Parade,EAST REGION,car_taxi,1220
+Museum,EAST REGION,car_taxi,322
+Newton,EAST REGION,car_taxi,656
+Novena,EAST REGION,car_taxi,1672
+Orchard,EAST REGION,car_taxi,1278
+Outram,EAST REGION,car_taxi,1349
+Pasir Ris,EAST REGION,car_taxi,2229
+Paya Lebar,EAST REGION,car_taxi,1034
+Pioneer,EAST REGION,car_taxi,1062
+Punggol,EAST REGION,car_taxi,336
+Queenstown,EAST REGION,car_taxi,5462
+Rochor,EAST REGION,car_taxi,1840
+Seletar,EAST REGION,car_taxi,383
+Sembawang,EAST REGION,car_taxi,1218
+Sengkang,EAST REGION,car_taxi,416
+Serangoon,EAST REGION,car_taxi,1377
+Singapore River,EAST REGION,car_taxi,744
+Southern Islands,EAST REGION,car_taxi,163
+Sungei Kadut,EAST REGION,car_taxi,593
+Tampines,EAST REGION,car_taxi,7737
+Tanglin,EAST REGION,car_taxi,373
+Toa Payoh,EAST REGION,car_taxi,2421
+Tuas,EAST REGION,car_taxi,1165
+Western Islands,EAST REGION,car_taxi,401
+Western Water Catchment,EAST REGION,car_taxi,1004
+Woodlands,EAST REGION,car_taxi,710
+Yishun,EAST REGION,car_taxi,1022
+Other Planning Areas or Outside Singapore,EAST REGION,car_taxi,1129
+No Fixed Location for Work,EAST REGION,car_taxi,5299
+Works from Home,EAST REGION,car_taxi,0
+Total,EAST REGION,other,30725
+Ang Mo Kio,EAST REGION,other,358
+Bedok,EAST REGION,other,2743
+Bishan,EAST REGION,other,216
+Boon Lay,EAST REGION,other,165
+Bukit Batok,EAST REGION,other,201
+Bukit Merah,EAST REGION,other,748
+Bukit Panjang,EAST REGION,other,0
+Bukit Timah,EAST REGION,other,64
+Changi,EAST REGION,other,3906
+Choa Chu Kang,EAST REGION,other,0
+Clementi,EAST REGION,other,251
+Downtown Core,EAST REGION,other,1500
+Geylang,EAST REGION,other,2586
+Hougang,EAST REGION,other,667
+Jurong East,EAST REGION,other,377
+Jurong West,EAST REGION,other,133
+Kallang,EAST REGION,other,536
+Marine Parade,EAST REGION,other,346
+Museum,EAST REGION,other,83
+Newton,EAST REGION,other,77
+Novena,EAST REGION,other,295
+Orchard,EAST REGION,other,225
+Outram,EAST REGION,other,280
+Pasir Ris,EAST REGION,other,1985
+Paya Lebar,EAST REGION,other,556
+Pioneer,EAST REGION,other,553
+Punggol,EAST REGION,other,43
+Queenstown,EAST REGION,other,996
+Rochor,EAST REGION,other,242
+Seletar,EAST REGION,other,176
+Sembawang,EAST REGION,other,228
+Sengkang,EAST REGION,other,177
+Serangoon,EAST REGION,other,213
+Singapore River,EAST REGION,other,37
+Southern Islands,EAST REGION,other,65
+Sungei Kadut,EAST REGION,other,157
+Tampines,EAST REGION,other,3285
+Tanglin,EAST REGION,other,69
+Toa Payoh,EAST REGION,other,468
+Tuas,EAST REGION,other,652
+Western Islands,EAST REGION,other,414
+Western Water Catchment,EAST REGION,other,177
+Woodlands,EAST REGION,other,326
+Yishun,EAST REGION,other,161
+Other Planning Areas or Outside Singapore,EAST REGION,other,353
+No Fixed Location for Work,EAST REGION,other,3633
+Works from Home,EAST REGION,other,0
+Total,EAST REGION,none,35616
+Ang Mo Kio,EAST REGION,none,64
+Bedok,EAST REGION,none,3878
+Bishan,EAST REGION,none,60
+Boon Lay,EAST REGION,none,0
+Bukit Batok,EAST REGION,none,71
+Bukit Merah,EAST REGION,none,36
+Bukit Panjang,EAST REGION,none,0
+Bukit Timah,EAST REGION,none,64
+Changi,EAST REGION,none,86
+Choa Chu Kang,EAST REGION,none,40
+Clementi,EAST REGION,none,0
+Downtown Core,EAST REGION,none,84
+Geylang,EAST REGION,none,110
+Hougang,EAST REGION,none,67
+Jurong East,EAST REGION,none,0
+Jurong West,EAST REGION,none,84
+Kallang,EAST REGION,none,44
+Marine Parade,EAST REGION,none,24
+Museum,EAST REGION,none,0
+Newton,EAST REGION,none,0
+Novena,EAST REGION,none,19
+Orchard,EAST REGION,none,0
+Outram,EAST REGION,none,0
+Pasir Ris,EAST REGION,none,1477
+Paya Lebar,EAST REGION,none,38
+Pioneer,EAST REGION,none,0
+Punggol,EAST REGION,none,0
+Queenstown,EAST REGION,none,11
+Rochor,EAST REGION,none,20
+Seletar,EAST REGION,none,0
+Sembawang,EAST REGION,none,18
+Sengkang,EAST REGION,none,0
+Serangoon,EAST REGION,none,18
+Singapore River,EAST REGION,none,22
+Southern Islands,EAST REGION,none,0
+Sungei Kadut,EAST REGION,none,0
+Tampines,EAST REGION,none,4808
+Tanglin,EAST REGION,none,10
+Toa Payoh,EAST REGION,none,0
+Tuas,EAST REGION,none,41
+Western Islands,EAST REGION,none,0
+Western Water Catchment,EAST REGION,none,22
+Woodlands,EAST REGION,none,22
+Yishun,EAST REGION,none,11
+Other Planning Areas or Outside Singapore,EAST REGION,none,78
+No Fixed Location for Work,EAST REGION,none,11752
+Works from Home,EAST REGION,none,12537
+Total,NORTH REGION,total,317372
+Ang Mo Kio,NORTH REGION,total,10377
+Bedok,NORTH REGION,total,4541
+Bishan,NORTH REGION,total,4626
+Boon Lay,NORTH REGION,total,2423
+Bukit Batok,NORTH REGION,total,4060
+Bukit Merah,NORTH REGION,total,10331
+Bukit Panjang,NORTH REGION,total,1050
+Bukit Timah,NORTH REGION,total,2094
+Changi,NORTH REGION,total,6757
+Choa Chu Kang,NORTH REGION,total,2107
+Clementi,NORTH REGION,total,4535
+Downtown Core,NORTH REGION,total,27436
+Geylang,NORTH REGION,total,12455
+Hougang,NORTH REGION,total,4338
+Jurong East,NORTH REGION,total,7940
+Jurong West,NORTH REGION,total,4757
+Kallang,NORTH REGION,total,7470
+Marine Parade,NORTH REGION,total,755
+Museum,NORTH REGION,total,1421
+Newton,NORTH REGION,total,1768
+Novena,NORTH REGION,total,6934
+Orchard,NORTH REGION,total,6196
+Outram,NORTH REGION,total,3405
+Pasir Ris,NORTH REGION,total,2073
+Paya Lebar,NORTH REGION,total,1774
+Pioneer,NORTH REGION,total,4914
+Punggol,NORTH REGION,total,732
+Queenstown,NORTH REGION,total,13900
+Rochor,NORTH REGION,total,3563
+Seletar,NORTH REGION,total,1101
+Sembawang,NORTH REGION,total,20458
+Sengkang,NORTH REGION,total,1580
+Serangoon,NORTH REGION,total,6120
+Singapore River,NORTH REGION,total,1911
+Southern Islands,NORTH REGION,total,1296
+Sungei Kadut,NORTH REGION,total,6686
+Tampines,NORTH REGION,total,6109
+Tanglin,NORTH REGION,total,1382
+Toa Payoh,NORTH REGION,total,7028
+Tuas,NORTH REGION,total,6487
+Western Islands,NORTH REGION,total,1630
+Western Water Catchment,NORTH REGION,total,4552
+Woodlands,NORTH REGION,total,23060
+Yishun,NORTH REGION,total,22042
+Other Planning Areas or Outside Singapore,NORTH REGION,total,3992
+No Fixed Location for Work,NORTH REGION,total,29226
+Works from Home,NORTH REGION,total,7978
+Total,NORTH REGION,pt,191635
+Ang Mo Kio,NORTH REGION,pt,7090
+Bedok,NORTH REGION,pt,2817
+Bishan,NORTH REGION,pt,3044
+Boon Lay,NORTH REGION,pt,1334
+Bukit Batok,NORTH REGION,pt,2326
+Bukit Merah,NORTH REGION,pt,7187
+Bukit Panjang,NORTH REGION,pt,725
+Bukit Timah,NORTH REGION,pt,1343
+Changi,NORTH REGION,pt,3690
+Choa Chu Kang,NORTH REGION,pt,1717
+Clementi,NORTH REGION,pt,3004
+Downtown Core,NORTH REGION,pt,23827
+Geylang,NORTH REGION,pt,7614
+Hougang,NORTH REGION,pt,2897
+Jurong East,NORTH REGION,pt,5557
+Jurong West,NORTH REGION,pt,2985
+Kallang,NORTH REGION,pt,5531
+Marine Parade,NORTH REGION,pt,631
+Museum,NORTH REGION,pt,1147
+Newton,NORTH REGION,pt,1529
+Novena,NORTH REGION,pt,5726
+Orchard,NORTH REGION,pt,5495
+Outram,NORTH REGION,pt,2848
+Pasir Ris,NORTH REGION,pt,998
+Paya Lebar,NORTH REGION,pt,944
+Pioneer,NORTH REGION,pt,2576
+Punggol,NORTH REGION,pt,458
+Queenstown,NORTH REGION,pt,9648
+Rochor,NORTH REGION,pt,2818
+Seletar,NORTH REGION,pt,607
+Sembawang,NORTH REGION,pt,11133
+Sengkang,NORTH REGION,pt,1058
+Serangoon,NORTH REGION,pt,3711
+Singapore River,NORTH REGION,pt,1646
+Southern Islands,NORTH REGION,pt,1141
+Sungei Kadut,NORTH REGION,pt,3825
+Tampines,NORTH REGION,pt,3847
+Tanglin,NORTH REGION,pt,1150
+Toa Payoh,NORTH REGION,pt,5116
+Tuas,NORTH REGION,pt,3051
+Western Islands,NORTH REGION,pt,691
+Western Water Catchment,NORTH REGION,pt,2903
+Woodlands,NORTH REGION,pt,11492
+Yishun,NORTH REGION,pt,10508
+Other Planning Areas or Outside Singapore,NORTH REGION,pt,2163
+No Fixed Location for Work,NORTH REGION,pt,10090
+Works from Home,NORTH REGION,pt,0
+Total,NORTH REGION,car_taxi,57932
+Ang Mo Kio,NORTH REGION,car_taxi,2137
+Bedok,NORTH REGION,car_taxi,1145
+Bishan,NORTH REGION,car_taxi,981
+Boon Lay,NORTH REGION,car_taxi,527
+Bukit Batok,NORTH REGION,car_taxi,1217
+Bukit Merah,NORTH REGION,car_taxi,2214
+Bukit Panjang,NORTH REGION,car_taxi,237
+Bukit Timah,NORTH REGION,car_taxi,449
+Changi,NORTH REGION,car_taxi,1704
+Choa Chu Kang,NORTH REGION,car_taxi,265
+Clementi,NORTH REGION,car_taxi,981
+Downtown Core,NORTH REGION,car_taxi,2788
+Geylang,NORTH REGION,car_taxi,3246
+Hougang,NORTH REGION,car_taxi,930
+Jurong East,NORTH REGION,car_taxi,1593
+Jurong West,NORTH REGION,car_taxi,1269
+Kallang,NORTH REGION,car_taxi,1412
+Marine Parade,NORTH REGION,car_taxi,92
+Museum,NORTH REGION,car_taxi,233
+Newton,NORTH REGION,car_taxi,160
+Novena,NORTH REGION,car_taxi,923
+Orchard,NORTH REGION,car_taxi,564
+Outram,NORTH REGION,car_taxi,451
+Pasir Ris,NORTH REGION,car_taxi,548
+Paya Lebar,NORTH REGION,car_taxi,562
+Pioneer,NORTH REGION,car_taxi,1374
+Punggol,NORTH REGION,car_taxi,208
+Queenstown,NORTH REGION,car_taxi,2995
+Rochor,NORTH REGION,car_taxi,595
+Seletar,NORTH REGION,car_taxi,275
+Sembawang,NORTH REGION,car_taxi,3588
+Sengkang,NORTH REGION,car_taxi,314
+Serangoon,NORTH REGION,car_taxi,1524
+Singapore River,NORTH REGION,car_taxi,158
+Southern Islands,NORTH REGION,car_taxi,55
+Sungei Kadut,NORTH REGION,car_taxi,1521
+Tampines,NORTH REGION,car_taxi,1460
+Tanglin,NORTH REGION,car_taxi,144
+Toa Payoh,NORTH REGION,car_taxi,1391
+Tuas,NORTH REGION,car_taxi,1586
+Western Islands,NORTH REGION,car_taxi,549
+Western Water Catchment,NORTH REGION,car_taxi,1057
+Woodlands,NORTH REGION,car_taxi,3835
+Yishun,NORTH REGION,car_taxi,3236
+Other Planning Areas or Outside Singapore,NORTH REGION,car_taxi,954
+No Fixed Location for Work,NORTH REGION,car_taxi,4484
+Works from Home,NORTH REGION,car_taxi,0
+Total,NORTH REGION,other,35983
+Ang Mo Kio,NORTH REGION,other,1103
+Bedok,NORTH REGION,other,547
+Bishan,NORTH REGION,other,475
+Boon Lay,NORTH REGION,other,561
+Bukit Batok,NORTH REGION,other,467
+Bukit Merah,NORTH REGION,other,858
+Bukit Panjang,NORTH REGION,other,65
+Bukit Timah,NORTH REGION,other,252
+Changi,NORTH REGION,other,1347
+Choa Chu Kang,NORTH REGION,other,124
+Clementi,NORTH REGION,other,535
+Downtown Core,NORTH REGION,other,770
+Geylang,NORTH REGION,other,1545
+Hougang,NORTH REGION,other,487
+Jurong East,NORTH REGION,other,765
+Jurong West,NORTH REGION,other,423
+Kallang,NORTH REGION,other,504
+Marine Parade,NORTH REGION,other,33
+Museum,NORTH REGION,other,41
+Newton,NORTH REGION,other,78
+Novena,NORTH REGION,other,266
+Orchard,NORTH REGION,other,117
+Outram,NORTH REGION,other,90
+Pasir Ris,NORTH REGION,other,527
+Paya Lebar,NORTH REGION,other,261
+Pioneer,NORTH REGION,other,964
+Punggol,NORTH REGION,other,50
+Queenstown,NORTH REGION,other,1216
+Rochor,NORTH REGION,other,125
+Seletar,NORTH REGION,other,219
+Sembawang,NORTH REGION,other,3783
+Sengkang,NORTH REGION,other,184
+Serangoon,NORTH REGION,other,885
+Singapore River,NORTH REGION,other,91
+Southern Islands,NORTH REGION,other,100
+Sungei Kadut,NORTH REGION,other,1264
+Tampines,NORTH REGION,other,738
+Tanglin,NORTH REGION,other,89
+Toa Payoh,NORTH REGION,other,479
+Tuas,NORTH REGION,other,1850
+Western Islands,NORTH REGION,other,390
+Western Water Catchment,NORTH REGION,other,577
+Woodlands,NORTH REGION,other,2864
+Yishun,NORTH REGION,other,3027
+Other Planning Areas or Outside Singapore,NORTH REGION,other,801
+No Fixed Location for Work,NORTH REGION,other,4048
+Works from Home,NORTH REGION,other,0
+Total,NORTH REGION,none,31822
+Ang Mo Kio,NORTH REGION,none,47
+Bedok,NORTH REGION,none,33
+Bishan,NORTH REGION,none,125
+Boon Lay,NORTH REGION,none,0
+Bukit Batok,NORTH REGION,none,50
+Bukit Merah,NORTH REGION,none,73
+Bukit Panjang,NORTH REGION,none,23
+Bukit Timah,NORTH REGION,none,50
+Changi,NORTH REGION,none,17
+Choa Chu Kang,NORTH REGION,none,0
+Clementi,NORTH REGION,none,16
+Downtown Core,NORTH REGION,none,51
+Geylang,NORTH REGION,none,50
+Hougang,NORTH REGION,none,25
+Jurong East,NORTH REGION,none,25
+Jurong West,NORTH REGION,none,80
+Kallang,NORTH REGION,none,23
+Marine Parade,NORTH REGION,none,0
+Museum,NORTH REGION,none,0
+Newton,NORTH REGION,none,0
+Novena,NORTH REGION,none,20
+Orchard,NORTH REGION,none,20
+Outram,NORTH REGION,none,17
+Pasir Ris,NORTH REGION,none,0
+Paya Lebar,NORTH REGION,none,8
+Pioneer,NORTH REGION,none,0
+Punggol,NORTH REGION,none,17
+Queenstown,NORTH REGION,none,40
+Rochor,NORTH REGION,none,24
+Seletar,NORTH REGION,none,0
+Sembawang,NORTH REGION,none,1953
+Sengkang,NORTH REGION,none,24
+Serangoon,NORTH REGION,none,0
+Singapore River,NORTH REGION,none,16
+Southern Islands,NORTH REGION,none,0
+Sungei Kadut,NORTH REGION,none,77
+Tampines,NORTH REGION,none,65
+Tanglin,NORTH REGION,none,0
+Toa Payoh,NORTH REGION,none,42
+Tuas,NORTH REGION,none,0
+Western Islands,NORTH REGION,none,0
+Western Water Catchment,NORTH REGION,none,16
+Woodlands,NORTH REGION,none,4869
+Yishun,NORTH REGION,none,5271
+Other Planning Areas or Outside Singapore,NORTH REGION,none,75
+No Fixed Location for Work,NORTH REGION,none,10604
+Works from Home,NORTH REGION,none,7978
+Total,NORTH-EAST REGION,total,507892
+Ang Mo Kio,NORTH-EAST REGION,total,19195
+Bedok,NORTH-EAST REGION,total,13660
+Bishan,NORTH-EAST REGION,total,9187
+Boon Lay,NORTH-EAST REGION,total,1695
+Bukit Batok,NORTH-EAST REGION,total,3860
+Bukit Merah,NORTH-EAST REGION,total,21322
+Bukit Panjang,NORTH-EAST REGION,total,422
+Bukit Timah,NORTH-EAST REGION,total,3471
+Changi,NORTH-EAST REGION,total,15970
+Choa Chu Kang,NORTH-EAST REGION,total,901
+Clementi,NORTH-EAST REGION,total,4326
+Downtown Core,NORTH-EAST REGION,total,64987
+Geylang,NORTH-EAST REGION,total,32371
+Hougang,NORTH-EAST REGION,total,22834
+Jurong East,NORTH-EAST REGION,total,7348
+Jurong West,NORTH-EAST REGION,total,3657
+Kallang,NORTH-EAST REGION,total,16714
+Marine Parade,NORTH-EAST REGION,total,2544
+Museum,NORTH-EAST REGION,total,3417
+Newton,NORTH-EAST REGION,total,2843
+Novena,NORTH-EAST REGION,total,11052
+Orchard,NORTH-EAST REGION,total,10399
+Outram,NORTH-EAST REGION,total,8634
+Pasir Ris,NORTH-EAST REGION,total,5698
+Paya Lebar,NORTH-EAST REGION,total,4126
+Pioneer,NORTH-EAST REGION,total,4182
+Punggol,NORTH-EAST REGION,total,6651
+Queenstown,NORTH-EAST REGION,total,25114
+Rochor,NORTH-EAST REGION,total,7096
+Seletar,NORTH-EAST REGION,total,1636
+Sembawang,NORTH-EAST REGION,total,6083
+Sengkang,NORTH-EAST REGION,total,12108
+Serangoon,NORTH-EAST REGION,total,18824
+Singapore River,NORTH-EAST REGION,total,4033
+Southern Islands,NORTH-EAST REGION,total,1862
+Sungei Kadut,NORTH-EAST REGION,total,3266
+Tampines,NORTH-EAST REGION,total,20070
+Tanglin,NORTH-EAST REGION,total,2211
+Toa Payoh,NORTH-EAST REGION,total,15563
+Tuas,NORTH-EAST REGION,total,4663
+Western Islands,NORTH-EAST REGION,total,1450
+Western Water Catchment,NORTH-EAST REGION,total,4156
+Woodlands,NORTH-EAST REGION,total,5782
+Yishun,NORTH-EAST REGION,total,7709
+Other Planning Areas or Outside Singapore,NORTH-EAST REGION,total,4789
+No Fixed Location for Work,NORTH-EAST REGION,total,42583
+Works from Home,NORTH-EAST REGION,total,17429
+Total,NORTH-EAST REGION,pt,296950
+Ang Mo Kio,NORTH-EAST REGION,pt,9977
+Bedok,NORTH-EAST REGION,pt,7880
+Bishan,NORTH-EAST REGION,pt,5626
+Boon Lay,NORTH-EAST REGION,pt,701
+Bukit Batok,NORTH-EAST REGION,pt,1778
+Bukit Merah,NORTH-EAST REGION,pt,14823
+Bukit Panjang,NORTH-EAST REGION,pt,316
+Bukit Timah,NORTH-EAST REGION,pt,2150
+Changi,NORTH-EAST REGION,pt,8367
+Choa Chu Kang,NORTH-EAST REGION,pt,479
+Clementi,NORTH-EAST REGION,pt,2089
+Downtown Core,NORTH-EAST REGION,pt,51430
+Geylang,NORTH-EAST REGION,pt,19847
+Hougang,NORTH-EAST REGION,pt,11947
+Jurong East,NORTH-EAST REGION,pt,4205
+Jurong West,NORTH-EAST REGION,pt,1960
+Kallang,NORTH-EAST REGION,pt,11428
+Marine Parade,NORTH-EAST REGION,pt,1726
+Museum,NORTH-EAST REGION,pt,2657
+Newton,NORTH-EAST REGION,pt,2076
+Novena,NORTH-EAST REGION,pt,8164
+Orchard,NORTH-EAST REGION,pt,8094
+Outram,NORTH-EAST REGION,pt,6808
+Pasir Ris,NORTH-EAST REGION,pt,3305
+Paya Lebar,NORTH-EAST REGION,pt,2287
+Pioneer,NORTH-EAST REGION,pt,1512
+Punggol,NORTH-EAST REGION,pt,3750
+Queenstown,NORTH-EAST REGION,pt,17900
+Rochor,NORTH-EAST REGION,pt,5050
+Seletar,NORTH-EAST REGION,pt,880
+Sembawang,NORTH-EAST REGION,pt,2895
+Sengkang,NORTH-EAST REGION,pt,6489
+Serangoon,NORTH-EAST REGION,pt,10361
+Singapore River,NORTH-EAST REGION,pt,3164
+Southern Islands,NORTH-EAST REGION,pt,1492
+Sungei Kadut,NORTH-EAST REGION,pt,1177
+Tampines,NORTH-EAST REGION,pt,11715
+Tanglin,NORTH-EAST REGION,pt,1593
+Toa Payoh,NORTH-EAST REGION,pt,9796
+Tuas,NORTH-EAST REGION,pt,1732
+Western Islands,NORTH-EAST REGION,pt,429
+Western Water Catchment,NORTH-EAST REGION,pt,2477
+Woodlands,NORTH-EAST REGION,pt,3186
+Yishun,NORTH-EAST REGION,pt,4539
+Other Planning Areas or Outside Singapore,NORTH-EAST REGION,pt,2885
+No Fixed Location for Work,NORTH-EAST REGION,pt,13810
+Works from Home,NORTH-EAST REGION,pt,0
+Total,NORTH-EAST REGION,car_taxi,126080
+Ang Mo Kio,NORTH-EAST REGION,car_taxi,4906
+Bedok,NORTH-EAST REGION,car_taxi,4349
+Bishan,NORTH-EAST REGION,car_taxi,2578
+Boon Lay,NORTH-EAST REGION,car_taxi,612
+Bukit Batok,NORTH-EAST REGION,car_taxi,1701
+Bukit Merah,NORTH-EAST REGION,car_taxi,5706
+Bukit Panjang,NORTH-EAST REGION,car_taxi,106
+Bukit Timah,NORTH-EAST REGION,car_taxi,1153
+Changi,NORTH-EAST REGION,car_taxi,4954
+Choa Chu Kang,NORTH-EAST REGION,car_taxi,296
+Clementi,NORTH-EAST REGION,car_taxi,1738
+Downtown Core,NORTH-EAST REGION,car_taxi,11997
+Geylang,NORTH-EAST REGION,car_taxi,10196
+Hougang,NORTH-EAST REGION,car_taxi,5282
+Jurong East,NORTH-EAST REGION,car_taxi,2571
+Jurong West,NORTH-EAST REGION,car_taxi,1384
+Kallang,NORTH-EAST REGION,car_taxi,4480
+Marine Parade,NORTH-EAST REGION,car_taxi,648
+Museum,NORTH-EAST REGION,car_taxi,673
+Newton,NORTH-EAST REGION,car_taxi,662
+Novena,NORTH-EAST REGION,car_taxi,2460
+Orchard,NORTH-EAST REGION,car_taxi,2070
+Outram,NORTH-EAST REGION,car_taxi,1624
+Pasir Ris,NORTH-EAST REGION,car_taxi,1745
+Paya Lebar,NORTH-EAST REGION,car_taxi,1273
+Pioneer,NORTH-EAST REGION,car_taxi,1929
+Punggol,NORTH-EAST REGION,car_taxi,711
+Queenstown,NORTH-EAST REGION,car_taxi,5999
+Rochor,NORTH-EAST REGION,car_taxi,1763
+Seletar,NORTH-EAST REGION,car_taxi,501
+Sembawang,NORTH-EAST REGION,car_taxi,2393
+Sengkang,NORTH-EAST REGION,car_taxi,1501
+Serangoon,NORTH-EAST REGION,car_taxi,4868
+Singapore River,NORTH-EAST REGION,car_taxi,768
+Southern Islands,NORTH-EAST REGION,car_taxi,252
+Sungei Kadut,NORTH-EAST REGION,car_taxi,1534
+Tampines,NORTH-EAST REGION,car_taxi,5962
+Tanglin,NORTH-EAST REGION,car_taxi,534
+Toa Payoh,NORTH-EAST REGION,car_taxi,4705
+Tuas,NORTH-EAST REGION,car_taxi,1855
+Western Islands,NORTH-EAST REGION,car_taxi,590
+Western Water Catchment,NORTH-EAST REGION,car_taxi,1271
+Woodlands,NORTH-EAST REGION,car_taxi,1922
+Yishun,NORTH-EAST REGION,car_taxi,2689
+Other Planning Areas or Outside Singapore,NORTH-EAST REGION,car_taxi,1338
+No Fixed Location for Work,NORTH-EAST REGION,car_taxi,7831
+Works from Home,NORTH-EAST REGION,car_taxi,0
+Total,NORTH-EAST REGION,other,37099
+Ang Mo Kio,NORTH-EAST REGION,other,1368
+Bedok,NORTH-EAST REGION,other,1371
+Bishan,NORTH-EAST REGION,other,645
+Boon Lay,NORTH-EAST REGION,other,369
+Bukit Batok,NORTH-EAST REGION,other,346
+Bukit Merah,NORTH-EAST REGION,other,768
+Bukit Panjang,NORTH-EAST REGION,other,0
+Bukit Timah,NORTH-EAST REGION,other,151
+Changi,NORTH-EAST REGION,other,2637
+Choa Chu Kang,NORTH-EAST REGION,other,112
+Clementi,NORTH-EAST REGION,other,490
+Downtown Core,NORTH-EAST REGION,other,1478
+Geylang,NORTH-EAST REGION,other,2150
+Hougang,NORTH-EAST REGION,other,2167
+Jurong East,NORTH-EAST REGION,other,524
+Jurong West,NORTH-EAST REGION,other,313
+Kallang,NORTH-EAST REGION,other,756
+Marine Parade,NORTH-EAST REGION,other,154
+Museum,NORTH-EAST REGION,other,87
+Newton,NORTH-EAST REGION,other,85
+Novena,NORTH-EAST REGION,other,378
+Orchard,NORTH-EAST REGION,other,223
+Outram,NORTH-EAST REGION,other,163
+Pasir Ris,NORTH-EAST REGION,other,614
+Paya Lebar,NORTH-EAST REGION,other,550
+Pioneer,NORTH-EAST REGION,other,741
+Punggol,NORTH-EAST REGION,other,568
+Queenstown,NORTH-EAST REGION,other,1178
+Rochor,NORTH-EAST REGION,other,249
+Seletar,NORTH-EAST REGION,other,254
+Sembawang,NORTH-EAST REGION,other,725
+Sengkang,NORTH-EAST REGION,other,1155
+Serangoon,NORTH-EAST REGION,other,1445
+Singapore River,NORTH-EAST REGION,other,100
+Southern Islands,NORTH-EAST REGION,other,118
+Sungei Kadut,NORTH-EAST REGION,other,523
+Tampines,NORTH-EAST REGION,other,2250
+Tanglin,NORTH-EAST REGION,other,70
+Toa Payoh,NORTH-EAST REGION,other,976
+Tuas,NORTH-EAST REGION,other,1060
+Western Islands,NORTH-EAST REGION,other,431
+Western Water Catchment,NORTH-EAST REGION,other,408
+Woodlands,NORTH-EAST REGION,other,634
+Yishun,NORTH-EAST REGION,other,452
+Other Planning Areas or Outside Singapore,NORTH-EAST REGION,other,557
+No Fixed Location for Work,NORTH-EAST REGION,other,5304
+Works from Home,NORTH-EAST REGION,other,0
+Total,NORTH-EAST REGION,none,47764
+Ang Mo Kio,NORTH-EAST REGION,none,2944
+Bedok,NORTH-EAST REGION,none,60
+Bishan,NORTH-EAST REGION,none,337
+Boon Lay,NORTH-EAST REGION,none,13
+Bukit Batok,NORTH-EAST REGION,none,35
+Bukit Merah,NORTH-EAST REGION,none,25
+Bukit Panjang,NORTH-EAST REGION,none,0
+Bukit Timah,NORTH-EAST REGION,none,18
+Changi,NORTH-EAST REGION,none,12
+Choa Chu Kang,NORTH-EAST REGION,none,14
+Clementi,NORTH-EAST REGION,none,9
+Downtown Core,NORTH-EAST REGION,none,83
+Geylang,NORTH-EAST REGION,none,178
+Hougang,NORTH-EAST REGION,none,3438
+Jurong East,NORTH-EAST REGION,none,49
+Jurong West,NORTH-EAST REGION,none,0
+Kallang,NORTH-EAST REGION,none,50
+Marine Parade,NORTH-EAST REGION,none,16
+Museum,NORTH-EAST REGION,none,0
+Newton,NORTH-EAST REGION,none,19
+Novena,NORTH-EAST REGION,none,50
+Orchard,NORTH-EAST REGION,none,13
+Outram,NORTH-EAST REGION,none,39
+Pasir Ris,NORTH-EAST REGION,none,34
+Paya Lebar,NORTH-EAST REGION,none,16
+Pioneer,NORTH-EAST REGION,none,0
+Punggol,NORTH-EAST REGION,none,1623
+Queenstown,NORTH-EAST REGION,none,36
+Rochor,NORTH-EAST REGION,none,34
+Seletar,NORTH-EAST REGION,none,0
+Sembawang,NORTH-EAST REGION,none,70
+Sengkang,NORTH-EAST REGION,none,2963
+Serangoon,NORTH-EAST REGION,none,2149
+Singapore River,NORTH-EAST REGION,none,0
+Southern Islands,NORTH-EAST REGION,none,0
+Sungei Kadut,NORTH-EAST REGION,none,32
+Tampines,NORTH-EAST REGION,none,143
+Tanglin,NORTH-EAST REGION,none,13
+Toa Payoh,NORTH-EAST REGION,none,86
+Tuas,NORTH-EAST REGION,none,17
+Western Islands,NORTH-EAST REGION,none,0
+Western Water Catchment,NORTH-EAST REGION,none,0
+Woodlands,NORTH-EAST REGION,none,40
+Yishun,NORTH-EAST REGION,none,30
+Other Planning Areas or Outside Singapore,NORTH-EAST REGION,none,9
+No Fixed Location for Work,NORTH-EAST REGION,none,15638
+Works from Home,NORTH-EAST REGION,none,17429
+Total,WEST REGION,total,509440
+Ang Mo Kio,WEST REGION,total,6230
+Bedok,WEST REGION,total,4981
+Bishan,WEST REGION,total,4578
+Boon Lay,WEST REGION,total,11850
+Bukit Batok,WEST REGION,total,18437
+Bukit Merah,WEST REGION,total,24905
+Bukit Panjang,WEST REGION,total,6556
+Bukit Timah,WEST REGION,total,8552
+Changi,WEST REGION,total,5427
+Choa Chu Kang,WEST REGION,total,8619
+Clementi,WEST REGION,total,20354
+Downtown Core,WEST REGION,total,46758
+Geylang,WEST REGION,total,14107
+Hougang,WEST REGION,total,3741
+Jurong East,WEST REGION,total,32802
+Jurong West,WEST REGION,total,29910
+Kallang,WEST REGION,total,9362
+Marine Parade,WEST REGION,total,1060
+Museum,WEST REGION,total,1996
+Newton,WEST REGION,total,2543
+Novena,WEST REGION,total,6299
+Orchard,WEST REGION,total,7753
+Outram,WEST REGION,total,7200
+Pasir Ris,WEST REGION,total,1580
+Paya Lebar,WEST REGION,total,1608
+Pioneer,WEST REGION,total,20865
+Punggol,WEST REGION,total,250
+Queenstown,WEST REGION,total,39677
+Rochor,WEST REGION,total,5107
+Seletar,WEST REGION,total,622
+Sembawang,WEST REGION,total,7331
+Sengkang,WEST REGION,total,529
+Serangoon,WEST REGION,total,3617
+Singapore River,WEST REGION,total,3573
+Southern Islands,WEST REGION,total,1871
+Sungei Kadut,WEST REGION,total,7174
+Tampines,WEST REGION,total,6426
+Tanglin,WEST REGION,total,2779
+Toa Payoh,WEST REGION,total,7167
+Tuas,WEST REGION,total,23651
+Western Islands,WEST REGION,total,7012
+Western Water Catchment,WEST REGION,total,11735
+Woodlands,WEST REGION,total,8724
+Yishun,WEST REGION,total,4911
+Other Planning Areas or Outside Singapore,WEST REGION,total,5368
+No Fixed Location for Work,WEST REGION,total,40511
+Works from Home,WEST REGION,total,13335
+Total,WEST REGION,pt,294491
+Ang Mo Kio,WEST REGION,pt,3801
+Bedok,WEST REGION,pt,2863
+Bishan,WEST REGION,pt,2633
+Boon Lay,WEST REGION,pt,6392
+Bukit Batok,WEST REGION,pt,9072
+Bukit Merah,WEST REGION,pt,16949
+Bukit Panjang,WEST REGION,pt,3276
+Bukit Timah,WEST REGION,pt,5507
+Changi,WEST REGION,pt,2411
+Choa Chu Kang,WEST REGION,pt,4343
+Clementi,WEST REGION,pt,11337
+Downtown Core,WEST REGION,pt,38300
+Geylang,WEST REGION,pt,8272
+Hougang,WEST REGION,pt,2111
+Jurong East,WEST REGION,pt,20805
+Jurong West,WEST REGION,pt,16310
+Kallang,WEST REGION,pt,6336
+Marine Parade,WEST REGION,pt,679
+Museum,WEST REGION,pt,1633
+Newton,WEST REGION,pt,1866
+Novena,WEST REGION,pt,4495
+Orchard,WEST REGION,pt,6117
+Outram,WEST REGION,pt,5770
+Pasir Ris,WEST REGION,pt,753
+Paya Lebar,WEST REGION,pt,804
+Pioneer,WEST REGION,pt,10394
+Punggol,WEST REGION,pt,147
+Queenstown,WEST REGION,pt,27790
+Rochor,WEST REGION,pt,3837
+Seletar,WEST REGION,pt,374
+Sembawang,WEST REGION,pt,4232
+Sengkang,WEST REGION,pt,250
+Serangoon,WEST REGION,pt,2156
+Singapore River,WEST REGION,pt,2690
+Southern Islands,WEST REGION,pt,1413
+Sungei Kadut,WEST REGION,pt,3508
+Tampines,WEST REGION,pt,3613
+Tanglin,WEST REGION,pt,1864
+Toa Payoh,WEST REGION,pt,4243
+Tuas,WEST REGION,pt,10301
+Western Islands,WEST REGION,pt,3025
+Western Water Catchment,WEST REGION,pt,7378
+Woodlands,WEST REGION,pt,4953
+Yishun,WEST REGION,pt,2798
+Other Planning Areas or Outside Singapore,WEST REGION,pt,2976
+No Fixed Location for Work,WEST REGION,pt,13715
+Works from Home,WEST REGION,pt,0
+Total,WEST REGION,car_taxi,115753
+Ang Mo Kio,WEST REGION,car_taxi,1965
+Bedok,WEST REGION,car_taxi,1397
+Bishan,WEST REGION,car_taxi,1319
+Boon Lay,WEST REGION,car_taxi,3209
+Bukit Batok,WEST REGION,car_taxi,5143
+Bukit Merah,WEST REGION,car_taxi,6176
+Bukit Panjang,WEST REGION,car_taxi,964
+Bukit Timah,WEST REGION,car_taxi,2423
+Changi,WEST REGION,car_taxi,2201
+Choa Chu Kang,WEST REGION,car_taxi,1055
+Clementi,WEST REGION,car_taxi,5545
+Downtown Core,WEST REGION,car_taxi,7287
+Geylang,WEST REGION,car_taxi,4304
+Hougang,WEST REGION,car_taxi,1151
+Jurong East,WEST REGION,car_taxi,6785
+Jurong West,WEST REGION,car_taxi,5909
+Kallang,WEST REGION,car_taxi,2278
+Marine Parade,WEST REGION,car_taxi,292
+Museum,WEST REGION,car_taxi,278
+Newton,WEST REGION,car_taxi,600
+Novena,WEST REGION,car_taxi,1467
+Orchard,WEST REGION,car_taxi,1403
+Outram,WEST REGION,car_taxi,1145
+Pasir Ris,WEST REGION,car_taxi,578
+Paya Lebar,WEST REGION,car_taxi,596
+Pioneer,WEST REGION,car_taxi,4990
+Punggol,WEST REGION,car_taxi,30
+Queenstown,WEST REGION,car_taxi,8989
+Rochor,WEST REGION,car_taxi,1017
+Seletar,WEST REGION,car_taxi,110
+Sembawang,WEST REGION,car_taxi,2083
+Sengkang,WEST REGION,car_taxi,173
+Serangoon,WEST REGION,car_taxi,1074
+Singapore River,WEST REGION,car_taxi,712
+Southern Islands,WEST REGION,car_taxi,234
+Sungei Kadut,WEST REGION,car_taxi,2405
+Tampines,WEST REGION,car_taxi,2160
+Tanglin,WEST REGION,car_taxi,716
+Toa Payoh,WEST REGION,car_taxi,2257
+Tuas,WEST REGION,car_taxi,6140
+Western Islands,WEST REGION,car_taxi,1946
+Western Water Catchment,WEST REGION,car_taxi,2852
+Woodlands,WEST REGION,car_taxi,2721
+Yishun,WEST REGION,car_taxi,1633
+Other Planning Areas or Outside Singapore,WEST REGION,car_taxi,1462
+No Fixed Location for Work,WEST REGION,car_taxi,6581
+Works from Home,WEST REGION,car_taxi,0
+Total,WEST REGION,other,53985
+Ang Mo Kio,WEST REGION,other,349
+Bedok,WEST REGION,other,685
+Bishan,WEST REGION,other,410
+Boon Lay,WEST REGION,other,2171
+Bukit Batok,WEST REGION,other,1666
+Bukit Merah,WEST REGION,other,1689
+Bukit Panjang,WEST REGION,other,432
+Bukit Timah,WEST REGION,other,496
+Changi,WEST REGION,other,783
+Choa Chu Kang,WEST REGION,other,639
+Clementi,WEST REGION,other,1973
+Downtown Core,WEST REGION,other,1145
+Geylang,WEST REGION,other,1437
+Hougang,WEST REGION,other,479
+Jurong East,WEST REGION,other,3530
+Jurong West,WEST REGION,other,3610
+Kallang,WEST REGION,other,729
+Marine Parade,WEST REGION,other,89
+Museum,WEST REGION,other,47
+Newton,WEST REGION,other,76
+Novena,WEST REGION,other,336
+Orchard,WEST REGION,other,225
+Outram,WEST REGION,other,240
+Pasir Ris,WEST REGION,other,222
+Paya Lebar,WEST REGION,other,197
+Pioneer,WEST REGION,other,5385
+Punggol,WEST REGION,other,72
+Queenstown,WEST REGION,other,2698
+Rochor,WEST REGION,other,228
+Seletar,WEST REGION,other,138
+Sembawang,WEST REGION,other,954
+Sengkang,WEST REGION,other,105
+Serangoon,WEST REGION,other,349
+Singapore River,WEST REGION,other,146
+Southern Islands,WEST REGION,other,212
+Sungei Kadut,WEST REGION,other,1171
+Tampines,WEST REGION,other,601
+Tanglin,WEST REGION,other,184
+Toa Payoh,WEST REGION,other,602
+Tuas,WEST REGION,other,7119
+Western Islands,WEST REGION,other,2029
+Western Water Catchment,WEST REGION,other,1174
+Woodlands,WEST REGION,other,955
+Yishun,WEST REGION,other,455
+Other Planning Areas or Outside Singapore,WEST REGION,other,839
+No Fixed Location for Work,WEST REGION,other,4916
+Works from Home,WEST REGION,other,0
+Total,WEST REGION,none,45210
+Ang Mo Kio,WEST REGION,none,114
+Bedok,WEST REGION,none,35
+Bishan,WEST REGION,none,216
+Boon Lay,WEST REGION,none,79
+Bukit Batok,WEST REGION,none,2556
+Bukit Merah,WEST REGION,none,91
+Bukit Panjang,WEST REGION,none,1885
+Bukit Timah,WEST REGION,none,126
+Changi,WEST REGION,none,32
+Choa Chu Kang,WEST REGION,none,2583
+Clementi,WEST REGION,none,1499
+Downtown Core,WEST REGION,none,26
+Geylang,WEST REGION,none,93
+Hougang,WEST REGION,none,0
+Jurong East,WEST REGION,none,1682
+Jurong West,WEST REGION,none,4081
+Kallang,WEST REGION,none,19
+Marine Parade,WEST REGION,none,0
+Museum,WEST REGION,none,37
+Newton,WEST REGION,none,0
+Novena,WEST REGION,none,0
+Orchard,WEST REGION,none,8
+Outram,WEST REGION,none,45
+Pasir Ris,WEST REGION,none,28
+Paya Lebar,WEST REGION,none,12
+Pioneer,WEST REGION,none,96
+Punggol,WEST REGION,none,0
+Queenstown,WEST REGION,none,200
+Rochor,WEST REGION,none,25
+Seletar,WEST REGION,none,0
+Sembawang,WEST REGION,none,62
+Sengkang,WEST REGION,none,0
+Serangoon,WEST REGION,none,38
+Singapore River,WEST REGION,none,25
+Southern Islands,WEST REGION,none,13
+Sungei Kadut,WEST REGION,none,90
+Tampines,WEST REGION,none,52
+Tanglin,WEST REGION,none,15
+Toa Payoh,WEST REGION,none,65
+Tuas,WEST REGION,none,92
+Western Islands,WEST REGION,none,12
+Western Water Catchment,WEST REGION,none,331
+Woodlands,WEST REGION,none,96
+Yishun,WEST REGION,none,25
+Other Planning Areas or Outside Singapore,WEST REGION,none,91
+No Fixed Location for Work,WEST REGION,none,15299
+Works from Home,WEST REGION,none,13335

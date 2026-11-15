@@ -1,0 +1,85 @@
+{
+  "_about": "Rail network used for the public-transport skims. Station order follows LTA station codes (the number in a code increases along the line). Positions: operating stations from LTA's MRT Station Exit dataset (mean of the station's exits, key 'lta'); Jurong Region Line stations from OpenStreetMap (key 'osm_code' or 'osm_name'), because they are not open and have no exits in the LTA dataset. 'base2020' lists the network used for the 2020 base year and for the 2030 do-minimum; 'jrl' is added in the 2030 do-something scenario.",
+  "base_year_rule": {
+    "value": "stations in operation at the Census of Population 2020 reference period",
+    "label": "ASSUMPTION",
+    "note": "Left out of base2020 because they opened after 2020: Thomson-East Coast Line stages 2-4 (TE4 onwards), Hume (DT4), Punggol Coast (NE18), Teck Lee (PW2); never-opened or future stations (CC18, CC30-CC32, NS3A, DT36-DT37, TE30 onwards, Cross Island Line) are also left out. The opening dates of these stations were not individually verified in this study; the line list itself follows the LTA codes."
+  },
+  "speeds_kmh": {"mrt": {"value": 40, "label": "ASSUMPTION", "note": "average speed between stations including dwell; not verified against timetables"},
+                 "lrt": {"value": 25, "label": "ASSUMPTION", "note": "as above, for the light rail loops"}},
+  "alignment_factor": {"value": 1.15, "label": "ASSUMPTION", "note": "track length / straight-line distance between consecutive stations"},
+  "lines": {
+    "EW": {"mode": "mrt", "stations": [
+      ["EW1", "Pasir Ris"], ["EW2", "Tampines"], ["EW3", "Simei"], ["EW4", "Tanah Merah"], ["EW5", "Bedok"],
+      ["EW6", "Kembangan"], ["EW7", "Eunos"], ["EW8", "Paya Lebar"], ["EW9", "Aljunied"], ["EW10", "Kallang"],
+      ["EW11", "Lavender"], ["EW12", "Bugis"], ["EW13", "City Hall"], ["EW14", "Raffles Place"], ["EW15", "Tanjong Pagar"],
+      ["EW16", "Outram Park"], ["EW17", "Tiong Bahru"], ["EW18", "Redhill"], ["EW19", "Queenstown"], ["EW20", "Commonwealth"],
+      ["EW21", "Buona Vista"], ["EW22", "Dover"], ["EW23", "Clementi"], ["EW24", "Jurong East"], ["EW25", "Chinese Garden"],
+      ["EW26", "Lakeside"], ["EW27", "Boon Lay"], ["EW28", "Pioneer"], ["EW29", "Joo Koon"], ["EW30", "Gul Circle"],
+      ["EW31", "Tuas Crescent"], ["EW32", "Tuas West Road"], ["EW33", "Tuas Link"]]},
+    "CG": {"mode": "mrt", "stations": [["EW4", "Tanah Merah"], ["CG1", "Expo"], ["CG2", "Changi Airport"]]},
+    "NS": {"mode": "mrt", "stations": [
+      ["NS1", "Jurong East"], ["NS2", "Bukit Batok"], ["NS3", "Bukit Gombak"], ["NS4", "Choa Chu Kang"], ["NS5", "Yew Tee"],
+      ["NS7", "Kranji"], ["NS8", "Marsiling"], ["NS9", "Woodlands"], ["NS10", "Admiralty"], ["NS11", "Sembawang"],
+      ["NS12", "Canberra"], ["NS13", "Yishun"], ["NS14", "Khatib"], ["NS15", "Yio Chu Kang"], ["NS16", "Ang Mo Kio"],
+      ["NS17", "Bishan"], ["NS18", "Braddell"], ["NS19", "Toa Payoh"], ["NS20", "Novena"], ["NS21", "Newton"],
+      ["NS22", "Orchard"], ["NS23", "Somerset"], ["NS24", "Dhoby Ghaut"], ["NS25", "City Hall"], ["NS26", "Raffles Place"],
+      ["NS27", "Marina Bay"], ["NS28", "Marina South Pier"]]},
+    "NE": {"mode": "mrt", "stations": [
+      ["NE1", "HarbourFront"], ["NE3", "Outram Park"], ["NE4", "Chinatown"], ["NE5", "Clarke Quay"], ["NE6", "Dhoby Ghaut"],
+      ["NE7", "Little India"], ["NE8", "Farrer Park"], ["NE9", "Boon Keng"], ["NE10", "Potong Pasir"], ["NE11", "Woodleigh"],
+      ["NE12", "Serangoon"], ["NE13", "Kovan"], ["NE14", "Hougang"], ["NE15", "Buangkok"], ["NE16", "Sengkang"],
+      ["NE17", "Punggol"]]},
+    "CC": {"mode": "mrt", "stations": [
+      ["CC1", "Dhoby Ghaut"], ["CC2", "Bras Basah"], ["CC3", "Esplanade"], ["CC4", "Promenade"], ["CC5", "Nicoll Highway"],
+      ["CC6", "Stadium"], ["CC7", "Mountbatten"], ["CC8", "Dakota"], ["CC9", "Paya Lebar"], ["CC10", "MacPherson"],
+      ["CC11", "Tai Seng"], ["CC12", "Bartley"], ["CC13", "Serangoon"], ["CC14", "Lorong Chuan"], ["CC15", "Bishan"],
+      ["CC16", "Marymount"], ["CC17", "Caldecott"], ["CC19", "Botanic Gardens"], ["CC20", "Farrer Road"],
+      ["CC21", "Holland Village"], ["CC22", "Buona Vista"], ["CC23", "one-north"], ["CC24", "Kent Ridge"],
+      ["CC25", "Haw Par Villa"], ["CC26", "Pasir Panjang"], ["CC27", "Labrador Park"], ["CC28", "Telok Blangah"],
+      ["CC29", "HarbourFront"]]},
+    "CE": {"mode": "mrt", "stations": [["CC4", "Promenade"], ["CE1", "Bayfront"], ["CE2", "Marina Bay"]]},
+    "DT": {"mode": "mrt", "stations": [
+      ["DT1", "Bukit Panjang"], ["DT2", "Cashew"], ["DT3", "Hillview"], ["DT5", "Beauty World"], ["DT6", "King Albert Park"],
+      ["DT7", "Sixth Avenue"], ["DT8", "Tan Kah Kee"], ["DT9", "Botanic Gardens"], ["DT10", "Stevens"], ["DT11", "Newton"],
+      ["DT12", "Little India"], ["DT13", "Rochor"], ["DT14", "Bugis"], ["DT15", "Promenade"], ["DT16", "Bayfront"],
+      ["DT17", "Downtown"], ["DT18", "Telok Ayer"], ["DT19", "Chinatown"], ["DT20", "Fort Canning"], ["DT21", "Bencoolen"],
+      ["DT22", "Jalan Besar"], ["DT23", "Bendemeer"], ["DT24", "Geylang Bahru"], ["DT25", "Mattar"], ["DT26", "MacPherson"],
+      ["DT27", "Ubi"], ["DT28", "Kaki Bukit"], ["DT29", "Bedok North"], ["DT30", "Bedok Reservoir"], ["DT31", "Tampines West"],
+      ["DT32", "Tampines"], ["DT33", "Tampines East"], ["DT34", "Upper Changi"], ["DT35", "Expo"]]},
+    "TE": {"mode": "mrt", "stations": [["TE1", "Woodlands North"], ["TE2", "Woodlands"], ["TE3", "Woodlands South"]]},
+    "BP": {"mode": "lrt", "lta_suffix": "LRT", "stations": [
+      ["BP1", "Choa Chu Kang"], ["BP2", "South View"], ["BP3", "Keat Hong"], ["BP4", "Teck Whye"], ["BP5", "Phoenix"],
+      ["BP6", "Bukit Panjang"], ["BP7", "Petir"], ["BP8", "Pending"], ["BP9", "Bangkit"], ["BP10", "Fajar"], ["BP11", "Segar"],
+      ["BP12", "Jelapang"], ["BP13", "Senja"], ["BP6", "Bukit Panjang"]]},
+    "SE": {"mode": "lrt", "lta_suffix": "LRT", "stations": [
+      ["STC", "Sengkang"], ["SE1", "Compassvale"], ["SE2", "Rumbia"], ["SE3", "Bakau"], ["SE4", "Kangkar"], ["SE5", "Ranggung"],
+      ["STC", "Sengkang"]]},
+    "SW": {"mode": "lrt", "lta_suffix": "LRT", "stations": [
+      ["STC", "Sengkang"], ["SW1", "Cheng Lim"], ["SW2", "Farmway"], ["SW3", "Kupang"], ["SW4", "Thanggam"], ["SW5", "Fernvale"],
+      ["SW6", "Layar"], ["SW7", "Tongkang"], ["SW8", "Renjong"], ["STC", "Sengkang"]]},
+    "PE": {"mode": "lrt", "lta_suffix": "LRT", "stations": [
+      ["PTC", "Punggol"], ["PE1", "Cove"], ["PE2", "Meridian"], ["PE3", "Coral Edge"], ["PE4", "Riviera"], ["PE5", "Kadaloor"],
+      ["PE6", "Oasis"], ["PE7", "Damai"], ["PTC", "Punggol"]]},
+    "PW": {"mode": "lrt", "lta_suffix": "LRT", "stations": [
+      ["PTC", "Punggol"], ["PW1", "Sam Kee"], ["PW3", "Punggol Point"], ["PW4", "Samudera"], ["PW5", "Nibong"],
+      ["PW6", "Sumang"], ["PW7", "Soo Teck"], ["PTC", "Punggol"]]}
+  },
+  "lta_name_overrides": {"STC": "SENGKANG MRT STATION", "PTC": "PUNGGOL LRT STATION"},
+  "jrl": {
+    "_source": "LTA, Jurong Region Line project page, https://www.lta.gov.sg/content/ltagov/en/upcoming_projects/rail_expansion/jurong_region_line.html (retrieved 2026-11-15): Stage 1 (2028) JS1-JS8 excluding JS2A and JW1-JW2, interchanges Choa Chu Kang and Boon Lay; Stage 2 (2028) JE1-JE7, interchange Jurong East; Stage 3 (2029) JS9-JS12 and JW3-JW5; JS2A in-fill station mid-2030s (left out of the 2030 scenario). The page names only JS1, JS8 and JE5; the other station names and all positions are from OpenStreetMap.",
+    "lines": {
+      "JS": {"mode": "mrt", "stage_note": "JS1-JS8 stage 1, JS9-JS12 stage 3", "stations": [
+        ["JS1", "Choa Chu Kang"], ["JS2", "Choa Chu Kang West"], ["JS3", "Tengah"], ["JS4", "Hong Kah"], ["JS5", "Corporation"],
+        ["JS6", "Jurong West"], ["JS7", "Bahar Junction"], ["JS8", "Boon Lay"], ["JS9", "Enterprise"], ["JS10", "Tukang"],
+        ["JS11", "Jurong Hill"], ["JS12", "Jurong Pier"]]},
+      "JW": {"mode": "mrt", "stage_note": "JW1-JW2 stage 1, JW3-JW5 stage 3", "stations": [
+        ["JS7", "Bahar Junction"], ["JW1", "Gek Poh"], ["JW2", "Tawas"], ["JW3", "Nanyang Gateway"], ["JW4", "Nanyang Crescent"],
+        ["JW5", "Peng Kang Hill"]]},
+      "JE": {"mode": "mrt", "stage_note": "stage 2", "stations": [
+        ["JS3", "Tengah"], ["JE1", "Tengah Plantation"], ["JE2", "Tengah Park"], ["JE3", "Bukit Batok West"], ["JE4", "Toh Guan"],
+        ["JE5", "Jurong East"], ["JE6", "Jurong Town Hall"], ["JE7", "Pandan Reservoir"]]}
+    },
+    "existing_interchanges": {"JS1": "CHOA CHU KANG MRT STATION", "JS8": "BOON LAY MRT STATION", "JE5": "JURONG EAST MRT STATION"}
+  }
+}
