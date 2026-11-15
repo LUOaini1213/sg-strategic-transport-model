@@ -193,7 +193,7 @@ Python 3.11.
 python -m venv .venv
 . .venv/bin/activate              # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python scripts/run_all.py         # model, figures, README.md and docs/validation_report.md (offline, about a minute)
+python scripts/run_all.py         # model, figures, README.md and docs/validation_report.md (offline, 1-2 minutes)
 python scripts/fetch_data.py --only sioux_falls   # test network (needs internet), then:
 pytest                            # tests (offline)
 python mutation/run_mutants.py    # optional: mutation test of the test suite
@@ -205,7 +205,7 @@ python mutation/run_mutants.py    # optional: mutation test of the test suite
 
 {{tests}} tests. The formula tests compare against numbers worked out by hand in the test file (Furness balancing, deterrence functions, coincidence ratio, GEH, logit shares, BPR time, integral and derivative, relative gap and line search on a two-link network, a Braess-type network, Webster's cycle and delay, Furness turning flows), parameter-recovery tests for the three calibration routines, the Sioux Falls check, and a full re-run of the pipeline compared with the committed results and this README.
 
-`mutation/run_mutants.py` copies the repository, plants one deliberate bug at a time in the core logic and runs the suite. **{{mut_killed}} of {{mut_total}} mutants killed** ({{mut_killed_ns}} of {{mut_total}} also without the two snapshot tests that compare a fresh run with the committed results). Survivors: {{mutation_survivors}}. Details: `results/mutation_report.json`.
+`mutation/run_mutants.py` copies the repository, plants one deliberate bug at a time in the core logic and runs the suite. **{{mut_killed}} of {{mut_total}} mutants killed** ({{mut_killed_ns}} of {{mut_total}} also with the snapshot tests switched off, i.e. by the hand-worked and property tests alone; the snapshot tests compare a fresh run with the committed results and README). Survivors: {{mutation_survivors}}. Details: `results/mutation_report.json`.
 
 ## Licence
 

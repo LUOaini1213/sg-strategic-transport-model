@@ -148,7 +148,8 @@ def one(m: tuple) -> dict:
 
 
 def count_tests() -> int:
-    p = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "-p", "no:cacheprovider"], cwd=REPO,
+    p = subprocess.run([sys.executable, "-m", "pytest", "--collect-only", "-q", "-o", "addopts=", "-p",
+                        "no:cacheprovider"], cwd=REPO,
                        capture_output=True, text=True, env=dict(os.environ, STM_REQUIRE_SIOUX_FALLS="1"))
     m = re.search(r"(\d+) tests? collected", p.stdout)
     return int(m.group(1)) if m else -1

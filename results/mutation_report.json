@@ -1,9 +1,9 @@
 {
  "date": "2026-11-15",
- "tests_collected": -1,
+ "tests_collected": 53,
  "total": 30,
- "killed": 28,
- "killed_without_snapshot": 28,
+ "killed": 30,
+ "killed_without_snapshot": 30,
  "mutants": [
   {
    "id": "M01",
@@ -88,10 +88,10 @@
    "what": "SRMSE standardised by the modelled mean",
    "original": "return float(np.sqrt(np.mean((m - c) ** 2)) / np.mean(c))",
    "mutated": "return float(np.sqrt(np.mean((m - c) ** 2)) / np.mean(m))",
-   "killed": false,
-   "killed_without_snapshot": false,
-   "pytest_without_snapshot": "...............................................                          [100%]",
-   "pytest_full": "....................................................                     [100%]"
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_formulas.py::test_r2_and_srmse_hand - assert 0.333333333333...",
+   "pytest_full": "(killed already without the snapshot tests)"
   },
   {
    "id": "M09",
@@ -101,7 +101,7 @@
    "mutated": "return e / e.sum()",
    "killed": true,
    "killed_without_snapshot": true,
-   "pytest_without_snapshot": "FAILED tests/test_pipeline.py::test_committed_flows_are_user_equilibria - ass...",
+   "pytest_without_snapshot": "FAILED tests/test_formulas.py::test_logit_shares_hand - assert array([0.0666....",
    "pytest_full": "(killed already without the snapshot tests)"
   },
   {
@@ -112,7 +112,7 @@
    "mutated": "v_car = (asc_car + b_time * t_car + b_priv * private[None, :] + b_central * central[None, :]",
    "killed": true,
    "killed_without_snapshot": true,
-   "pytest_without_snapshot": "FAILED tests/test_pipeline.py::test_committed_flows_are_user_equilibria - ass...",
+   "pytest_without_snapshot": "FAILED tests/test_formulas.py::test_utilities_hand - assert 0.5 == 1.5 \u00b1 1.5e-06",
    "pytest_full": "(killed already without the snapshot tests)"
   },
   {
@@ -195,13 +195,13 @@
   {
    "id": "M18",
    "file": "stm/assignment.py",
-   "what": "no fall-back when the direction is not descent",
-   "original": "        if float(np.dot(t, d)) >= 0.0:  # not a descent direction: restart with FW",
-   "mutated": "        if False:  # not a descent direction: restart with FW",
-   "killed": false,
-   "killed_without_snapshot": false,
-   "pytest_without_snapshot": "...............................................                          [100%]",
-   "pytest_full": "....................................................                     [100%]"
+   "what": "no fall-back to Frank-Wolfe when the direction is not a descent direction",
+   "original": "    if float(np.dot(t, s - x)) >= 0.0:\n        return y, True",
+   "mutated": "    if False:\n        return y, True",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_formulas.py::test_descent_safeguard_hand - assert (False)",
+   "pytest_full": "(killed already without the snapshot tests)"
   },
   {
    "id": "M19",
