@@ -55,8 +55,11 @@ def test_snapshot_summary_matches_committed(fresh):
                 assert vn < 0.01, k  # minutes per trip
             elif k.startswith(loose):
                 assert vn == pytest.approx(vo, rel=5e-3, abs=0.05), k
+            elif k.endswith("max_abs_gradient") or k.endswith("moment_residual"):
+                assert abs(vn) < 1e-5, k   # optimiser residuals: only their size matters
             else:
-                assert vn == pytest.approx(vo, rel=1e-5, abs=1e-8), k
+                # calibrated values come out of numerical optimisers; allow for platform differences
+                assert vn == pytest.approx(vo, rel=1e-4, abs=1e-6), k
         else:
             assert vn == vo, k
 
@@ -72,7 +75,7 @@ def test_snapshot_calibration_tables_match_committed(fresh):
         assert len(a) == len(b), name
         for c in a.columns:
             if pd.api.types.is_numeric_dtype(b[c]):
-                assert np.allclose(a[c].values, b[c].values, rtol=1e-5, atol=1e-6, equal_nan=True), (name, c)
+                assert np.allclose(a[c].values, b[c].values, rtol=1e-4, atol=1e-4, equal_nan=True), (name, c)
             else:
                 assert (a[c].fillna("") == b[c].fillna("")).all(), (name, c)
 

@@ -123,7 +123,7 @@ Link costs follow the BPR function t = t0 (1 + 0.15 (v/c)^4) (Bureau of Public R
 
 **Verification on Sioux Falls** (bstabler/TransportationNetworks, pinned commit; `tests/test_sioux_falls.py`). The published best-known flows have relative gap below 1e-12 in absolute value and Beckmann objective 42.31335287 (x 10^5) in this code, the published optimum being 42.31335287. Run to gap 8.6e-07 (970 iterations), this code reaches objective 42.313359 (relative difference 1.3e-07) with every link flow within 0.01% (1.6 vehicles) of the published one. To gap 1e-4, bi-conjugate FW needs 93 iterations and plain FW 1,049.
 
-AequilibraE 1.7.2 was also installed (Windows, Python 3.11, in a separate environment, because it pulls NumPy 2.4 and pandas 3.1) and runs Sioux Falls. The model uses its own implementation so that every formula is hand-checked and mutation-tested inside this repository.
+AequilibraE 1.7.2 also installs on Windows with Python 3.11 (tried in a separate environment, because it pulls NumPy 2.4 and pandas 3.1), and its bi-conjugate Frank-Wolfe ran on Sioux Falls in a one-off trial (relative gap 2.2e-05 after 500 iterations; its flows were not compared further, and the trial is not part of this repository). The model uses its own implementation so that every formula is hand-checked and mutation-tested inside this repository.
 
 ### f. Validation
 
@@ -280,7 +280,7 @@ pytest                            # tests (offline)
 python mutation/run_mutants.py    # optional: mutation test of the test suite
 ```
 
-`scripts/run_all.py` rewrites everything under `results/` from the committed inputs in `data/inputs/`; numbers are deterministic. To rebuild the inputs from the raw sources: `pip install -r requirements-tools.txt`, `python scripts/fetch_data.py` (keyless downloads), then `python scripts/prepare_inputs.py --datamall-dir <folder>` with the DataMall files downloaded with your own DataMall AccountKey (none is stored here).
+`scripts/run_all.py` rewrites everything under `results/` from the committed inputs in `data/inputs/`; numbers are deterministic. Two files are exceptions: `results/sioux_falls_check.json` is rewritten only when the Sioux Falls files have been downloaded, and `results/mutation_report.json` only by `mutation/run_mutants.py`. To rebuild the inputs from the raw sources: `pip install -r requirements-tools.txt`, `python scripts/fetch_data.py` (keyless downloads), then `python scripts/prepare_inputs.py --datamall-dir <folder>` with the DataMall files downloaded with your own DataMall AccountKey (none is stored here).
 
 ## Tests and mutation testing
 

@@ -20,6 +20,11 @@ def main() -> None:
     ap.add_argument("--no-figures", action="store_true")
     a = ap.parse_args()
     pipeline.run(assign_scenarios=not a.reuse_assignment)
+    from stm import sioux
+    if sioux.available():   # the test network is downloaded, not committed (scripts/fetch_data.py --only sioux_falls)
+        pipeline.write_json(pipeline.RESULTS / "sioux_falls_check.json", sioux.verify())
+    else:
+        print("Sioux Falls files not downloaded: results/sioux_falls_check.json left as committed")
     if not a.no_figures:
         from stm import plots
         plots.make_all()
