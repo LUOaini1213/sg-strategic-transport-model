@@ -75,11 +75,21 @@ Profile of the time coefficient (other parameters re-estimated at each fixed val
 
 | Scenario | iterations | relative gap (final) | relative gap recomputed from the saved flows |
 |---|---|---|---|
-| 2020 base | 40 | 7.4e-05 | 7.4e-05 |
-| 2030 without JRL | 35 | 9.6e-05 | 9.6e-05 |
-| 2030 with JRL | 36 | 7.8e-05 | 7.8e-05 |
+| 2020 base | 371 | 8.3e-07 | 8.3e-07 |
+| 2030 without JRL | 374 | 7.4e-07 | 7.4e-07 |
+| 2030 with JRL | 296 | 9.1e-07 | 9.1e-07 |
 
-`tests/test_pipeline.py` re-runs the whole model and recomputes these gaps from the flows in `results/link_flows.csv` with one independent all-or-nothing load each.
+`tests/test_pipeline.py` recomputes these gaps from the saved flows and the demand they were solved for (`results/link_flows.csv`, `connector_flows.csv`, `car_demand_*.npy`) with one independent all-or-nothing load each, and solves the base year again from scratch to 1e-04 to compare with the saved flows.
+
+What stopping at the usual 1e-04 would have cost (flows at the first iteration that reaches it, against the final flows):
+
+| Scenario | iteration reaching the reference gap | final iteration | links differing from the final flows by more than max(10 pcu/h, 2%) | largest difference (pcu/h) | links differing by 0.05+ in V/C |
+|---|---|---|---|---|---|
+| base 2020 | 40 | 371 | 3.1% | 238 | 23 |
+| dm 2030 | 35 | 374 | 2.5% | 538 | 49 |
+| ds 2030 jrl | 36 | 296 | 3.7% | 505 | 47 |
+
+Differences of this size are as large as the scenario effects in section g of the README, which is why the target is 1e-06. A re-run on another machine follows a slightly different iteration path (floating-point arithmetic) and ends at slightly different flows within that gap.
 
 Sioux Falls (24 zones, 76 links, 360,600 trips): the published best-known flows give relative gap below 1e-12 in absolute value and objective 42.31335287 x 10^5 in this code (published optimum 42.31335287); total system travel time 7,480,225. This code at relative gap 8.6e-07: 970 iterations, objective 42.313359 (relative difference 1.3e-07), largest link-flow difference 1.6 vehicles (0.01%). At gap 1e-4: bi-conjugate FW 93 iterations (largest flow difference 0.46%), plain FW 1,049 iterations (0.19%).
 
@@ -91,22 +101,22 @@ Share of directed link-km by volume/capacity:
 
 | Scenario | V/C 0-0.5 | V/C 0.5-0.85 | V/C 0.85-1.0 | V/C >1.0 |
 |---|---|---|---|---|
-| base 2020 | 85.1% | 9.6% | 2.3% | 3.0% |
-| dm 2030 | 84.7% | 9.9% | 2.3% | 3.2% |
-| ds 2030 jrl | 84.9% | 9.8% | 2.2% | 3.2% |
+| base 2020 | 85.1% | 9.7% | 2.3% | 3.0% |
+| dm 2030 | 84.7% | 9.8% | 2.3% | 3.2% |
+| ds 2030 jrl | 84.9% | 9.7% | 2.2% | 3.2% |
 
 By road class, 2020 base:
 
 | OSM class | km (directed) | mean V/C (km-weighted) | km with V/C > 0.85 | km with V/C > 1.0 | mean speed (km/h, flow-weighted) |
 |---|---|---|---|---|---|
-| motorway | 313 | 0.50 | 17.4% | 7.6% | 78 |
+| motorway | 313 | 0.50 | 17.7% | 7.6% | 78 |
 | trunk | 158 | 0.29 | 6.3% | 2.8% | 52 |
 | primary | 856 | 0.22 | 4.1% | 2.8% | 39 |
 | secondary | 562 | 0.13 | 2.1% | 1.5% | 36 |
 | tertiary | 600 | 0.08 | 2.6% | 1.7% | 29 |
 | motorway_link | 243 | 0.27 | 9.3% | 6.4% | 41 |
 | trunk_link | 52 | 0.16 | 2.8% | 0.4% | 44 |
-| primary_link | 89 | 0.10 | 1.9% | 0.6% | 36 |
+| primary_link | 89 | 0.10 | 1.9% | 0.7% | 36 |
 | secondary_link | 27 | 0.08 | 1.8% | 1.2% | 33 |
 | tertiary_link | 13 | 0.02 | 0.4% | 0.1% | 29 |
 
@@ -114,10 +124,10 @@ Screenlines (consistency, not validation): assigned flow crossing a north-south 
 
 | Screenline | Scenario | links | assigned eastbound | OD demand crossing eastbound | assigned westbound | OD demand crossing westbound |
 |---|---|---|---|---|---|---|
-| x = 21 km (West | rest) | base 2020 | 68 | 28,260 | 17,472 | 29,762 | 21,239 |
-| x = 21 km (West | rest) | ds 2030 jrl | 68 | 30,885 | 19,844 | 28,989 | 20,265 |
-| x = 30 km (central) | base 2020 | 77 | 33,124 | 25,762 | 41,106 | 32,500 |
-| x = 30 km (central) | ds 2030 jrl | 77 | 34,523 | 27,156 | 40,495 | 31,891 |
+| x = 21 km (West | rest) | base 2020 | 68 | 28,292 | 17,472 | 29,793 | 21,239 |
+| x = 21 km (West | rest) | ds 2030 jrl | 68 | 30,901 | 19,844 | 29,006 | 20,265 |
+| x = 30 km (central) | base 2020 | 77 | 33,041 | 25,762 | 41,023 | 32,500 |
+| x = 30 km (central) | ds 2030 jrl | 77 | 34,564 | 27,156 | 40,535 | 31,891 |
 
 What would be needed for real road validation: classified counts on screenlines and key links (none public), or travel times; LTA DataMall's traffic speed bands give observed speeds on road segments and could be compared with modelled speeds in a later version (not done here).
 

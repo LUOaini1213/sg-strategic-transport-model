@@ -87,10 +87,15 @@
     "label": "ASSUMPTION",
     "value": 3000
    },
+   "rgap_reference": {
+    "label": "ASSUMPTION",
+    "note": "looser gap at which the flows are compared with the final ones, to show what stopping there would cost",
+    "value": 0.0001
+   },
    "rgap_target": {
     "label": "ASSUMPTION",
-    "note": "relative gap = (TSTT - SPTT) / SPTT",
-    "value": 0.0001
+    "note": "relative gap = (TSTT - SPTT) / SPTT. Tighter than the usual 1e-4 because scenarios are compared link by link",
+    "value": 1e-06
    },
    "speed_default_kmh": {
     "label": "ASSUMPTION",

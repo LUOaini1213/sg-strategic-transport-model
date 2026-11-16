@@ -133,6 +133,16 @@ def context() -> dict:
         c.update({f"as_{short}_it": i(a[k]["iterations"]), f"as_{short}_gap": f"{a[k]['relative_gap']:.1e}",
                   f"as_{short}_gap2": f"{a[k]['relative_gap_recomputed']:.1e}", f"as_{short}_q": i(a[k]["car_trips_per_hour"]),
                   f"as_{short}_vht": i(a[k]["vehicle_hours"]), f"as_{short}_vkt": i(a[k]["vehicle_km"])})
+    tb = a["base_2020"]["at_reference_gap"]
+    c.update(cfg_rgap_ref=f"{tb['gap']:.0e}", tight_it_ref=i(tb["iteration"]), tight_share=pct(tb["share_links_differing"]),
+             tight_max=i(tb["max_abs_flow_diff_pcu"]), tight_vc_links=i(tb["links_vc_differing_0_05_or_more"]))
+    c["tightness_table"] = table(
+        ["Scenario", "iteration reaching the reference gap", "final iteration",
+         "links differing from the final flows by more than max(10 pcu/h, 2%)", "largest difference (pcu/h)",
+         "links differing by 0.05+ in V/C"],
+        [[n.replace("_", " "), i(a[n]["at_reference_gap"]["iteration"]), i(a[n]["iterations"]),
+          pct(a[n]["at_reference_gap"]["share_links_differing"]), i(a[n]["at_reference_gap"]["max_abs_flow_diff_pcu"]),
+          i(a[n]["at_reference_gap"]["links_vc_differing_0_05_or_more"])] for n in ("base_2020", "dm_2030", "ds_2030_jrl")])
     r = s["road"]
     vb = r["share_km_by_vc_bin"]
     c["vc_table"] = table(["Scenario"] + [f"V/C {x}" for x in r["vc_bins"]],

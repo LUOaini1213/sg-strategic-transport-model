@@ -73,7 +73,13 @@ Profile of the time coefficient (other parameters re-estimated at each fixed val
 | 2030 without JRL | {{as_dm_it}} | {{as_dm_gap}} | {{as_dm_gap2}} |
 | 2030 with JRL | {{as_ds_it}} | {{as_ds_gap}} | {{as_ds_gap2}} |
 
-`tests/test_pipeline.py` re-runs the whole model and recomputes these gaps from the flows in `results/link_flows.csv` with one independent all-or-nothing load each.
+`tests/test_pipeline.py` recomputes these gaps from the saved flows and the demand they were solved for (`results/link_flows.csv`, `connector_flows.csv`, `car_demand_*.npy`) with one independent all-or-nothing load each, and solves the base year again from scratch to {{cfg_rgap_ref}} to compare with the saved flows.
+
+What stopping at the usual {{cfg_rgap_ref}} would have cost (flows at the first iteration that reaches it, against the final flows):
+
+{{tightness_table}}
+
+Differences of this size are as large as the scenario effects in section g of the README, which is why the target is {{cfg_rgap}}. A re-run on another machine follows a slightly different iteration path (floating-point arithmetic) and ends at slightly different flows within that gap.
 
 Sioux Falls (24 zones, 76 links, 360,600 trips): the published best-known flows give relative gap {{sf_gap_pub}} and objective {{sf_obj_pub}} x 10^5 in this code (published optimum {{sf_obj}}); total system travel time {{sf_tstt}}. This code at relative gap {{sf_bfw6_gap}}: {{sf_bfw6_it}} iterations, objective {{sf_bfw6_obj}} (relative difference {{sf_bfw6_rel}}), largest link-flow difference {{sf_bfw6_maxabs}} vehicles ({{sf_bfw6_maxrel}}). At gap 1e-4: bi-conjugate FW {{sf_bfw4_it}} iterations (largest flow difference {{sf_bfw4_maxrel}}), plain FW {{sf_fw4_it}} iterations ({{sf_fw4_maxrel}}).
 

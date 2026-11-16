@@ -314,8 +314,9 @@ def fig_convergence():
     fig, ax = plt.subplots(figsize=(5.2, 3.4))
     for (name, g), colr in zip(c.groupby("scenario", sort=False), (BLUE, ORANGE, AQUA)):
         ax.semilogy(g.iteration, g.relative_gap, color=colr, label=name.replace("_", " "))
-    ax.axhline(1e-4, color=MUTED, linewidth=1, linestyle=":")
-    ax.text(1, 1.15e-4, "target 1e-4", fontsize=7, color=INK2)
+    tgt = json.loads((REPO / "config" / "model.json").read_text(encoding="utf-8"))["assignment"]["rgap_target"]["value"]
+    ax.axhline(tgt, color=MUTED, linewidth=1, linestyle=":")
+    ax.text(1, 1.15 * tgt, f"target {tgt:.0e}", fontsize=7, color=INK2)
     ax.set_xlabel("bi-conjugate Frank-Wolfe iteration")
     ax.set_ylabel("relative gap")
     ax.set_title("Assignment convergence", loc="left")

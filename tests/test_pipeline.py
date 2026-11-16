@@ -1,11 +1,23 @@
-"""End-to-end check: re-run the whole model from the committed inputs and compare with the committed results.
+"""End-to-end checks against the committed results.
 
-The full pipeline (three equilibrium assignments included) takes about a minute, so the test runs it once per
-session. Calibration outputs must agree to tight tolerances. Assignment outputs are compared more loosely: two
-runs that each stop at a relative gap below 1e-4 can differ slightly when floating-point results differ between
-machines, so the test also recomputes the gap of the committed flows independently.
+What runs by default (and in CI): the whole model is rebuilt from the committed inputs, except that the three
+equilibrium assignments are not solved again. Their saved flows (results/link_flows.csv, connector_flows.csv) are
+reused together with the demand matrices they were solved for (results/car_demand_*.npy), and the tests then check
+
+  * that everything upstream of the assignment (trip ends, calibrations, mode choice, demand) and everything
+    downstream of it (V/C, screenlines, junctions) comes out as committed;
+  * independently, that each saved flow vector is a user equilibrium for its saved demand (one all-or-nothing
+    load), and that the saved demand equals the freshly computed one;
+  * that a fresh assignment of the base year, run from scratch to the looser reference gap, lands on the saved
+    flows to within what that gap allows.
+
+Why the assignments are not solved again by default: the path of the iterations depends on the last digits of
+floating-point results, so two machines stop at slightly different flows. Set STM_FULL=1 to solve all three again
+and compare (several minutes).
 """
 import json
+import os
+import shutil
 from pathlib import Path
 
 import numpy as np
@@ -14,17 +26,30 @@ import pytest
 
 from stm import model as M
 from stm import pipeline as P
-from stm.assignment import equilibrium_gap
+from stm.assignment import assign, equilibrium_gap
 
 REPO = Path(__file__).resolve().parents[1]
 RES = REPO / "results"
+SCENARIOS = ("base_2020", "dm_2030", "ds_2030_jrl")
+SAVED = ["link_flows.csv", "connector_flows.csv", "assignment_convergence.csv", "assignment_tightness.csv"] + [
+    f"car_demand_{n}.npy" for n in SCENARIOS]
 
 
 @pytest.fixture(scope="session")
 def fresh(tmp_path_factory):
     out = tmp_path_factory.mktemp("results")
-    summary = P.run(out=out, verbose=False)
+    for name in SAVED:
+        shutil.copy2(RES / name, out / name)
+    summary = P.run(out=out, assign_scenarios=False, verbose=False)
     return out, summary
+
+
+@pytest.fixture(scope="session")
+def road():
+    cfg = M.load_config()
+    inp = M.load_inputs()
+    z = M.zone_table(inp)
+    return cfg, M.road_model(inp, cfg, z)
 
 
 def _leaves(d, prefix=""):
@@ -43,20 +68,15 @@ def test_snapshot_summary_matches_committed(fresh):
     new = dict(_leaves(json.loads((out / "summary.json").read_text(encoding="utf-8"))))
     old = dict(_leaves(json.loads((RES / "summary.json").read_text(encoding="utf-8"))))
     assert new.keys() == old.keys()
-    loose = ("assignment.", "road.", "junctions.", "scenario_2030.mode_shares.base_2020.car_trips")
     for k, vo in old.items():
         vn = new[k]
         if isinstance(vo, (int, float)) and not isinstance(vo, bool):
-            if "iterations" in k:
-                assert abs(vn - vo) <= max(5, 0.25 * vo), k
-            elif "relative_gap" in k:
-                assert vn <= 1e-4 * 1.01, k
-            elif "average_excess_cost" in k:
-                assert vn < 0.01, k  # minutes per trip
-            elif k.startswith(loose):
-                assert vn == pytest.approx(vo, rel=5e-3, abs=0.05), k
-            elif k.endswith("max_abs_gradient") or k.endswith("moment_residual"):
+            if k.endswith("max_abs_gradient") or k.endswith("moment_residual"):
                 assert abs(vn) < 1e-5, k   # optimiser residuals: only their size matters
+            elif k.endswith("saved_demand_max_diff_from_fresh_run"):
+                assert vn < 1e-3, k
+            elif "relative_gap" in k or "average_excess_cost" in k:
+                assert vn == pytest.approx(vo, rel=1e-2, abs=1e-9), k
             else:
                 # calibrated values come out of numerical optimisers; allow for platform differences
                 assert vn == pytest.approx(vo, rel=1e-4, abs=1e-6), k
@@ -64,13 +84,14 @@ def test_snapshot_summary_matches_committed(fresh):
             assert vn == vo, k
 
 
-def test_snapshot_calibration_tables_match_committed(fresh):
+def test_snapshot_tables_match_committed(fresh):
     out, _ = fresh
     for name in ("calibration_commute_cells.csv", "tld_bus.csv", "bus_pa_pairs_202608.csv", "mode_shares_residence.csv",
                  "mode_shares_workplace.csv", "mode_shares_holdout_cells.csv", "mode_choice_time_profile.csv",
-                 "zones_trip_ends.csv"):
-        a = pd.read_csv(out / name)
-        b = pd.read_csv(RES / name)
+                 "zones_trip_ends.csv", "link_flows.csv", "vc_by_class_base.csv", "scenario_mode_share_west.csv",
+                 "junction_growth_factors.csv", "junction_example_turns.csv", "screenlines.csv"):
+        a = pd.read_csv(out / name, keep_default_na=False, na_values=[""])
+        b = pd.read_csv(RES / name, keep_default_na=False, na_values=[""])
         assert list(a.columns) == list(b.columns), name
         assert len(a) == len(b), name
         for c in a.columns:
@@ -80,45 +101,59 @@ def test_snapshot_calibration_tables_match_committed(fresh):
                 assert (a[c].fillna("") == b[c].fillna("")).all(), (name, c)
 
 
-def test_snapshot_link_flows_close_to_committed(fresh):
-    out, _ = fresh
-    a = pd.read_csv(out / "link_flows.csv")
-    b = pd.read_csv(RES / "link_flows.csv")
-    assert len(a) == len(b)
-    for n in ("base_2020", "dm_2030", "ds_2030_jrl"):
-        d = np.abs(a[f"flow_{n}"].values - b[f"flow_{n}"].values)
-        far = d > np.maximum(10.0, 0.02 * b[f"flow_{n}"].values)
-        assert far.mean() < 0.01, n
-
-
-def test_committed_flows_are_user_equilibria():
-    """Independent check: one all-or-nothing load at the committed flows' own costs gives a gap <= 1e-4."""
-    cfg = M.load_config()
-    inp = M.load_inputs()
-    z = M.zone_table(inp)
-    rm = M.road_model(inp, cfg, z)
-    lf = pd.read_csv(RES / "link_flows.csv")
-    summary = json.loads((RES / "summary.json").read_text(encoding="utf-8"))
-    # rebuild the 2020 car demand with the committed calibration (fast: no re-calibration)
-    te = M.trip_ends_2020(inp, cfg, z)
-    t_ff, d = M.car_skims(rm, cfg)
-    dc = summary["distribution_commute"]
-    from stm import gravity as G
-    from stm import logit as L
-
-    T = G.gravity(te["O"], te["D"], d, "gamma", dc["a"], dc["b_per_km"])
-    g_pt, _, _, _, _ = M.pt_skims(inp, cfg, z, d, with_jrl=False)
-    theta = [summary["mode_choice"]["params"][k] for k in L.PARAMS]
-    t_car = t_ff + cfg["model"]["mode_choice"]["car_terminal_min"]["value"]
-    Pm = L.probabilities(L.utilities(theta, t_car, g_pt, d, z.private_share.values, z.central.values,
-                                     M.industrial_share(inp, cfg, len(z))))
-    Q = P.car_demand(T, Pm[0], cfg, M.peak_hour_share(inp, cfg, "202607"))
-    assert Q.sum() == pytest.approx(summary["assignment"]["base_2020"]["car_trips_per_hour"], rel=1e-6)
+def _saved_flow(rm, name):
+    lf = pd.read_csv(RES / "link_flows.csv", usecols=[f"flow_{name}"])
     cf = pd.read_csv(RES / "connector_flows.csv")
     g = rm.net.graph
     kc = np.arange(rm.n_road_links, g.n_links)
     assert np.array_equal(cf["tail"].values, g.tail[kc]) and np.array_equal(cf["head"].values, g.head[kc])
-    flow = np.concatenate([lf.flow_base_2020.values, cf.flow_base_2020.values])
-    gap = equilibrium_gap(rm.net, flow, rm.origins, rm.dests, Q)["relative_gap"]
-    assert gap <= 1e-4 * 1.01
+    return np.concatenate([lf[f"flow_{name}"].values, cf[f"flow_{name}"].values])
 
+
+@pytest.mark.parametrize("name", SCENARIOS)
+def test_committed_flows_are_user_equilibria(road, name):
+    """Independent of the solver: one all-or-nothing load at the saved flows' own costs gives the gap."""
+    cfg, rm = road
+    target = cfg["model"]["assignment"]["rgap_target"]["value"]
+    Q = np.load(RES / f"car_demand_{name}.npy")
+    flow = _saved_flow(rm, name)
+    gap = equilibrium_gap(rm.net, flow, rm.origins, rm.dests, Q)["relative_gap"]
+    assert 0 <= gap <= target * 1.001
+    # flow conservation: what leaves the zone connectors is the demand
+    g = rm.net.graph
+    out_of_zones = np.bincount(g.tail, weights=flow, minlength=g.n_nodes)[rm.origins]
+    assert out_of_zones == pytest.approx(Q.sum(axis=1), rel=1e-6, abs=1e-3)
+
+
+def test_saved_demand_is_the_fresh_demand(fresh):
+    _, summary = fresh
+    for name in SCENARIOS:
+        assert summary["assignment"][name]["saved_demand_max_diff_from_fresh_run"] < 1e-3
+        assert summary["assignment"][name]["converged"] is True
+
+
+def test_assignment_from_scratch_approaches_committed_flows(road):
+    """Solve the base year again, to the looser reference gap, and compare with the saved (tighter) flows."""
+    cfg, rm = road
+    ref = cfg["model"]["assignment"]["rgap_reference"]["value"]
+    Q = np.load(RES / "car_demand_base_2020.npy")
+    r = assign(rm.net, rm.origins, rm.dests, Q, method="bfw", rgap_target=ref, max_iter=500)
+    assert r.converged
+    n = rm.n_road_links
+    saved = _saved_flow(rm, "base_2020")[:n]
+    km = rm.links.length_km.values
+    assert np.dot(r.flow[:n], km) == pytest.approx(np.dot(saved, km), rel=2e-3)        # vehicle-km
+    d = np.abs(r.flow[:n] - saved)
+    assert np.mean(d > np.maximum(25.0, 0.05 * saved)) < 0.03
+    assert np.corrcoef(r.flow[:n], saved)[0, 1] > 0.9995
+
+
+@pytest.mark.skipif(os.environ.get("STM_FULL") != "1", reason="set STM_FULL=1 to solve the three assignments again")
+def test_full_rerun_reproduces_flows(tmp_path):
+    P.run(out=tmp_path, assign_scenarios=True, verbose=False)
+    a = pd.read_csv(tmp_path / "link_flows.csv")
+    b = pd.read_csv(RES / "link_flows.csv")
+    for name in SCENARIOS:
+        x, y = a[f"flow_{name}"].values, b[f"flow_{name}"].values
+        assert np.dot(x, b.length_km.values) == pytest.approx(np.dot(y, b.length_km.values), rel=1e-4)
+        assert np.mean(np.abs(x - y) > np.maximum(10.0, 0.02 * y)) < 0.01, name

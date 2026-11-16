@@ -115,6 +115,8 @@ Link costs follow the BPR function t = t0 (1 + {{cfg_alpha}} (v/c)^{{cfg_beta}})
 | 2030 without JRL | {{as_dm_q}} | {{as_dm_it}} | {{as_dm_gap}} | {{as_dm_vht}} | {{as_dm_vkt}} |
 | 2030 with JRL | {{as_ds_q}} | {{as_ds_it}} | {{as_ds_gap}} | {{as_ds_vht}} | {{as_ds_vkt}} |
 
+**Why {{cfg_rgap}} and not {{cfg_rgap_ref}}.** At the iteration where the 2020 run first reaches a relative gap of {{cfg_rgap_ref}} (iteration {{tight_it_ref}} of {{as_base_it}}), {{tight_share}} of links still differ from the final flows by more than max(10 pcu/h, 2%), the largest difference is {{tight_max}} pcu/h, and {{tight_vc_links}} links differ by 0.05 or more in V/C, which is the size of the scenario effects being measured. All three scenarios are therefore solved to {{cfg_rgap}} (`results/assignment_tightness.csv`). The path of the iterations depends on the last digits of floating-point arithmetic, so a re-run on another machine stops at slightly different flows, within the gap; iteration counts differ too. The saved flows are stored with the demand they were solved for (`results/car_demand_*.npy`), so the equilibrium can be re-checked exactly on any machine.
+
 **Verification on Sioux Falls** (bstabler/TransportationNetworks, pinned commit; `tests/test_sioux_falls.py`). The published best-known flows have relative gap {{sf_gap_pub}} and Beckmann objective {{sf_obj_pub}} (x 10^5) in this code, the published optimum being {{sf_obj}}. Run to gap {{sf_bfw6_gap}} ({{sf_bfw6_it}} iterations), this code reaches objective {{sf_bfw6_obj}} (relative difference {{sf_bfw6_rel}}) with every link flow within {{sf_bfw6_maxrel}} ({{sf_bfw6_maxabs}} vehicles) of the published one. To gap 1e-4, bi-conjugate FW needs {{sf_bfw4_it}} iterations and plain FW {{sf_fw4_it}}.
 
 AequilibraE 1.7.2 also installs on Windows with Python 3.11 (tried in a separate environment, because it pulls NumPy 2.4 and pandas 3.1), and its bi-conjugate Frank-Wolfe ran on Sioux Falls in a one-off trial (relative gap 2.2e-05 after 500 iterations; its flows were not compared further, and the trial is not part of this repository). The model uses its own implementation so that every formula is hand-checked and mutation-tested inside this repository.
@@ -193,7 +195,7 @@ Python 3.11.
 python -m venv .venv
 . .venv/bin/activate              # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-python scripts/run_all.py         # model, figures, README.md and docs/validation_report.md (offline, 1-2 minutes)
+python scripts/run_all.py         # model, figures, README.md and docs/validation_report.md (offline, a few minutes)
 python scripts/fetch_data.py --only sioux_falls   # test network (needs internet), then:
 pytest                            # tests (offline)
 python mutation/run_mutants.py    # optional: mutation test of the test suite
@@ -203,7 +205,7 @@ python mutation/run_mutants.py    # optional: mutation test of the test suite
 
 ## Tests and mutation testing
 
-{{tests}} tests. The formula tests compare against numbers worked out by hand in the test file (Furness balancing, deterrence functions, coincidence ratio, GEH, logit shares, BPR time, integral and derivative, relative gap and line search on a two-link network, a Braess-type network, Webster's cycle and delay, Furness turning flows), parameter-recovery tests for the three calibration routines, the Sioux Falls check, and a full re-run of the pipeline compared with the committed results and this README.
+{{tests}} tests. The formula tests compare against numbers worked out by hand in the test file (Furness balancing, deterrence functions, coincidence ratio, GEH, logit shares, BPR time, integral and derivative, relative gap and line search on a two-link network, a Braess-type network, Webster's cycle and delay, Furness turning flows), parameter-recovery tests for the three calibration routines, the Sioux Falls check, and a rebuild of the model from the committed inputs compared with the committed results and this README. In that rebuild the three saved equilibria are not solved again: each is re-checked independently against its saved demand with one all-or-nothing load, and the base year is solved again from scratch to {{cfg_rgap_ref}} and compared with the saved flows. `STM_FULL=1 pytest` solves all three again.
 
 `mutation/run_mutants.py` copies the repository, plants one deliberate bug at a time in the core logic and runs the suite. **{{mut_killed}} of {{mut_total}} mutants killed** ({{mut_killed_ns}} of {{mut_total}} also with the snapshot tests switched off, i.e. by the hand-worked and property tests alone; the snapshot tests compare a fresh run with the committed results and README). Survivors: {{mutation_survivors}}. Details: `results/mutation_report.json`.
 

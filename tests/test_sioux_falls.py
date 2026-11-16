@@ -52,10 +52,12 @@ def test_bfw_is_faster_than_fw_and_both_converge(check):
 
 @needs_files
 def test_snapshot_sioux_falls_matches_committed_result(check):
+    # The iteration path depends on the last digits of floating-point results, so another machine stops at a
+    # slightly different point: objectives agree to within what the gap allows, iteration counts roughly.
     committed = json.loads((REPO / "results" / "sioux_falls_check.json").read_text(encoding="utf-8"))
-    for k in ("bfw_1e-04", "fw_1e-04", "bfw_1e-06"):
-        assert check[k]["objective_1e5"] == pytest.approx(committed[k]["objective_1e5"], rel=1e-6)
-        assert abs(check[k]["iterations"] - committed[k]["iterations"]) <= max(3, 0.05 * committed[k]["iterations"])
+    for k, rel in (("bfw_1e-04", 2e-4), ("fw_1e-04", 2e-4), ("bfw_1e-06", 2e-6)):
+        assert check[k]["objective_1e5"] == pytest.approx(committed[k]["objective_1e5"], rel=rel)
+        assert 0.5 * committed[k]["iterations"] <= check[k]["iterations"] <= 2.0 * committed[k]["iterations"]
 
 
 @needs_files

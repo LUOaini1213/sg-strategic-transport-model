@@ -84,6 +84,7 @@ class AssignmentResult:
     objective: float
     history: list = field(default_factory=list)
     converged: bool = False
+    snapshots: dict = field(default_factory=dict)   # {gap: (iteration, flows)} at the first iteration with rg <= gap
 
 
 def line_search(net: Network, x: np.ndarray, d: np.ndarray, tol: float = 1e-12, max_iter: int = 200) -> float:
@@ -137,8 +138,10 @@ def _bfw_target(net: Network, x, y, s1, s2, tau, delta=1e-4):
 
 
 def assign(net: Network, origins, dest_nodes, demand, method: str = "bfw", rgap_target: float = 1e-4,
-           max_iter: int = 2000, x0: np.ndarray | None = None, verbose: bool = False) -> AssignmentResult:
-    """User-equilibrium assignment of demand[o, d] from node origins[o] to node dest_nodes[d]."""
+           max_iter: int = 2000, x0: np.ndarray | None = None, verbose: bool = False,
+           snapshot_gaps: tuple = ()) -> AssignmentResult:
+    """User-equilibrium assignment of demand[o, d] from node origins[o] to node dest_nodes[d].
+    snapshot_gaps: looser gaps at which a copy of the flows is kept (first iteration that reaches each)."""
     if method not in ("fw", "bfw"):
         raise ValueError("method must be 'fw' or 'bfw'")
     demand = np.asarray(demand, dtype=float)
@@ -150,6 +153,7 @@ def assign(net: Network, origins, dest_nodes, demand, method: str = "bfw", rgap_
     s1 = s2 = None
     tau = 0.0
     history = []
+    snapshots: dict = {}
     rg = np.inf
     it = 0
     tstt = sptt = np.nan
@@ -159,6 +163,9 @@ def assign(net: Network, origins, dest_nodes, demand, method: str = "bfw", rgap_
         tstt = float(np.dot(x, t))
         rg = relative_gap(tstt, sptt)
         history.append(rg)
+        for sg in snapshot_gaps:
+            if sg not in snapshots and rg <= sg:
+                snapshots[sg] = (it, x.copy())
         if verbose and (it % 25 == 0 or it < 5):
             print(f"  iter {it:4d}  relative gap {rg:.3e}")
         if rg <= rgap_target:
@@ -186,7 +193,7 @@ def assign(net: Network, origins, dest_nodes, demand, method: str = "bfw", rgap_
     return AssignmentResult(flow=x, time=t, iterations=it, relative_gap=float(rg),
                             average_excess_cost=float((tstt - sptt) / total) if total > 0 else 0.0,
                             tstt=float(tstt), sptt=float(sptt), objective=net.objective(x), history=history,
-                            converged=bool(rg <= rgap_target))
+                            converged=bool(rg <= rgap_target), snapshots=snapshots)
 
 
 def equilibrium_gap(net: Network, flow: np.ndarray, origins, dest_nodes, demand) -> dict:

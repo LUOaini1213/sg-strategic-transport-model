@@ -302,7 +302,8 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     summary["distribution_bus"] = bus_summary
     write_csv(out / "tld_bus.csv", pd.DataFrame(tld_rows, columns=["month", "km_from", "km_to", "observed_trips",
                                                                    "modelled_trips_gamma", "modelled_trips_exponential"]))
-    write_csv(out / "bus_pa_pairs_202608.csv", pair_tables["202608"].sort_values("observed_trips", ascending=False))
+    write_csv(out / "bus_pa_pairs_202608.csv", pair_tables["202608"].sort_values(
+        ["observed_trips", "origin_pa", "dest_pa"], ascending=[False, True, True], kind="mergesort"))
     log(f"bus gravity a={a_b:.3f} b={b_b:.4f}")
 
     # ---- PT skims --------------------------------------------------------------------------------------------------
@@ -416,33 +417,62 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     zone_rows = {"zone": z.zone.values, "subzone": z.subzone.values, "planning_area": z.planning_area.values,
                  "region": z.region.values, "productions_2020": O, "attractions_2020": D,
                  "productions_2030": O30, "attractions_2030": D30}
+    names = ("base_2020", "dm_2030", "ds_2030_jrl")
+    target = M.v(acfg["rgap_target"])
+    ref_gap = M.v(acfg["rgap_reference"])
+    nrl = rm.n_road_links
     if assign_scenarios:
-        for name in ("base_2020", "dm_2030", "ds_2030_jrl"):
-            r = assign(rm.net, rm.origins, rm.dests, scen[name]["Q"], method="bfw", rgap_target=M.v(acfg["rgap_target"]),
-                       max_iter=M.v(acfg["max_iter"]))
-            chk = equilibrium_gap(rm.net, r.flow, rm.origins, rm.dests, scen[name]["Q"])
-            results_flows[name] = r.flow
+        tight_rows = []
+        for name in names:
+            r = assign(rm.net, rm.origins, rm.dests, scen[name]["Q"], method="bfw", rgap_target=target,
+                       max_iter=M.v(acfg["max_iter"]), snapshot_gaps=(ref_gap,))
+            # flows are kept to 10 significant digits, exactly as they are written to the CSV files
+            results_flows[name] = np.array([float(f"{x:.10g}") for x in r.flow])
             conv_rows += [[name, k + 1, g] for k, g in enumerate(r.history)]
-            summary.setdefault("assignment", {})[name] = {
-                "iterations": r.iterations, "relative_gap": r.relative_gap, "relative_gap_recomputed": chk["relative_gap"],
-                "converged": r.converged, "car_trips_per_hour": float(scen[name]["Q"].sum()),
-                "vehicle_hours": float(np.dot(r.flow[: rm.n_road_links], r.time[: rm.n_road_links])),
-                "vehicle_km": float(np.dot(r.flow[: rm.n_road_links], rm.links.length_km.values)),
-                "average_excess_cost_min": r.average_excess_cost * 60}
+            np.save(out / f"car_demand_{name}.npy", scen[name]["Q"])
+            it_ref, x_ref = r.snapshots.get(ref_gap, (r.iterations, r.flow))
+            dlt = np.abs(x_ref - r.flow)[:nrl]
+            tight_rows.append([name, ref_gap, it_ref, r.iterations,
+                               float(np.mean(dlt > np.maximum(10.0, 0.02 * r.flow[:nrl]))), float(dlt.max()),
+                               int(np.sum(dlt / rm.links.capacity.values >= 0.05))])
             log(f"assignment {name}: {r.iterations} iterations, gap {r.relative_gap:.2e}")
         write_csv(out / "assignment_convergence.csv", pd.DataFrame(conv_rows, columns=["scenario", "iteration",
                                                                                       "relative_gap"]))
+        write_csv(out / "assignment_tightness.csv", pd.DataFrame(tight_rows, columns=[
+            "scenario", "reference_gap", "iteration_at_reference_gap", "iterations_final",
+            "share_links_differing_over_max_10pcu_2pct", "max_abs_flow_diff_pcu", "links_vc_differing_0_05_or_more"]))
         g = rm.net.graph
-        kc = np.arange(rm.n_road_links, g.n_links)
+        kc = np.arange(nrl, g.n_links)
         write_csv(out / "connector_flows.csv", pd.DataFrame(
-            {"tail": g.tail[kc], "head": g.head[kc],
-             **{f"flow_{n}": results_flows[n][rm.n_road_links:] for n in ("base_2020", "dm_2030", "ds_2030_jrl")}}),
-            sig=10)
+            {"tail": g.tail[kc], "head": g.head[kc], **{f"flow_{n}": results_flows[n][nrl:] for n in names}}), sig=10)
     else:
+        # reuse saved equilibrium flows, together with the demand matrices they were solved for
         lf = pd.read_csv(out / "link_flows.csv")
         cf = pd.read_csv(out / "connector_flows.csv")
-        for name in ("base_2020", "dm_2030", "ds_2030_jrl"):
+        for name in names:
             results_flows[name] = np.concatenate([lf[f"flow_{name}"].values, cf[f"flow_{name}"].values])
+    conv = pd.read_csv(out / "assignment_convergence.csv")
+    tight = pd.read_csv(out / "assignment_tightness.csv").set_index("scenario")
+    summary["assignment"] = {}
+    for name in names:
+        Qs = np.load(out / f"car_demand_{name}.npy")       # the demand the saved flows were solved for
+        f = results_flows[name]
+        chk = equilibrium_gap(rm.net, f, rm.origins, rm.dests, Qs)
+        c = conv[conv.scenario == name]
+        tt = rm.net.time(f)
+        tr = tight.loc[name]
+        summary["assignment"][name] = {
+            "iterations": int(c.iteration.max()), "relative_gap": float(c.relative_gap.iloc[-1]),
+            "relative_gap_recomputed": chk["relative_gap"], "converged": bool(chk["relative_gap"] <= target * 1.001),
+            "car_trips_per_hour": float(Qs.sum()),
+            "saved_demand_max_diff_from_fresh_run": float(np.max(np.abs(Qs - scen[name]["Q"])) / scen[name]["Q"].max()),
+            "vehicle_hours": float(np.dot(f[:nrl], tt[:nrl])),
+            "vehicle_km": float(np.dot(f[:nrl], rm.links.length_km.values)),
+            "average_excess_cost_min": float((chk["tstt"] - chk["sptt"]) / Qs.sum() * 60),
+            "at_reference_gap": {"gap": float(tr.reference_gap), "iteration": int(tr.iteration_at_reference_gap),
+                                 "share_links_differing": float(tr.share_links_differing_over_max_10pcu_2pct),
+                                 "max_abs_flow_diff_pcu": float(tr.max_abs_flow_diff_pcu),
+                                 "links_vc_differing_0_05_or_more": int(tr.links_vc_differing_0_05_or_more)}}
 
     # ---- link results, V/C, west --------------------------------------------------------------------------------------
     Ld = rm.links
@@ -498,7 +528,7 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
                              ("x = 30 km (central)", 30000.0, 25000.0, 50000.0)):
         for name in ("base_2020", "ds_2030_jrl"):
             e, w_, n_links = screenline(rm, node_xy, results_flows[name], x0, ylo, yhi)
-            Q = scen[name]["Q"]
+            Q = np.load(out / f"car_demand_{name}.npy")
             dem_e = float(Q[np.ix_(zx < x0, zx >= x0)].sum())
             dem_w = float(Q[np.ix_(zx >= x0, zx < x0)].sum())
             sl_rows.append([nm, name, n_links, e, dem_e, w_, dem_w])

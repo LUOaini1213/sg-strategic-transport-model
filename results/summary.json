@@ -1,34 +1,58 @@
 {
  "assignment": {
   "base_2020": {
-   "average_excess_cost_min": 0.001338128999,
+   "at_reference_gap": {
+    "gap": 0.0001,
+    "iteration": 40,
+    "links_vc_differing_0_05_or_more": 23,
+    "max_abs_flow_diff_pcu": 238.045,
+    "share_links_differing": 0.03092437
+   },
+   "average_excess_cost_min": 1.505348152e-05,
    "car_trips_per_hour": 162844.3215,
    "converged": true,
-   "iterations": 40,
-   "relative_gap": 7.386684646e-05,
-   "relative_gap_recomputed": 7.386684646e-05,
-   "vehicle_hours": 43644.36697,
-   "vehicle_km": 2252361.836
+   "iterations": 371,
+   "relative_gap": 8.30771e-07,
+   "relative_gap_recomputed": 8.307701079e-07,
+   "saved_demand_max_diff_from_fresh_run": 0.0,
+   "vehicle_hours": 43653.10986,
+   "vehicle_km": 2252452.55
   },
   "dm_2030": {
-   "average_excess_cost_min": 0.001753520872,
+   "at_reference_gap": {
+    "gap": 0.0001,
+    "iteration": 35,
+    "links_vc_differing_0_05_or_more": 49,
+    "max_abs_flow_diff_pcu": 537.9232,
+    "share_links_differing": 0.02487395
+   },
+   "average_excess_cost_min": 1.349021961e-05,
    "car_trips_per_hour": 166602.0542,
    "converged": true,
-   "iterations": 35,
-   "relative_gap": 9.61354316e-05,
-   "relative_gap_recomputed": 9.61354316e-05,
-   "vehicle_hours": 44946.1827,
-   "vehicle_km": 2301869.658
+   "iterations": 374,
+   "relative_gap": 7.393664e-07,
+   "relative_gap_recomputed": 7.393724466e-07,
+   "saved_demand_max_diff_from_fresh_run": 0.0,
+   "vehicle_hours": 44957.42738,
+   "vehicle_km": 2301876.929
   },
   "ds_2030_jrl": {
-   "average_excess_cost_min": 0.001417553011,
+   "at_reference_gap": {
+    "gap": 0.0001,
+    "iteration": 36,
+    "links_vc_differing_0_05_or_more": 47,
+    "max_abs_flow_diff_pcu": 504.7062,
+    "share_links_differing": 0.03676471
+   },
+   "average_excess_cost_min": 1.658827164e-05,
    "car_trips_per_hour": 166076.4339,
    "converged": true,
-   "iterations": 36,
-   "relative_gap": 7.777418404e-05,
-   "relative_gap_recomputed": 7.777418404e-05,
-   "vehicle_hours": 44783.11446,
-   "vehicle_km": 2293826.167
+   "iterations": 296,
+   "relative_gap": 9.099211e-07,
+   "relative_gap_recomputed": 9.099194429e-07,
+   "saved_demand_max_diff_from_fresh_run": 0.0,
+   "vehicle_hours": 44791.43775,
+   "vehicle_km": 2293851.309
   }
  },
  "distribution_bus": {
@@ -118,25 +142,25 @@
    "checks": {
     "base_2020": {
      "X": [
-      0.2357991503,
-      0.1360255287,
-      0.1325765944,
-      0.2357991503
+      0.2358352488,
+      0.1360694121,
+      0.1331119976,
+      0.2358352488
      ],
-     "Y": 0.2043592636,
+     "Y": 0.204390549,
      "approach_flow": [
-      2249.937783,
-      1112.504832,
-      112.7797691,
+      2250.353878,
+      1112.899174,
+      113.2178914,
       133.7258352
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      2.940322572,
-      2.689073684,
-      22.37575826,
-      23.05263556
+      2.93997417,
+      2.688757979,
+      22.37936944,
+      23.05393714
      ],
      "growth_factor": [
       1.0,
@@ -144,7 +168,7 @@
       1.0,
       1.0
      ],
-     "max_X": 0.2357991503,
+     "max_X": 0.2358352488,
      "phases": [
       [
        0,
@@ -158,33 +182,33 @@
     },
     "dm_2030": {
      "X": [
-      0.3813082034,
-      0.159023231,
-      0.08560339179,
-      0.3813082034
+      0.3808069625,
+      0.1590414966,
+      0.0855001379,
+      0.3808069625
      ],
-     "Y": 0.3304671096,
+     "Y": 0.3300327008,
      "approach_flow": [
-      3126.597912,
-      1117.659897,
-      122.0584244,
+      3120.820275,
+      1117.191294,
+      122.0716657,
       362.4613275
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      5.882169817,
-      4.939296265,
-      17.34728494,
-      19.30201622
+      5.888664282,
+      4.947506721,
+      17.331946,
+      19.28462901
      ],
      "growth_factor": [
-      1.389637498,
-      1.004633747,
-      1.082272339,
-      2.710480939
+      1.386813117,
+      1.003856702,
+      1.078201194,
+      2.71048094
      ],
-     "max_X": 0.3813082034,
+     "max_X": 0.3808069625,
      "phases": [
       [
        0,
@@ -198,33 +222,33 @@
     },
     "ds_2030_jrl": {
      "X": [
-      0.376153454,
-      0.1587347083,
-      0.08609330561,
-      0.376153454
+      0.3761247805,
+      0.1584851285,
+      0.08620589257,
+      0.3761247805
      ],
-     "Y": 0.3259996602,
+     "Y": 0.3259748097,
      "approach_flow": [
-      3093.743395,
-      1119.036735,
-      121.8336771,
-      354.8720243
+      3095.12642,
+      1117.861945,
+      121.8339885,
+      354.3824427
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      5.805426733,
-      4.891827928,
-      17.4344779,
-      19.34839463
+      5.796504366,
+      4.882952587,
+      17.4496544,
+      19.3620674
      ],
      "growth_factor": [
-      1.375035087,
-      1.005871348,
-      1.080279541,
-      2.653728232
+      1.375395421,
+      1.004459318,
+      1.076101904,
+      2.650067148
      ],
-     "max_X": 0.376153454,
+     "max_X": 0.3761247805,
      "phases": [
       [
        0,
@@ -250,8 +274,8 @@
    ]
   },
   "junctions_in_west": 153,
-  "max_junction_gf_dm_vs_base": 2.192379929,
-  "median_junction_gf_dm_vs_base": 1.027883346
+  "max_junction_gf_dm_vs_base": 2.216933235,
+  "median_junction_gf_dm_vs_base": 1.025970109
  },
  "mode_choice": {
   "converged": true,
@@ -327,22 +351,22 @@
  "road": {
   "share_km_by_vc_bin": {
    "base_2020": [
-    0.8509652398,
-    0.0963548761,
-    0.02277062489,
-    0.02990925921
+    0.8506679941,
+    0.0965572174,
+    0.02284297058,
+    0.02993181788
    ],
    "dm_2030": [
-    0.8469840295,
-    0.09870643713,
-    0.02251159505,
-    0.03179793832
+    0.8471483953,
+    0.09791193933,
+    0.02260478262,
+    0.03233488273
    ],
    "ds_2030_jrl": [
-    0.8485174696,
-    0.09807554977,
-    0.02175836897,
-    0.0316486116
+    0.8487886544,
+    0.09725554042,
+    0.02161656181,
+    0.03233924338
    ]
   },
   "vc_bins": [
@@ -352,15 +376,15 @@
    ">1.0"
   ],
   "west_km": 775.0528,
-  "west_km_vc_over_0_85_base": 25.9214,
-  "west_km_vc_over_0_85_dm": 29.6417,
-  "west_km_vc_over_0_85_ds": 28.3307,
+  "west_km_vc_over_0_85_base": 25.7036,
+  "west_km_vc_over_0_85_dm": 30.7623,
+  "west_km_vc_over_0_85_ds": 29.2858,
   "west_links": 6028,
-  "west_links_vc_down_by_0_05_ds_vs_dm": 40,
-  "west_links_vc_up_by_0_05_ds_vs_dm": 8,
-  "west_mean_vc_base": 0.1656784283,
-  "west_mean_vc_dm": 0.1742746941,
-  "west_mean_vc_ds": 0.1723494106
+  "west_links_vc_down_by_0_05_ds_vs_dm": 25,
+  "west_links_vc_up_by_0_05_ds_vs_dm": 0,
+  "west_mean_vc_base": 0.1656789198,
+  "west_mean_vc_dm": 0.1741182679,
+  "west_mean_vc_ds": 0.1722818082
  },
  "runtime_s": null,
  "scenario_2030": {
