@@ -1,43 +1,43 @@
 scenario,from_road,from_link,to_road,to_link,pcu_per_hour
-base_2020,Bukit Batok Road,5697,,5690,68.03301
-base_2020,Bukit Batok Road,5697,,7457,258.7751
-base_2020,Bukit Batok Road,5697,Jurong Town Hall Road,23711,1923.546
-base_2020,Jurong Town Hall Road,5699,,5690,182.238
-base_2020,Jurong Town Hall Road,5699,Bukit Batok Road,5693,237.488
-base_2020,Jurong Town Hall Road,5699,,7457,693.1732
-base_2020,,5707,,5690,3.293079
-base_2020,,5707,Bukit Batok Road,5693,4.291459
-base_2020,,5707,,7457,12.52579
-base_2020,,5707,Jurong Town Hall Road,23711,93.10757
-base_2020,,7460,,5690,3.889577
-base_2020,,7460,Bukit Batok Road,5693,5.0688
-base_2020,,7460,,7457,14.79467
-base_2020,,7460,Jurong Town Hall Road,23711,109.9728
-dm_2030,Bukit Batok Road,5697,,5690,214.2716
-dm_2030,Bukit Batok Road,5697,,7457,369.2106
-dm_2030,Bukit Batok Road,5697,Jurong Town Hall Road,23711,2537.338
-dm_2030,Jurong Town Hall Road,5699,,5690,324.561
-dm_2030,Jurong Town Hall Road,5699,Bukit Batok Road,5693,233.3804
-dm_2030,Jurong Town Hall Road,5699,,7457,559.2499
-dm_2030,,5707,,5690,7.986968
-dm_2030,,5707,Bukit Batok Road,5693,5.743147
-dm_2030,,5707,,7457,13.76232
-dm_2030,,5707,Jurong Town Hall Road,23711,94.57923
-dm_2030,,7460,,5690,23.71531
-dm_2030,,7460,Bukit Batok Road,5693,17.05284
-dm_2030,,7460,,7457,40.86377
-dm_2030,,7460,Jurong Town Hall Road,23711,280.8294
-ds_2030_jrl,Bukit Batok Road,5697,,5690,205.8488
-ds_2030_jrl,Bukit Batok Road,5697,,7457,365.4429
-ds_2030_jrl,Bukit Batok Road,5697,Jurong Town Hall Road,23711,2523.835
-ds_2030_jrl,Jurong Town Hall Road,5699,,5690,319.2005
-ds_2030_jrl,Jurong Town Hall Road,5699,Bukit Batok Road,5693,231.9857
-ds_2030_jrl,Jurong Town Hall Road,5699,,7457,566.6758
-ds_2030_jrl,,5707,,5690,7.729264
-ds_2030_jrl,,5707,Bukit Batok Road,5693,5.617405
-ds_2030_jrl,,5707,,7457,13.72174
-ds_2030_jrl,,5707,Jurong Town Hall Road,23711,94.76558
-ds_2030_jrl,,7460,,5690,22.48236
-ds_2030_jrl,,7460,Bukit Batok Road,5693,16.33953
-ds_2030_jrl,,7460,,7457,39.91287
-ds_2030_jrl,,7460,Jurong Town Hall Road,23711,275.6477
+base_2020,Bukit Batok Road,5697,,5690,68.03203
+base_2020,Bukit Batok Road,5697,,7457,258.7738
+base_2020,Bukit Batok Road,5697,Jurong Town Hall Road,23711,1923.372
+base_2020,Jurong Town Hall Road,5699,,5690,182.2338
+base_2020,Jurong Town Hall Road,5699,Bukit Batok Road,5693,237.4935
+base_2020,Jurong Town Hall Road,5699,,7457,693.1635
+base_2020,,5707,,5690,3.29347
+base_2020,,5707,Bukit Batok Road,5693,4.292167
+base_2020,,5707,,7457,12.52739
+base_2020,,5707,Jurong Town Hall Road,23711,93.11155
+base_2020,,7460,,5690,3.889809
+base_2020,,7460,Bukit Batok Road,5693,5.069338
+base_2020,,7460,,7457,14.79569
+base_2020,,7460,Jurong Town Hall Road,23711,109.971
+dm_2030,Bukit Batok Road,5697,,5690,214.5439
+dm_2030,Bukit Batok Road,5697,,7457,369.3756
+dm_2030,Bukit Batok Road,5697,Jurong Town Hall Road,23711,2537.628
+dm_2030,Jurong Town Hall Road,5699,,5690,324.7458
+dm_2030,Jurong Town Hall Road,5699,Bukit Batok Road,5693,233.3705
+dm_2030,Jurong Town Hall Road,5699,,7457,559.108
+dm_2030,,5707,,5690,7.9951
+dm_2030,,5707,Bukit Batok Road,5693,5.745479
+dm_2030,,5707,,7457,13.76499
+dm_2030,,5707,Jurong Town Hall Road,23711,94.56618
+dm_2030,,7460,,5690,23.73943
+dm_2030,,7460,Bukit Batok Road,5693,17.05975
+dm_2030,,7460,,7457,40.87168
+dm_2030,,7460,Jurong Town Hall Road,23711,280.7904
+ds_2030_jrl,Bukit Batok Road,5697,,5690,206.4816
+ds_2030_jrl,Bukit Batok Road,5697,,7457,365.8144
+ds_2030_jrl,Bukit Batok Road,5697,Jurong Town Hall Road,23711,2524.357
+ds_2030_jrl,Jurong Town Hall Road,5699,,5690,319.6212
+ds_2030_jrl,Jurong Town Hall Road,5699,Bukit Batok Road,5693,231.9622
+ds_2030_jrl,Jurong Town Hall Road,5699,,7457,566.2589
+ds_2030_jrl,,5707,,5690,7.748792
+ds_2030_jrl,,5707,Bukit Batok Road,5693,5.623615
+ds_2030_jrl,,5707,,7457,13.72819
+ds_2030_jrl,,5707,Jurong Town Hall Road,23711,94.73347
+ds_2030_jrl,,7460,,5690,22.53912
+ds_2030_jrl,,7460,Bukit Batok Road,5693,16.35756
+ds_2030_jrl,,7460,,7457,39.93156
+ds_2030_jrl,,7460,Jurong Town Hall Road,23711,275.5537

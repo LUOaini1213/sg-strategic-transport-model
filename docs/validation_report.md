@@ -75,9 +75,9 @@ Profile of the time coefficient (other parameters re-estimated at each fixed val
 
 | Scenario | iterations | relative gap (final) | relative gap recomputed from the saved flows |
 |---|---|---|---|
-| 2020 base | 371 | 8.3e-07 | 8.3e-07 |
-| 2030 without JRL | 374 | 7.4e-07 | 7.4e-07 |
-| 2030 with JRL | 296 | 9.1e-07 | 9.1e-07 |
+| 2020 base | 282 | 8.9e-07 | 8.9e-07 |
+| 2030 without JRL | 346 | 8.1e-07 | 8.1e-07 |
+| 2030 with JRL | 282 | 9.3e-07 | 9.3e-07 |
 
 `tests/test_pipeline.py` recomputes these gaps from the saved flows and the demand they were solved for (`results/link_flows.csv`, `connector_flows.csv`, `car_demand_*.npy`) with one independent all-or-nothing load each, and solves the base year again from scratch to 1e-04 to compare with the saved flows.
 
@@ -85,9 +85,9 @@ What stopping at the usual 1e-04 would have cost (flows at the first iteration t
 
 | Scenario | iteration reaching the reference gap | final iteration | links differing from the final flows by more than max(10 pcu/h, 2%) | largest difference (pcu/h) | links differing by 0.05+ in V/C |
 |---|---|---|---|---|---|
-| base 2020 | 40 | 371 | 3.1% | 238 | 23 |
-| dm 2030 | 35 | 374 | 2.5% | 538 | 49 |
-| ds 2030 jrl | 36 | 296 | 3.7% | 505 | 47 |
+| base 2020 | 36 | 282 | 3.3% | 411 | 45 |
+| dm 2030 | 38 | 346 | 4.0% | 563 | 50 |
+| ds 2030 jrl | 40 | 282 | 3.1% | 482 | 46 |
 
 Differences of this size are as large as the scenario effects in section g of the README, which is why the target is 1e-06. A re-run on another machine follows a slightly different iteration path (floating-point arithmetic) and ends at slightly different flows within that gap.
 
@@ -124,10 +124,10 @@ Screenlines (consistency, not validation): assigned flow crossing a north-south 
 
 | Screenline | Scenario | links | assigned eastbound | OD demand crossing eastbound | assigned westbound | OD demand crossing westbound |
 |---|---|---|---|---|---|---|
-| x = 21 km (West | rest) | base 2020 | 68 | 28,292 | 17,472 | 29,793 | 21,239 |
+| x = 21 km (West | rest) | base 2020 | 68 | 28,291 | 17,472 | 29,793 | 21,239 |
 | x = 21 km (West | rest) | ds 2030 jrl | 68 | 30,901 | 19,844 | 29,006 | 20,265 |
-| x = 30 km (central) | base 2020 | 77 | 33,041 | 25,762 | 41,023 | 32,500 |
-| x = 30 km (central) | ds 2030 jrl | 77 | 34,564 | 27,156 | 40,535 | 31,891 |
+| x = 30 km (central) | base 2020 | 77 | 33,042 | 25,762 | 41,024 | 32,500 |
+| x = 30 km (central) | ds 2030 jrl | 77 | 34,565 | 27,156 | 40,536 | 31,891 |
 
 What would be needed for real road validation: classified counts on screenlines and key links (none public), or travel times; LTA DataMall's traffic speed bands give observed speeds on road segments and could be compared with modelled speeds in a later version (not done here).
 

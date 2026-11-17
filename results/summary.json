@@ -3,56 +3,56 @@
   "base_2020": {
    "at_reference_gap": {
     "gap": 0.0001,
-    "iteration": 40,
-    "links_vc_differing_0_05_or_more": 23,
-    "max_abs_flow_diff_pcu": 238.045,
-    "share_links_differing": 0.03092437
+    "iteration": 36,
+    "links_vc_differing_0_05_or_more": 45,
+    "max_abs_flow_diff_pcu": 410.9916,
+    "share_links_differing": 0.03285714
    },
-   "average_excess_cost_min": 1.505348152e-05,
-   "car_trips_per_hour": 162844.3215,
+   "average_excess_cost_min": 1.615372766e-05,
+   "car_trips_per_hour": 162844.3151,
    "converged": true,
-   "iterations": 371,
-   "relative_gap": 8.30771e-07,
-   "relative_gap_recomputed": 8.307701079e-07,
+   "iterations": 282,
+   "relative_gap": 8.914789e-07,
+   "relative_gap_recomputed": 8.914878661e-07,
    "saved_demand_max_diff_from_fresh_run": 0.0,
-   "vehicle_hours": 43653.10986,
-   "vehicle_km": 2252452.55
+   "vehicle_hours": 43653.29408,
+   "vehicle_km": 2252455.868
   },
   "dm_2030": {
    "at_reference_gap": {
     "gap": 0.0001,
-    "iteration": 35,
-    "links_vc_differing_0_05_or_more": 49,
-    "max_abs_flow_diff_pcu": 537.9232,
-    "share_links_differing": 0.02487395
+    "iteration": 38,
+    "links_vc_differing_0_05_or_more": 50,
+    "max_abs_flow_diff_pcu": 563.2447,
+    "share_links_differing": 0.04004202
    },
-   "average_excess_cost_min": 1.349021961e-05,
-   "car_trips_per_hour": 166602.0542,
+   "average_excess_cost_min": 1.478724902e-05,
+   "car_trips_per_hour": 166602.0496,
    "converged": true,
-   "iterations": 374,
-   "relative_gap": 7.393664e-07,
-   "relative_gap_recomputed": 7.393724466e-07,
+   "iterations": 346,
+   "relative_gap": 8.104601e-07,
+   "relative_gap_recomputed": 8.104619696e-07,
    "saved_demand_max_diff_from_fresh_run": 0.0,
-   "vehicle_hours": 44957.42738,
-   "vehicle_km": 2301876.929
+   "vehicle_hours": 44957.30799,
+   "vehicle_km": 2301876.803
   },
   "ds_2030_jrl": {
    "at_reference_gap": {
     "gap": 0.0001,
-    "iteration": 36,
-    "links_vc_differing_0_05_or_more": 47,
-    "max_abs_flow_diff_pcu": 504.7062,
-    "share_links_differing": 0.03676471
+    "iteration": 40,
+    "links_vc_differing_0_05_or_more": 46,
+    "max_abs_flow_diff_pcu": 481.8965,
+    "share_links_differing": 0.03054622
    },
-   "average_excess_cost_min": 1.658827164e-05,
-   "car_trips_per_hour": 166076.4339,
+   "average_excess_cost_min": 1.690726682e-05,
+   "car_trips_per_hour": 166076.4274,
    "converged": true,
-   "iterations": 296,
-   "relative_gap": 9.099211e-07,
-   "relative_gap_recomputed": 9.099194429e-07,
+   "iterations": 282,
+   "relative_gap": 9.274215e-07,
+   "relative_gap_recomputed": 9.274196888e-07,
    "saved_demand_max_diff_from_fresh_run": 0.0,
-   "vehicle_hours": 44791.43775,
-   "vehicle_km": 2293851.309
+   "vehicle_hours": 44791.29155,
+   "vehicle_km": 2293857.011
   }
  },
  "distribution_bus": {
@@ -80,7 +80,7 @@
   "calibration_month": "2026-07",
   "deterrence": "gamma",
   "exponential_b_per_km": 0.4249549494,
-  "moment_residual": 1.409983241e-13,
+  "moment_residual": 1.356692536e-13,
   "stop_to_stop_straight_line_mean_km_july": 2.586582434,
   "transfer_to_commute": {
    "mean_km_model_zone_level": 9.344596994,
@@ -142,25 +142,25 @@
    "checks": {
     "base_2020": {
      "X": [
-      0.2358352488,
-      0.1360694121,
-      0.1331119976,
-      0.2358352488
+      0.23581996,
+      0.136070224,
+      0.1331112333,
+      0.23581996
      ],
-     "Y": 0.204390549,
+     "Y": 0.2043772987,
      "approach_flow": [
-      2250.353878,
-      1112.899174,
-      113.2178914,
-      133.7258352
+      2250.177657,
+      1112.890812,
+      113.2245795,
+      133.7258329
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      2.93997417,
-      2.688757979,
-      22.37936944,
-      23.05393714
+      2.940121659,
+      2.688938223,
+      22.37888438,
+      23.05338605
      ],
      "growth_factor": [
       1.0,
@@ -168,7 +168,7 @@
       1.0,
       1.0
      ],
-     "max_X": 0.2358352488,
+     "max_X": 0.23581996,
      "phases": [
       [
        0,
@@ -182,33 +182,33 @@
     },
     "dm_2030": {
      "X": [
-      0.3808069625,
-      0.1590414966,
-      0.0855001379,
-      0.3808069625
+      0.3808700777,
+      0.1590354607,
+      0.08551438121,
+      0.3808700777
      ],
-     "Y": 0.3300327008,
+     "Y": 0.3300874007,
      "approach_flow": [
-      3120.820275,
-      1117.191294,
-      122.0716657,
-      362.4613275
+      3121.547982,
+      1117.22422,
+      122.07175,
+      362.4612707
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      5.888664282,
-      4.947506721,
-      17.331946,
-      19.28462901
+      5.887843948,
+      4.946456567,
+      17.33388806,
+      19.28682201
      ],
      "growth_factor": [
-      1.386813117,
-      1.003856702,
-      1.078201194,
-      2.71048094
+      1.387245124,
+      1.00389383,
+      1.07813825,
+      2.710480562
      ],
-     "max_X": 0.3808069625,
+     "max_X": 0.3808700777,
      "phases": [
       [
        0,
@@ -222,33 +222,33 @@
     },
     "ds_2030_jrl": {
      "X": [
-      0.3761247805,
-      0.1584851285,
-      0.08620589257,
-      0.3761247805
+      0.3762570625,
+      0.158459928,
+      0.08623638452,
+      0.3762570625
      ],
-     "Y": 0.3259748097,
+     "Y": 0.3260894541,
      "approach_flow": [
-      3095.12642,
-      1117.861945,
-      121.8339885,
-      354.3824427
+      3096.652831,
+      1117.842257,
+      121.8340726,
+      354.381974
      ],
      "approaches_over_practical_X": 0,
      "cycle_s": 60.0,
      "delay_s": [
-      5.796504366,
-      4.882952587,
-      17.4496544,
-      19.3620674
+      5.794781474,
+      4.880709148,
+      17.45375909,
+      19.36668744
      ],
      "growth_factor": [
-      1.375395421,
-      1.004459318,
-      1.076101904,
-      2.650067148
+      1.376181486,
+      1.004449174,
+      1.076039082,
+      2.650063689
      ],
-     "max_X": 0.3761247805,
+     "max_X": 0.3762570625,
      "phases": [
       [
        0,
@@ -274,43 +274,43 @@
    ]
   },
   "junctions_in_west": 153,
-  "max_junction_gf_dm_vs_base": 2.216933235,
-  "median_junction_gf_dm_vs_base": 1.025970109
+  "max_junction_gf_dm_vs_base": 2.217728316,
+  "median_junction_gf_dm_vs_base": 1.025870994
  },
  "mode_choice": {
   "converged": true,
   "holdout_cells": 206,
-  "holdout_r2_car_share": 0.6147577765,
-  "holdout_r2_pt_share": 0.7895766936,
-  "holdout_weighted_mae_car_points": 3.033999349,
-  "holdout_weighted_mae_pt_points": 3.552798104,
+  "holdout_r2_car_share": 0.6147573134,
+  "holdout_r2_pt_share": 0.7895765219,
+  "holdout_weighted_mae_car_points": 3.034001122,
+  "holdout_weighted_mae_pt_points": 3.552801033,
   "log_likelihood": -3168747.644,
-  "max_abs_gradient": 3.205768984e-06,
+  "max_abs_gradient": 2.821132217e-06,
   "params": {
-   "asc_car": -1.849084016,
-   "asc_other": -3.576003073,
-   "b_central": -0.2755156943,
-   "b_dist_other": 0.004677344155,
-   "b_ind_car": 0.5352698763,
-   "b_ind_other": 1.979610154,
-   "b_priv": 2.184740111,
-   "b_time": -0.009044971607
+   "asc_car": -1.849083301,
+   "asc_other": -3.576002337,
+   "b_central": -0.2755156114,
+   "b_dist_other": 0.004677265098,
+   "b_ind_car": 0.5352666364,
+   "b_ind_other": 1.979607482,
+   "b_priv": 2.184737141,
+   "b_time": -0.009045001738
   },
-  "residence_mae_share_points": 2.000390207,
-  "residence_r2_car_share": 0.9181382458,
+  "residence_mae_share_points": 2.000388639,
+  "residence_r2_car_share": 0.9181382931,
   "share_census_residence": {
    "car": 0.2679881887,
    "other": 0.09194916095,
    "pt": 0.6400626504
   },
   "share_model": {
-   "car": 0.2679249408,
-   "other": 0.08894752154,
-   "pt": 0.6431275377
+   "car": 0.2679249298,
+   "other": 0.0889475224,
+   "pt": 0.6431275478
   },
   "value_of_time_note": "b_time is per minute of (generalised) time",
-  "workplace_mae_share_points": 2.544551385,
-  "workplace_r2_car_share": 0.3653794846
+  "workplace_mae_share_points": 2.544551469,
+  "workplace_r2_car_share": 0.3653783007
  },
  "network": {
   "connectors": 1992,
@@ -359,14 +359,14 @@
    "dm_2030": [
     0.8471483953,
     0.09791193933,
-    0.02260478262,
-    0.03233488273
+    0.02255554497,
+    0.03238412037
    ],
    "ds_2030_jrl": [
     0.8487886544,
     0.09725554042,
-    0.02161656181,
-    0.03233924338
+    0.0216136776,
+    0.0323421276
    ]
   },
   "vc_bins": [
@@ -382,9 +382,9 @@
   "west_links": 6028,
   "west_links_vc_down_by_0_05_ds_vs_dm": 25,
   "west_links_vc_up_by_0_05_ds_vs_dm": 0,
-  "west_mean_vc_base": 0.1656789198,
-  "west_mean_vc_dm": 0.1741182679,
-  "west_mean_vc_ds": 0.1722818082
+  "west_mean_vc_base": 0.1656848748,
+  "west_mean_vc_dm": 0.1741166934,
+  "west_mean_vc_ds": 0.1722803782
  },
  "runtime_s": null,
  "scenario_2030": {
@@ -395,51 +395,51 @@
   "mode_shares": {
    "base_2020": {
     "all": {
-     "car": 0.2679249408,
-     "other": 0.08894752154,
-     "pt": 0.6431275377
+     "car": 0.2679249298,
+     "other": 0.0889475224,
+     "pt": 0.6431275478
     },
-    "car_trips_per_hour": 162844.3215,
+    "car_trips_per_hour": 162844.3151,
     "west_residents": {
-     "car": 0.2469643978,
-     "other": 0.1023274576,
-     "pt": 0.6507081446
+     "car": 0.2469644057,
+     "other": 0.1023274504,
+     "pt": 0.6507081439
     }
    },
    "dm_2030": {
     "all": {
-     "car": 0.2651842751,
-     "other": 0.08931716338,
-     "pt": 0.6454985615
+     "car": 0.2651842673,
+     "other": 0.08931716373,
+     "pt": 0.6454985689
     },
-    "car_trips_per_hour": 166602.0542,
+    "car_trips_per_hour": 166602.0496,
     "tengah_residents": {
-     "car": 0.1889991677,
-     "other": 0.1112448274,
-     "pt": 0.6997560049
+     "car": 0.1889992562,
+     "other": 0.1112448041,
+     "pt": 0.6997559397
     },
     "west_residents": {
-     "car": 0.2396056163,
-     "other": 0.1030529839,
-     "pt": 0.6573413999
+     "car": 0.2396056358,
+     "other": 0.1030529747,
+     "pt": 0.6573413895
     }
    },
    "ds_2030_jrl": {
     "all": {
-     "car": 0.2643562788,
-     "other": 0.08898367666,
-     "pt": 0.6466600446
+     "car": 0.2643562679,
+     "other": 0.08898367582,
+     "pt": 0.6466600563
     },
-    "car_trips_per_hour": 166076.4339,
+    "car_trips_per_hour": 166076.4274,
     "tengah_residents": {
-     "car": 0.1864482728,
-     "other": 0.1098480972,
-     "pt": 0.70370363
+     "car": 0.1864483522,
+     "other": 0.1098480691,
+     "pt": 0.7037035787
     },
     "west_residents": {
-     "car": 0.2375908806,
-     "other": 0.1020797815,
-     "pt": 0.6603293379
+     "car": 0.2375908931,
+     "other": 0.1020797689,
+     "pt": 0.6603293381
     }
    }
   },

@@ -1,4 +1,4 @@
 scenario,reference_gap,iteration_at_reference_gap,iterations_final,share_links_differing_over_max_10pcu_2pct,max_abs_flow_diff_pcu,links_vc_differing_0_05_or_more
-base_2020,0.0001,40,371,0.03092437,238.045,23
-dm_2030,0.0001,35,374,0.02487395,537.9232,49
-ds_2030_jrl,0.0001,36,296,0.03676471,504.7062,47
+base_2020,0.0001,36,282,0.03285714,410.9916,45
+dm_2030,0.0001,38,346,0.04004202,563.2447,50
+ds_2030_jrl,0.0001,40,282,0.03054622,481.8965,46

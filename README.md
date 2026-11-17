@@ -31,7 +31,7 @@ All values are generated from the files in [`results/`](results/) by `scripts/ru
 | Bus deterrence used for commuting instead | mean commute length 9.3 km instead of 14.3 km (34% shorter); R2 on Census cells 0.814 instead of 0.989 | `results/summary.json` |
 | Mode shares, 2020 | car 26.8% / PT 64.3% / other 8.9% modelled; Census 26.8% / 64.0% / 9.2% | `results/summary.json` |
 | Mode choice on held-out cells | 206 region x workplace cells: R2 0.61 (car share), 0.79 (PT share); weighted mean absolute error 3.0 and 3.6 points | `results/mode_shares_holdout_cells.csv` |
-| Assignment, 2020 AM peak hour | 162,844 car trips/h; relative gap 8.3e-07 after 371 iterations (recomputed independently: 8.3e-07) | `results/summary.json`, `assignment_convergence.csv` |
+| Assignment, 2020 AM peak hour | 162,844 car trips/h; relative gap 8.9e-07 after 282 iterations (recomputed independently: 8.9e-07) | `results/summary.json`, `assignment_convergence.csv` |
 | Sioux Falls check | the published equilibrium flows give relative gap below 1e-12 in absolute value and objective 42.31335287 in this code (published optimum 42.31335287); this code at gap 8.6e-07: objective 42.313359, largest link-flow difference 0.01% | `results/sioux_falls_check.json` |
 | Road plausibility, 2020 | 5.3% of directed link-km above V/C 0.85, 3.0% above 1.0; flow-weighted mean speed 78 km/h on expressways, 39 km/h on primary roads | `results/vc_by_class_base.csv` |
 | Tengah, 2030 | 42,000 homes x 3.1 persons = 130,200 residents, 61,215 commuters; 3,758 extra car trips/h | `results/summary.json` |
@@ -117,11 +117,11 @@ Link costs follow the BPR function t = t0 (1 + 0.15 (v/c)^4) (Bureau of Public R
 
 | Scenario | car trips/h | iterations | relative gap | vehicle-hours | vehicle-km |
 |---|---|---|---|---|---|
-| 2020 base | 162,844 | 371 | 8.3e-07 | 43,653 | 2,252,453 |
-| 2030 without JRL | 166,602 | 374 | 7.4e-07 | 44,957 | 2,301,877 |
-| 2030 with JRL | 166,076 | 296 | 9.1e-07 | 44,791 | 2,293,851 |
+| 2020 base | 162,844 | 282 | 8.9e-07 | 43,653 | 2,252,456 |
+| 2030 without JRL | 166,602 | 346 | 8.1e-07 | 44,957 | 2,301,877 |
+| 2030 with JRL | 166,076 | 282 | 9.3e-07 | 44,791 | 2,293,857 |
 
-**Why 1e-06 and not 1e-04.** At the iteration where the 2020 run first reaches a relative gap of 1e-04 (iteration 40 of 371), 3.1% of links still differ from the final flows by more than max(10 pcu/h, 2%), the largest difference is 238 pcu/h, and 23 links differ by 0.05 or more in V/C, which is the size of the scenario effects being measured. All three scenarios are therefore solved to 1e-06 (`results/assignment_tightness.csv`). The path of the iterations depends on the last digits of floating-point arithmetic, so a re-run on another machine stops at slightly different flows, within the gap; iteration counts differ too. The saved flows are stored with the demand they were solved for (`results/car_demand_*.npy`), so the equilibrium can be re-checked exactly on any machine.
+**Why 1e-06 and not 1e-04.** At the iteration where the 2020 run first reaches a relative gap of 1e-04 (iteration 36 of 282), 3.3% of links still differ from the final flows by more than max(10 pcu/h, 2%), the largest difference is 411 pcu/h, and 45 links differ by 0.05 or more in V/C, which is the size of the scenario effects being measured. All three scenarios are therefore solved to 1e-06 (`results/assignment_tightness.csv`). The path of the iterations depends on the last digits of floating-point arithmetic, so a re-run on another machine stops at slightly different flows, within the gap; iteration counts differ too. The saved flows are stored with the demand they were solved for (`results/car_demand_*.npy`), so the equilibrium can be re-checked exactly on any machine.
 
 **Verification on Sioux Falls** (bstabler/TransportationNetworks, pinned commit; `tests/test_sioux_falls.py`). The published best-known flows have relative gap below 1e-12 in absolute value and Beckmann objective 42.31335287 (x 10^5) in this code, the published optimum being 42.31335287. Run to gap 8.6e-07 (970 iterations), this code reaches objective 42.313359 (relative difference 1.3e-07) with every link flow within 0.01% (1.6 vehicles) of the published one. To gap 1e-4, bi-conjugate FW needs 93 iterations and plain FW 1,049.
 
@@ -161,7 +161,7 @@ Summary here; details, tables and the reasoning are in [docs/validation_report.m
 
 | Approach | 2020 base (pcu/h) | 2030 without JRL | growth factor | 2030 with JRL | growth factor |
 |---|---|---|---|---|---|
-| Bukit Batok Road | 2,250 | 3,121 | 1.387 | 3,095 | 1.375 |
+| Bukit Batok Road | 2,250 | 3,122 | 1.387 | 3,097 | 1.376 |
 | Jurong Town Hall Road | 1,113 | 1,117 | 1.004 | 1,118 | 1.004 |
 | (unnamed link) | 113 | 122 | 1.078 | 122 | 1.076 |
 | (unnamed link) | 134 | 362 | 2.710 | 354 | 2.650 |

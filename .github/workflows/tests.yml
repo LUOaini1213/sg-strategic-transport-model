@@ -28,4 +28,5 @@ jobs:
       - name: "Run tests (offline from here on; rebuilds the model from data/inputs and re-checks the saved equilibria)"
         env:
           STM_REQUIRE_SIOUX_FALLS: "1"
+          OPENBLAS_NUM_THREADS: "1"
         run: python -m pytest

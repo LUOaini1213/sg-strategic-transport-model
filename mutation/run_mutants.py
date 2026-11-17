@@ -101,7 +101,8 @@ EQUIVALENT: dict[str, str] = {}
 
 
 def run_pytest(cwd: Path, extra: list[str], timeout: int = 1800) -> tuple[bool, str]:
-    env = dict(os.environ, STM_REQUIRE_SIOUX_FALLS="1", NUMBA_CACHE_DIR=str(cwd / ".numba_cache"))
+    env = dict(os.environ, STM_REQUIRE_SIOUX_FALLS="1", NUMBA_CACHE_DIR=str(cwd / ".numba_cache"),
+               OPENBLAS_NUM_THREADS="1")
     try:
         p = subprocess.run([sys.executable, "-m", "pytest", "-x", "-q", "-p", "no:cacheprovider", "-p", "no:warnings",
                             *extra], cwd=cwd, capture_output=True, text=True, timeout=timeout, env=env)
