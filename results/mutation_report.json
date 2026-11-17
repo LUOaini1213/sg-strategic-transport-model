@@ -1,6 +1,6 @@
 {
- "date": "2026-11-15",
- "tests_collected": 53,
+ "date": "2026-11-17",
+ "tests_collected": 57,
  "total": 30,
  "killed": 30,
  "killed_without_snapshot": 30,
