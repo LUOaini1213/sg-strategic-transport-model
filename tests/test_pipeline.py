@@ -31,8 +31,8 @@ from stm.assignment import assign, equilibrium_gap
 REPO = Path(__file__).resolve().parents[1]
 RES = REPO / "results"
 SCENARIOS = ("base_2020", "dm_2030", "ds_2030_jrl")
-SAVED = ["link_flows.csv", "connector_flows.csv", "assignment_convergence.csv", "assignment_tightness.csv"] + [
-    f"car_demand_{n}.npy" for n in SCENARIOS]
+SAVED = ["link_flows.csv", "connector_flows.csv", "assignment_convergence.csv", "assignment_tightness.csv",
+         "road_scheme_flows.csv", "road_scheme_convergence.csv"] + [f"car_demand_{n}.npy" for n in SCENARIOS]
 
 
 @pytest.fixture(scope="session")
@@ -142,6 +142,46 @@ def test_snapshot_appraisal_matches_committed(fresh):
     _tables_close(out, ("appraisal_benefits_by_planning_area.csv", "appraisal_sensitivity.csv"), 1e-4, 1e-6)
 
 
+def test_snapshot_road_scheme_matches_committed(fresh):
+    out, _ = fresh
+    for name in ("road_scheme.json", "road_scheme_appraisal.json"):
+        new = json.loads((out / name).read_text(encoding="utf-8"))
+        old = json.loads((RES / name).read_text(encoding="utf-8"))
+        loose = (("relative_gap", "first_round_mode_response"), 1e-6)
+        _numbers_close(new, old, rel=1e-4 if name.endswith("appraisal.json") else 1e-3, abs_=1e-6, loose=loose)
+    _tables_close(out, ("road_scheme_corridor_ranking.csv", "road_scheme_appraisal_benefits_by_planning_area.csv",
+                        "road_scheme_appraisal_sensitivity.csv"), 1e-4, 1e-6)
+
+
+def test_committed_road_scheme_flows_are_a_user_equilibrium_on_the_widened_network(road):
+    """Independent of the solver: one all-or-nothing load at the saved flows' own costs, on a network rebuilt
+    here from the scheme's definition, with the do-minimum demand."""
+    from stm import road_scheme as RS
+    cfg, rm = road
+    rc = RS.load_config()
+    node_xy = M.load_inputs()["nodes"][["x", "y"]].values
+    mask = RS.select_links(rm.links, node_xy, rc)
+    assert set(rm.links.name[mask]) == {"Central Expressway"} and set(rm.links.highway[mask]) == {"motorway"}
+    a, b = rm.links.a.values[mask] - 1, rm.links.b.values[mask] - 1
+    assert np.all(node_xy[b, 1] < node_xy[a, 1])                   # every selected link runs south
+    rm1 = RS.widen(rm, mask, rc["scheme"]["added_lanes"]["value"], cfg["model"]["assignment"]["capacity_per_lane"]["value"])
+    assert np.all(rm1.net.capacity[: rm.n_road_links][mask] == rm.net.capacity[: rm.n_road_links][mask] + 1900.0)
+    assert np.array_equal(rm1.net.capacity[: rm.n_road_links][~mask], rm.net.capacity[: rm.n_road_links][~mask])
+    sf = pd.read_csv(RES / "road_scheme_flows.csv")
+    g = rm.net.graph
+    assert np.array_equal(sf["tail"].values, g.tail) and np.array_equal(sf["head"].values, g.head)
+    assert (sf.kind.values[: rm.n_road_links] == "road").all() and (sf.kind.values[rm.n_road_links:] == "connector").all()
+    flow = sf.flow_ds_2030_road.values
+    Q = np.load(RES / "car_demand_dm_2030.npy")
+    target = cfg["model"]["assignment"]["rgap_target"]["value"]
+    assert 0 <= equilibrium_gap(rm1.net, flow, rm.origins, rm.dests, Q)["relative_gap"] <= target * 1.001
+    assert equilibrium_gap(rm.net, flow, rm.origins, rm.dests, Q)["relative_gap"] > 10 * target   # not on the old network
+    out_of_zones = np.bincount(g.tail, weights=flow, minlength=g.n_nodes)[rm.origins]
+    assert out_of_zones == pytest.approx(Q.sum(axis=1), rel=1e-6, abs=1e-3)
+    rs = json.loads((RES / "road_scheme.json").read_text(encoding="utf-8"))
+    assert int(mask.sum()) == rs["links"] and float(rm.links.length_km[mask].sum()) == pytest.approx(rs["directed_km"])
+
+
 def test_snapshot_survey_matches_committed(fresh):
     """The synthetic respondents come from a seeded generator, but the probabilities they are drawn with come
     out of numerical optimisers, so on another platform a handful of draws may fall differently: the tolerances
@@ -221,3 +261,8 @@ def test_full_rerun_reproduces_flows(tmp_path):
         x, y = a[f"flow_{name}"].values, b[f"flow_{name}"].values
         assert np.dot(x, b.length_km.values) == pytest.approx(np.dot(y, b.length_km.values), rel=1e-4)
         assert np.mean(np.abs(x - y) > np.maximum(10.0, 0.02 * y)) < 0.01, name
+    n = len(b)
+    x = pd.read_csv(tmp_path / "road_scheme_flows.csv").flow_ds_2030_road.values[:n]
+    y = pd.read_csv(RES / "road_scheme_flows.csv").flow_ds_2030_road.values[:n]
+    assert np.dot(x, b.length_km.values) == pytest.approx(np.dot(y, b.length_km.values), rel=1e-4)
+    assert np.mean(np.abs(x - y) > np.maximum(10.0, 0.02 * y)) < 0.01

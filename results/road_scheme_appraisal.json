@@ -1,0 +1,132 @@
+{
+ "annual_benefits_sgd": {
+  "car_non_fuel_operating": -182364.2666,
+  "car_user_fuel": -541257.1434,
+  "car_user_time": 2730969.095,
+  "co2": -20392.88412,
+  "pt_user_time": 0.0,
+  "total": 1986954.801
+ },
+ "annual_shares": {
+  "car_non_fuel_operating": -0.09178078261,
+  "car_user_fuel": -0.2724053628,
+  "car_user_time": 1.374449531,
+  "co2": -0.01026338602,
+  "pt_user_time": 0.0
+ },
+ "core": {
+  "bcr": 0.05121078661,
+  "capital_sgd": 800000000.0,
+  "first_benefit_year": 2030,
+  "last_benefit_year": 2089,
+  "npv_sgd": -846277517.1,
+  "pv_operating_sgd": 91955246.88,
+  "pv_per_annual_unit": 22.98881172,
+  "pvb_sgd": 45677729.81,
+  "pvc_sgd": 891955246.9
+ },
+ "distribution": {
+  "all_benefit_per_commuter_sgd": 1.442987648,
+  "attributed_user_benefit_sgd_per_year": 2730969.095,
+  "by_region": {
+   "CENTRAL REGION": {
+    "per_commuter_sgd": 0.812400698,
+    "share": 0.1176631898
+   },
+   "EAST REGION": {
+    "per_commuter_sgd": 0.941506689,
+    "share": 0.1071023381
+   },
+   "NORTH REGION": {
+    "per_commuter_sgd": 2.576820843,
+    "share": 0.2481682999
+   },
+   "NORTH-EAST REGION": {
+    "per_commuter_sgd": 3.055913555,
+    "share": 0.4793776658
+   },
+   "WEST REGION": {
+    "per_commuter_sgd": 0.2631241365,
+    "share": 0.04768850645
+   }
+  },
+  "not_attributed_sgd_per_year": -744014.2941,
+  "planning_areas_losing": 7,
+  "planning_areas_with_commuters": 43,
+  "tengah_benefit_per_commuter_sgd": 0.2190303437,
+  "tengah_share": 0.004909565425,
+  "tengah_share_of_commuters": 0.03234456992,
+  "top5": [
+   {
+    "planning_area": "SENGKANG",
+    "share": 0.1301723287
+   },
+   {
+    "planning_area": "YISHUN",
+    "share": 0.1132777043
+   },
+   {
+    "planning_area": "HOUGANG",
+    "share": 0.1121418743
+   },
+   {
+    "planning_area": "SERANGOON",
+    "share": 0.09286120773
+   },
+   {
+    "planning_area": "WOODLANDS",
+    "share": 0.07724198984
+   }
+  ],
+  "top5_share": 0.5256951049,
+  "west_region_share": 0.04768850645,
+  "west_region_share_of_commuters": 0.2615264669
+ },
+ "fixed_demand": true,
+ "present_values_sgd": {
+  "car_non_fuel_operating": -4192337.79,
+  "car_user_fuel": -12442858.56,
+  "car_user_time": 62781734.34,
+  "co2": -468808.1734,
+  "pt_user_time": 0.0
+ },
+ "quantities": {
+  "car_mean_time_saving_s_per_trip": 6.000794332,
+  "car_od_pairs_faster": 52795,
+  "car_od_pairs_slower": 19991,
+  "car_trips_per_peak_hour_do_minimum": 166602.0496,
+  "car_trips_per_peak_hour_do_something": 166602.0496,
+  "car_vehicle_hours_per_peak_hour": 277.7068431,
+  "fixed_demand_vehicle_km_change_per_peak_hour": 3647.285333,
+  "fuel_cost_sgd_per_km": 0.2968,
+  "pt_mean_saving_min_per_pt_trip": 0.0,
+  "pt_pairs_with_higher_cost": 0,
+  "pt_person_hours_existing_users": 0.0,
+  "pt_person_hours_logsum": 0.0,
+  "pt_person_hours_per_day_one_way": 0.0,
+  "pt_trips_per_day_one_way_do_minimum": 1099491.725,
+  "pt_trips_per_day_one_way_do_something": 1099491.725,
+  "rule_of_half_over_logsum": null,
+  "vehicle_hours_do_minimum": 44957.30799,
+  "vehicle_hours_do_something": 44678.09131,
+  "vehicle_km_change_per_peak_hour": 3647.285333,
+  "vehicle_km_do_minimum": 2301876.803,
+  "vehicle_km_do_something": 2305524.088
+ },
+ "scenarios": {
+  "do_minimum": "dm_2030",
+  "do_something": "ds_2030_road"
+ },
+ "sensitivity": {
+  "bcr_max": 0.1024215732,
+  "bcr_min": -0.01917585505,
+  "tests": 12,
+  "tests_with_bcr_at_least_1": 0
+ },
+ "switching": {
+  "annual_benefit_for_bcr_1_sgd": 38799536.83,
+  "benefit_multiple_for_bcr_1": 19.5271361,
+  "capital_cost_for_bcr_1_sgd": -46277517.07,
+  "value_of_time_for_bcr_1_sgd_per_hour": 237.3219104
+ }
+}

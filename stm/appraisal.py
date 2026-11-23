@@ -7,9 +7,14 @@ User benefits follow the rule of a half, mode by mode and origin-destination pai
 with T the trips and c the perceived cost without (0) and with (1) the scheme. For public transport c is the
 generalised time of the mode-choice model; for cars it is the travel time on the equilibrium network. Costs that
 car users do not perceive (non-fuel operating costs) and tailpipe CO2 are added as the net change in
-vehicle-kilometres times a unit value. Fuel is left out: the model has no relation between speed and fuel use,
-and the distance of "the" quickest path between two zones is not defined at equilibrium, where several paths
-tie. Annual benefits are discounted to a base year over an appraisal period and
+vehicle-kilometres times a unit value.
+
+Fuel is a perceived cost, but the distance of "the" quickest path between two zones is not defined at equilibrium,
+where several paths tie, so it cannot be put through the rule of a half pair by pair. When demand is fixed the
+rule of a half summed over all pairs is simply the change in total cost, and total vehicle-kilometres are well
+defined: fuel is then counted as the change in vehicle-kilometres times a cost per kilometre. When demand varies
+(the rail line) fuel is left out: the fuel that travellers who switch mode no longer buy is already inside their
+rule-of-a-half gain. The model has no relation between speed and fuel use in either case. Annual benefits are discounted to a base year over an appraisal period and
 compared with scheme costs.
 
 The unit values and their sources are in config/appraisal.json. The scheme costs there are ILLUSTRATIVE, so the
@@ -131,9 +136,11 @@ def annual_components(day: dict, ac: dict, occupancy: float, vot: float | None =
     days = v(ann["working_days_per_year"]) if days is None else days
     peak_hours = v(ann["road_peak_hours_per_day"]) if peak_hours is None else peak_hours
     road = peak_hours * days
+    fuel_per_km = v(val["fuel_litres_per_100km"]) / 100.0 * v(val["fuel_price_sgd_per_litre"])
     return {
         "pt_user_time": day["pt_person_hours_per_day_one_way"] * v(ann["return_trip_factor"]) * days * vot,
         "car_user_time": day["car_vehicle_hours_per_peak_hour"] * occupancy * road * vot,
+        "car_user_fuel": -day.get("fixed_demand_vehicle_km_change_per_peak_hour", 0.0) * fuel_per_km * road + 0.0,
         "car_non_fuel_operating": -day["vehicle_km_change_per_peak_hour"] * v(val["non_fuel_cost_sgd_per_km"]) * road,
         "co2": (-day["vehicle_km_change_per_peak_hour"] * v(val["co2_kg_per_vehicle_km"]) / 1000.0
                 * v(val["carbon_price_sgd_per_tonne"]) * road)}
@@ -156,14 +163,20 @@ def evaluate(annual_total: float, ac: dict, schedule=None, years: int | None = N
             "pv_per_annual_unit": present_value(benefit_stream(1.0, first, years, growth), schedule)}
 
 
-def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray, P0: np.ndarray, P1: np.ndarray,
-        V0: np.ndarray, V1: np.ndarray, b_time: float, g_pt0: np.ndarray, g_pt1: np.ndarray, Q0: np.ndarray,
-        Q1: np.ndarray, flow0: np.ndarray, flow1: np.ndarray, rm, attendance: float, occupancy: float,
-        write_json, write_csv, ac: dict | None = None) -> dict:
+def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray | None, P0: np.ndarray,
+        P1: np.ndarray, V0: np.ndarray, V1: np.ndarray, b_time: float, g_pt0: np.ndarray, g_pt1: np.ndarray,
+        Q0: np.ndarray, Q1: np.ndarray, flow0: np.ndarray, flow1: np.ndarray, rm, attendance: float, occupancy: float,
+        write_json, write_csv, ac: dict | None = None, rm1=None, out_name: str = "appraisal",
+        fixed_demand: bool = False) -> dict:
     """Appraise do-something (1) against do-minimum (0). T are daily commuters, P mode probabilities
     (car, pt, other), V the mode utilities, g_pt generalised public-transport minutes, Q car trips per peak hour,
-    flow the equilibrium link flows."""
+    flow the equilibrium link flows. ``rm1`` is the road model with the scheme when the scheme changes the road
+    network; ``fixed_demand`` says that Q0 and Q1 are the same matrix, which lets fuel be counted (see the module
+    note). Results go to <out_name>.json, <out_name>_benefits_by_planning_area.csv and <out_name>_sensitivity.csv."""
     ac = load_config() if ac is None else ac
+    rm1 = rm if rm1 is None else rm1
+    if fixed_demand and not np.array_equal(Q0, Q1):
+        raise ValueError("fixed_demand needs the same car demand with and without the scheme")
     val = ac["values"]
     nz = len(z)
     nrl = rm.n_road_links
@@ -175,14 +188,15 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
     pt_existing = existing_user_benefit(N0, g_pt0, g_pt1)
     ls_min = logsum_benefit(T_do_min * attendance, V0, V1, b_time)
     # ---- road: vehicles per peak hour ------------------------------------------------------------------------------
-    car_h = rule_of_half(Q0, Q1, road_times(rm, flow0), road_times(rm, flow1))
+    car_h = rule_of_half(Q0, Q1, road_times(rm, flow0), road_times(rm1, flow1))
     km = rm.links.length_km.values
     vkm0, vkm1 = float(np.dot(flow0[:nrl], km)), float(np.dot(flow1[:nrl], km))
     vh0 = float(np.dot(flow0[:nrl], rm.net.time(flow0)[:nrl]))
-    vh1 = float(np.dot(flow1[:nrl], rm.net.time(flow1)[:nrl]))
+    vh1 = float(np.dot(flow1[:nrl], rm1.net.time(flow1)[:nrl]))
     day = {"pt_person_hours_per_day_one_way": float(pt_min.sum() / 60.0),
            "car_vehicle_hours_per_peak_hour": float(car_h.sum()),
-           "vehicle_km_change_per_peak_hour": vkm1 - vkm0}
+           "vehicle_km_change_per_peak_hour": vkm1 - vkm0,
+           "fixed_demand_vehicle_km_change_per_peak_hour": (vkm1 - vkm0) if fixed_demand else 0.0}
     comp = annual_components(day, ac, occupancy)
     annual = float(sum(comp.values()))
     core = evaluate(annual, ac)
@@ -194,7 +208,7 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
     days = v(ann["working_days_per_year"])
     road = v(ann["road_peak_hours_per_day"]) * days
     zone_pt = pt_min.sum(axis=1) / 60.0 * v(ann["return_trip_factor"]) * days * vot
-    zone_car = car_h.sum(axis=1) * occupancy * vot * road
+    zone_car = car_h.sum(axis=1) * occupancy * vot * road      # fuel is known for the network only, not by zone
     commuters = T_do_min.sum(axis=1)
     by_zone = pd.DataFrame({"planning_area": z.planning_area.values, "region": z.region.values, "commuters": commuters,
                             "pt_user_benefit": zone_pt, "road_user_benefit": zone_car})
@@ -205,7 +219,7 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
     pa["share_of_commuters"] = pa.commuters / pa.commuters.sum()
     pa["benefit_per_commuter"] = np.where(pa.commuters > 0, pa.user_benefit / pa.commuters.clip(lower=1e-9), 0.0)
     pa = pa[pa.commuters > 0].sort_values(["user_benefit", "planning_area"], ascending=[False, True], kind="mergesort")
-    write_csv(out / "appraisal_benefits_by_planning_area.csv", pa.rename(columns={
+    write_csv(out / f"{out_name}_benefits_by_planning_area.csv", pa.rename(columns={
         "commuters": "commuters_daily_2030", "pt_user_benefit": "pt_user_benefit_sgd_per_year",
         "road_user_benefit": "road_user_benefit_sgd_per_year", "user_benefit": "user_benefit_sgd_per_year",
         "benefit_per_commuter": "user_benefit_sgd_per_commuter_per_year"}))
@@ -237,14 +251,23 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
         rows.append({"test": name, "annual_benefit_sgd_million": sum(cmp_.values()) / 1e6, "pvb_sgd_million": e["pvb"] / 1e6,
                      "pvc_sgd_million": e["pvc"] / 1e6, "npv_sgd_million": e["npv"] / 1e6, "bcr": e["bcr"]})
     sens = pd.DataFrame(rows)
-    write_csv(out / "appraisal_sensitivity.csv", sens)
+    write_csv(out / f"{out_name}_sensitivity.csv", sens)
 
     # ---- land-use test: the same line without Tengah (public-transport user benefits only) ---------------------------
-    M0 = T_2020 * attendance * P0[1]
-    M1 = T_2020 * attendance * P1[1]
-    pt_min_2020 = float(rule_of_half(M0, M1, g_pt0, g_pt1).sum())
     tengah = (z.planning_area == "TENGAH").values
-    pt_annual_2020 = pt_min_2020 / 60.0 * v(ann["return_trip_factor"]) * days * vot
+    land_use = None
+    if T_2020 is not None and comp["pt_user_time"] > 0:
+        M0 = T_2020 * attendance * P0[1]
+        M1 = T_2020 * attendance * P1[1]
+        pt_min_2020 = float(rule_of_half(M0, M1, g_pt0, g_pt1).sum())
+        pt_annual_2020 = pt_min_2020 / 60.0 * v(ann["return_trip_factor"]) * days * vot
+        land_use = {
+            "pt_user_time_sgd_per_year_with_tengah": comp["pt_user_time"],
+            "pt_user_time_sgd_per_year_2020_land_use": pt_annual_2020,
+            "share_of_pt_user_benefit_due_to_tengah": 1.0 - pt_annual_2020 / comp["pt_user_time"],
+            "pt_person_hours_per_day_one_way_2020_land_use": pt_min_2020 / 60.0,
+            "pvb_pt_user_time_with_tengah_sgd": comp["pt_user_time"] * f,
+            "pvb_pt_user_time_2020_land_use_sgd": pt_annual_2020 * f}
 
     res = {
         "scenarios": {"do_minimum": v(ac["scheme"]["do_minimum"]), "do_something": v(ac["scheme"]["do_something"])},
@@ -252,6 +275,7 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
             day, pt_trips_per_day_one_way_do_minimum=float(N0.sum()), pt_trips_per_day_one_way_do_something=float(N1.sum()),
             pt_person_hours_existing_users=float(pt_existing.sum() / 60.0),
             pt_mean_saving_min_per_pt_trip=float(pt_min.sum() / (0.5 * (N0.sum() + N1.sum()))),
+            fuel_cost_sgd_per_km=v(val["fuel_litres_per_100km"]) / 100.0 * v(val["fuel_price_sgd_per_litre"]),
             pt_pairs_with_higher_cost=int(np.sum(g_pt1 > g_pt0 + 1e-9)),
             pt_person_hours_logsum=float(ls_min.sum() / 60.0),
             rule_of_half_over_logsum=float(pt_min.sum() / ls_min.sum()) if ls_min.sum() != 0 else float("nan"),
@@ -280,8 +304,8 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
             "west_region_share_of_commuters": float(reg.commuters.get("WEST REGION", 0.0) / reg.commuters.sum()),
             "tengah_share": float((zone_pt[tengah].sum() + zone_car[tengah].sum()) / attributed),
             "tengah_share_of_commuters": float(commuters[tengah].sum() / commuters.sum()),
-            "tengah_benefit_per_commuter_sgd": float((zone_pt[tengah].sum() + zone_car[tengah].sum())
-                                                     / commuters[tengah].sum()),
+            "tengah_benefit_per_commuter_sgd": (float((zone_pt[tengah].sum() + zone_car[tengah].sum())
+                                                      / commuters[tengah].sum()) if tengah.any() else float("nan")),
             "all_benefit_per_commuter_sgd": float(attributed / commuters.sum()),
             "planning_areas_with_commuters": int(len(pa)),
             "planning_areas_losing": int((pa.user_benefit < 0).sum()),
@@ -289,14 +313,10 @@ def run(out: Path, *, z: pd.DataFrame, T_do_min: np.ndarray, T_2020: np.ndarray,
             "top5_share": float(top.share_of_user_benefit.sum()),
             "by_region": {r: {"share": float(x.user_benefit / attributed),
                               "per_commuter_sgd": float(x.user_benefit / x.commuters)} for r, x in reg.iterrows()}},
-        "land_use_test": {
-            "pt_user_time_sgd_per_year_with_tengah": comp["pt_user_time"],
-            "pt_user_time_sgd_per_year_2020_land_use": pt_annual_2020,
-            "share_of_pt_user_benefit_due_to_tengah": 1.0 - pt_annual_2020 / comp["pt_user_time"],
-            "pt_person_hours_per_day_one_way_2020_land_use": pt_min_2020 / 60.0,
-            "pvb_pt_user_time_with_tengah_sgd": comp["pt_user_time"] * f,
-            "pvb_pt_user_time_2020_land_use_sgd": pt_annual_2020 * f},
         "sensitivity": {"bcr_min": float(sens.bcr.min()), "bcr_max": float(sens.bcr.max()),
                         "tests": int(len(sens) - 1), "tests_with_bcr_at_least_1": int((sens.bcr[1:] >= 1.0).sum())}}
-    write_json(out / "appraisal.json", res)
+    res["fixed_demand"] = bool(fixed_demand)
+    if land_use is not None:
+        res["land_use_test"] = land_use
+    write_json(out / f"{out_name}.json", res)
     return res

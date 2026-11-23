@@ -1,0 +1,20 @@
+{
+  "_about": "A stylised road scheme, used to put a road project through the same appraisal as the rail line. It is ILLUSTRATIVE: it is not an LTA proposal, and whether a lane could be added on this alignment was not examined. Same labels as config/model.json.",
+  "selection": {
+    "rule": {"value": "the named road with the most directed km above a volume/capacity ratio of 1.0 in the 2030 do-minimum assignment", "label": "ASSUMPTION", "note": "results/road_scheme_corridor_ranking.csv lists the candidates; a test checks that the road named below is the one the rule picks from the committed flows"},
+    "threshold_vc": {"value": 1.0, "label": "ASSUMPTION", "note": "a link counts as over capacity above this ratio"}
+  },
+  "scheme": {
+    "road_name": {"value": "Central Expressway", "label": "ILLUSTRATIVE", "note": "OpenStreetMap name of the corridor picked by the rule"},
+    "highway": {"value": "motorway", "label": "ILLUSTRATIVE", "note": "main carriageway only; slip roads are left as they are"},
+    "direction": {"value": "southbound", "label": "ILLUSTRATIVE", "note": "links whose end node lies south of their start node. In the AM peak hour every over-capacity link of this road is southbound, towards the Central Area"},
+    "added_lanes": {"value": 1, "label": "ILLUSTRATIVE", "note": "one more lane on every selected link; capacity rises by the model's per-lane capacity for the road class, free-flow time is unchanged"},
+    "name": {"value": "ds_2030_road", "label": "ASSUMPTION", "note": "compared with dm_2030: the same 2030 land use (Tengah built), no Jurong Region Line, the same car demand matrix"},
+    "demand": {"value": "fixed", "label": "ASSUMPTION", "note": "the model's mode choice uses free-flow car times and its distribution uses distance, so faster roads do not create, redistribute or attract trips from public transport. Only routes change. A first-round mode response is reported for scale but not fed back"},
+    "warm_start": {"value": "the saved 2030 do-minimum flows", "label": "ASSUMPTION", "note": "starting point of the with-scheme assignment; the equilibrium does not depend on it, only the path of the iterations"}
+  },
+  "costs": {
+    "capital_cost_pv_sgd_million": {"value": 800.0, "label": "ILLUSTRATIVE", "note": "round placeholder, present value in the base year; no source. Every ratio that uses it is illustrative"},
+    "operating_cost_sgd_million_per_year": {"value": 4.0, "label": "ILLUSTRATIVE", "note": "round placeholder for maintenance of the added lane, constant in real terms from the opening year; no source"}
+  }
+}

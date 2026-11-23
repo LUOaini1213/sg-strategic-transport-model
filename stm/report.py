@@ -265,6 +265,7 @@ def context() -> dict:
     c["comm_growth_pct"] = pct(sc["commuters_daily_2030"] / gen["commuters_daily"] - 1)
     c["car_growth_pct"] = pct(ms["dm_2030"]["car_trips_per_hour"] / ms["base_2020"]["car_trips_per_hour"] - 1)
     c.update(_appraisal_context())
+    c.update(_road_context())
     c.update(_survey_context())
     if mut and mut.get("first_run"):
         fr = mut["first_run"]
@@ -278,6 +279,131 @@ def context() -> dict:
     else:
         c.update(mut_first_killed="(not run)", mut_first_total="(not run)", mut_first_date="(not run)",
                  mut_first_killed_ns="(not run)", mut_first_survivors="(not run)", mut_first_survivors_ns="(not run)")
+    return c
+
+
+COMPONENTS = {"pt_user_time": "Public-transport users: generalised time (rule of a half)",
+              "car_user_time": "Road users: travel time (rule of a half)",
+              "car_user_fuel": "Road users: fuel (change in total fuel cost; counted only when demand is fixed)",
+              "car_non_fuel_operating": "Car non-fuel operating costs (not perceived by users; net change)",
+              "co2": "Tailpipe CO2, at the carbon tax rate"}
+
+
+def _component_table(r: dict) -> str:
+    b, pvs, core = r["annual_benefits_sgd"], r["present_values_sgd"], r["core"]
+    return table(
+        ["Component (a negative number is a cost)", "S$ million a year", "share of the total",
+         f"present value, S$ million ({core['first_benefit_year']}-{core['last_benefit_year']})"],
+        [[COMPONENTS[k], sm(b[k], 2), pct(r["annual_shares"][k]), sm(pvs[k], 1)] for k in COMPONENTS]
+        + [["**Total**", f"**{sm(b['total'], 2)}**", "100.0%", f"**{sm(core['pvb_sgd'], 1)}**"]])
+
+
+def _road_context() -> dict:
+    rs = json.loads((RES / "road_scheme.json").read_text(encoding="utf-8"))
+    r = json.loads((RES / "road_scheme_appraisal.json").read_text(encoding="utf-8"))
+    rail = json.loads((RES / "appraisal.json").read_text(encoding="utf-8"))
+    rc = json.loads((REPO / "config" / "road_scheme.json").read_text(encoding="utf-8"))
+    sel, asg, cw, c0, nw, n0 = (rs["selection"], rs["assignment"], rs["corridor_with"], rs["corridor_without"],
+                                rs["network_with"], rs["network_without"])
+    q, b, core, sw, d = r["quantities"], r["annual_benefits_sgd"], r["core"], r["switching"], r["distribution"]
+    ind = rs["first_round_mode_response"]
+
+    def breakeven(x):
+        if x["switching"]["capital_cost_for_bcr_1_sgd"] > 0:
+            return f"S$ {sm(x['switching']['capital_cost_for_bcr_1_sgd'], 0)} million"
+        return (f"none: the benefits (S$ {sm(x['core']['pvb_sgd'], 0)} million) are below the placeholder running "
+                f"cost alone (S$ {sm(x['core']['pv_operating_sgd'], 0)} million)")
+
+    def top_region(x):
+        k, val = max(x["distribution"]["by_region"].items(), key=lambda kv: kv[1]["share"])
+        return f"{k.title().replace(' Region', '')} ({pct(val['share'], 0)})"
+
+    c = dict(
+        rd_road=rs["road_name"], rd_dir=rs["direction"], rd_lanes=i(rs["added_lanes"]), rd_links=i(rs["links"]),
+        rd_km=f(rs["directed_km"], 1), rd_lane_km=f(rs["lane_km_added"], 1),
+        rd_lanes_min=i(rs["lanes_before_min"]), rd_lanes_max=i(rs["lanes_before_max"]),
+        rd_cap_share=pct(rs["capacity_added_share"], 0), rd_thr=f(rc["selection"]["threshold_vc"]["value"], 1),
+        rd_sel_km=f(sel["km_over_threshold"], 1), rd_net_km=f(sel["network_km_over_threshold"], 1),
+        rd_sel_share=pct(sel["km_over_threshold"] / sel["network_km_over_threshold"], 0),
+        rd_sel_other_dir=f(sel["km_over_threshold_other_direction"], 1), rd_runner=sel["runner_up"],
+        rd_runner_km=f(sel["runner_up_km_over_threshold"], 1),
+        rd_it=i(asg["iterations"]), rd_gap=f"{asg['relative_gap']:.1e}", rd_gap2=f"{asg['relative_gap_recomputed']:.1e}",
+        rd_q=i(asg["car_trips_per_hour"]), rd_tstt=i(-asg["total_travel_time_change_vehicle_hours"]),
+        rd_vc0=f(c0["mean_vc_km_weighted"], 2), rd_vc1=f(cw["mean_vc_km_weighted"], 2),
+        rd_maxvc0=f(c0["max_vc"], 2), rd_maxvc1=f(cw["max_vc"], 2),
+        rd_over0=f(c0["km_over_threshold"], 1), rd_over1=f(cw["km_over_threshold"], 1),
+        rd_speed0=f(c0["mean_speed_kmh_flow_weighted"], 0), rd_speed1=f(cw["mean_speed_kmh_flow_weighted"], 0),
+        rd_growth=pct(rs["corridor_traffic_growth"], 0), rd_moved=i(rs["vehicle_km_moved_off_other_roads"]),
+        rd_net_over0=f(n0["km_over_threshold"], 1), rd_net_over1=f(nw["km_over_threshold"], 1),
+        rd_dvh=i(n0["vehicle_hours"] - nw["vehicle_hours"]),
+        rd_dvh_pct=pct(1 - nw["vehicle_hours"] / n0["vehicle_hours"], 2),
+        rd_dvkm=i(nw["vehicle_km"] - n0["vehicle_km"]), rd_dvkm_pct=pct(nw["vehicle_km"] / n0["vehicle_km"] - 1, 2),
+        rd_down=i(rs["other_links_vc_down_by_0_05"]), rd_up=i(rs["other_links_vc_up_by_0_05"]),
+        rd_ind=i(ind["car_trips_per_hour"]), rd_ind_pct=pct(ind["share_of_car_trips"], 2),
+        rd_dt_min=f(-ind["mean_car_time_change_min"], 2),
+        rd_car_vh=f(q["car_vehicle_hours_per_peak_hour"], 1), rd_car_s=f(q["car_mean_time_saving_s_per_trip"], 1),
+        rd_faster=i(q["car_od_pairs_faster"]), rd_slower=i(q["car_od_pairs_slower"]),
+        rd_fuel_km=f(q["fuel_cost_sgd_per_km"], 3),
+        rd_annual=sm(b["total"], 2), rd_time=sm(b["car_user_time"], 2), rd_fuel=sm(b["car_user_fuel"], 2),
+        rd_nonfuel=sm(b["car_non_fuel_operating"], 2), rd_co2=sm(b["co2"], 2),
+        rd_pvb=sm(core["pvb_sgd"], 1), rd_pvc=sm(core["pvc_sgd"], 0), rd_npv=sm(core["npv_sgd"], 0),
+        rd_bcr=f(core["bcr"], 2), rd_cap=sm(core["capital_sgd"], 0), rd_opex_pv=sm(core["pv_operating_sgd"], 0),
+        rd_cap_cfg=i(rc["costs"]["capital_cost_pv_sgd_million"]["value"]),
+        rd_opex_cfg=i(rc["costs"]["operating_cost_sgd_million_per_year"]["value"]),
+        rd_breakeven=breakeven(r), rd_sw_mult=f(sw["benefit_multiple_for_bcr_1"], 1),
+        rd_bcr_min=f(r["sensitivity"]["bcr_min"], 2), rd_bcr_max=f(r["sensitivity"]["bcr_max"], 2),
+        rd_n_tests=i(r["sensitivity"]["tests"]), rd_n_tests_ge1=i(r["sensitivity"]["tests_with_bcr_at_least_1"]),
+        rd_n_pa=i(d["planning_areas_with_commuters"]), rd_n_losing=i(d["planning_areas_losing"]),
+        rd_top5_share=pct(d["top5_share"], 0), rd_unattributed=sm(d["not_attributed_sgd_per_year"], 2),
+        rd_per=f(d["all_benefit_per_commuter_sgd"], 2), rd_top_region=top_region(r), ap_top_region=top_region(rail),
+        rd_fuel_abs=sm(abs(b["car_user_fuel"]), 2))
+    c["rd_component_table"] = _component_table(r)
+    rank = pd.read_csv(RES / "road_scheme_corridor_ranking.csv")
+    c["rd_runner_maxvc"] = f(rank.max_vc.iloc[1], 1)
+    c["rd_rank_table"] = table(
+        ["Road (OpenStreetMap name)", "class", "directed km", f"km above V/C {c['rd_thr']}", "highest V/C",
+         "mean V/C (km-weighted)"],
+        [[x.name, x.highway, f(x.directed_km, 1), f(x.km_over_threshold, 1), f(x.max_vc, 2), f(x.mean_vc_km_weighted, 2)]
+         for x in rank.head(5).itertuples(index=False)])
+    sens = pd.read_csv(RES / "road_scheme_appraisal_sensitivity.csv")
+    c["rd_sens_table"] = table(
+        ["Test", "annual benefit (S$ m)", "PVB (S$ m)", "PVC (S$ m, illustrative)", "NPV (S$ m)", "BCR (illustrative)"],
+        [[x.test, f(x.annual_benefit_sgd_million, 2), f(x.pvb_sgd_million, 1), i(x.pvc_sgd_million), i(x.npv_sgd_million),
+          f(x.bcr, 2)] for x in sens.itertuples()])
+    pa = pd.read_csv(RES / "road_scheme_appraisal_benefits_by_planning_area.csv")
+    c["rd_pa_table"] = table(
+        ["Planning area of residence", "Region", "commuters 2030", "road user benefit (S$ m a year)", "share of benefit",
+         "share of commuters", "S$ per commuter a year"],
+        [[x.planning_area.title(), x.region.title().replace(" Region", ""), i(x.commuters_daily_2030),
+          sm(x.user_benefit_sgd_per_year, 2), pct(x.share_of_user_benefit), pct(x.share_of_commuters),
+          f(x.user_benefit_sgd_per_commuter_per_year, 2)] for x in pd.concat([pa.head(5), pa.tail(2)]).itertuples()])
+    c["rd_region_table"] = table(
+        ["Region of residence", "share of road user benefit", "S$ per commuter a year"],
+        [[k.title().replace(" Region", ""), pct(x["share"]), f(x["per_commuter_sgd"], 2)]
+         for k, x in sorted(d["by_region"].items(), key=lambda kv: -kv[1]["share"])])
+
+    def col(x, what, demand, vkm):
+        bb, cc, dd = x["annual_benefits_sgd"], x["core"], x["distribution"]
+        return [what, demand, sm(bb["total"], 2), sm(bb["pt_user_time"], 2), sm(bb["car_user_time"], 2),
+                sm(bb["car_user_fuel"] + bb["car_non_fuel_operating"], 2), sm(bb["co2"], 2), vkm,
+                sm(cc["pvb_sgd"], 0), f"{sm(cc['pvc_sgd'], 0)} (ILLUSTRATIVE)", f"{f(cc['bcr'], 2)} (illustrative)",
+                breakeven(x), top_region(x), f"{i(dd['planning_areas_losing'])} of {i(dd['planning_areas_with_commuters'])}"]
+
+    rows = ["What changes", "Demand response in the model", "Benefit, S$ million a year", "of which public-transport user time",
+            "of which road user time", "of which car operating costs (fuel and non-fuel)", "of which CO2",
+            "Vehicle-km per peak hour", "Present value of benefits, S$ million", "Present value of costs, S$ million",
+            "Benefit-cost ratio", "Capital cost at which benefits equal costs", "Region with the largest share of user benefit",
+            "Planning areas whose residents lose"]
+    rq = rail["quantities"]
+    summ = json.loads((RES / "summary.json").read_text(encoding="utf-8"))["pt_network"]
+    a_ = col(rail, f"{summ['stations_with_jrl'] - summ['stations_base']} new rail stations in the West Region",
+             "mode choice (car trips fall); destinations fixed",
+             f"{rq['vehicle_km_change_per_peak_hour']:+,.0f}")
+    b_ = col(r, f"one more {rs['direction']} lane on {rs['directed_km']:.1f} km of the {rs['road_name']}",
+             "none: fixed car matrix, routes only", f"{q['vehicle_km_change_per_peak_hour']:+,.0f}")
+    c["compare_table"] = table(["", "Jurong Region Line (rail)", "Road scheme (ILLUSTRATIVE)"],
+                               [[n_, x_, y_] for n_, x_, y_ in zip(rows, a_, b_)])
+    c["rd_param_table"] = table(["Parameter (config/road_scheme.json)", "Value", "Status", "Note"], _label_rows(rc))
     return c
 
 
@@ -335,14 +461,7 @@ def _appraisal_context() -> dict:
         ap_lu_pvb_with=sm(lu["pvb_pt_user_time_with_tengah_sgd"], 0),
         ap_lu_pvb_without=sm(lu["pvb_pt_user_time_2020_land_use_sgd"], 0),
         ap_lu_pvb_diff=sm(lu["pvb_pt_user_time_with_tengah_sgd"] - lu["pvb_pt_user_time_2020_land_use_sgd"], 0))
-    names = {"pt_user_time": "Public-transport users: generalised time (rule of a half)",
-             "car_user_time": "Road users: travel time on the less loaded network (rule of a half)",
-             "car_non_fuel_operating": "Car non-fuel operating costs avoided (not perceived by users; net change)",
-             "co2": "Tailpipe CO2 avoided, at the carbon tax rate"}
-    c["ap_component_table"] = table(
-        ["Component", "S$ million a year", "share", f"present value, S$ million ({c['ap_first']}-{c['ap_last']})"],
-        [[names[k], sm(b[k], 2), pct(r["annual_shares"][k]), sm(pvs[k], 0)] for k in names]
-        + [["**Total**", f"**{sm(b['total'], 2)}**", "100.0%", f"**{sm(core['pvb_sgd'], 0)}**"]])
+    c["ap_component_table"] = _component_table(r)
     sens = pd.read_csv(RES / "appraisal_sensitivity.csv")
     c["ap_sens_table"] = table(
         ["Test", "annual benefit (S$ m)", "PVB (S$ m)", "PVC (S$ m, illustrative)", "NPV (S$ m)", "BCR (illustrative)"],

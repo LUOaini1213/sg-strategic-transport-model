@@ -142,6 +142,7 @@ def _toy_config():
                    "appraisal_years": e(2), "benefit_growth_per_year": e(0.0)},
         "discounting": {"schedule": e([[99, 0.0]]), "schedule_green_book_2026": e([[99, 0.0]]), "high_rate": e(0.07)},
         "values": {"value_of_time_sgd_per_hour": e(10.0), "value_of_time_range": e(0.25),
+                   "fuel_litres_per_100km": e(10.0), "fuel_price_sgd_per_litre": e(3.0),
                    "non_fuel_cost_sgd_per_km": e(0.1), "co2_kg_per_vehicle_km": e(0.25),
                    "carbon_price_sgd_per_tonne": e(40.0)},
         "annualisation": {"working_days_per_year": e(200), "return_trip_factor": e(2.0), "road_peak_hours_per_day": e(2.0)},
@@ -190,6 +191,7 @@ def test_two_zone_example_by_hand(tmp_path):
     assert b["car_user_time"] == pytest.approx(24.502875 * 1.2 * 2 * 200 * 10)  # 117,613.8
     assert b["car_non_fuel_operating"] == pytest.approx(1000 * 0.1 * 2 * 200)   # 40,000
     assert b["co2"] == pytest.approx(1000 * 0.25 / 1000 * 40 * 2 * 200)         # 4,000
+    assert b["car_user_fuel"] == 0.0                                            # demand varies: fuel is not counted
     assert b["total"] == pytest.approx(3300000 + 117613.8 + 40000 + 4000)
     # no discounting, two years of benefits: PVB = 2 x total; PVC = 1,000,000 + 2 x 500,000
     c = r["core"]
@@ -280,6 +282,7 @@ def test_committed_switching_values_switch(committed):
     day = {k: q[k] for k in ("pt_person_hours_per_day_one_way", "car_vehicle_hours_per_peak_hour",
                              "vehicle_km_change_per_peak_hour")}
     occ = json.loads((REPO / "config" / "model.json").read_text(encoding="utf-8"))["assignment"]["car_occupancy"]["value"]
+    assert q["fixed_demand_vehicle_km_change_per_peak_hour"] == 0.0
     comp = A.annual_components(day, ac, occ, vot=r["switching"]["value_of_time_for_bcr_1_sgd_per_hour"])
     assert A.evaluate(sum(comp.values()), ac)["bcr"] == pytest.approx(1.0, rel=1e-8)
     assert A.evaluate(r["annual_benefits_sgd"]["total"], ac,

@@ -1,0 +1,11 @@
+name,highway,directed_km,km_over_threshold,max_vc,links,mean_vc_km_weighted
+Central Expressway,motorway,30.4542,12.5476,1.609516,73,0.732907
+Tanah Merah Coast Road,primary,19.2989,9.3956,3.076114,62,0.9305981
+Pan-Island Expressway,motorway,82.2579,8.2255,1.318558,193,0.616848
+Ayer Rajah Expressway,motorway,54.6781,4.5974,1.235149,106,0.3818018
+Kallang-Paya Lebar Expressway,motorway,22.1625,2.2794,1.103707,33,0.4072706
+Nicoll Highway,trunk,6.3836,1.9562,1.739818,37,0.5785497
+Serangoon Viaduct,primary,3.8895,1.8648,1.016553,3,0.5280543
+Harbour Drive,secondary,4.1925,1.7142,1.279479,30,0.529967
+Tuas South Boulevard,secondary,7.8017,1.6847,1.510907,27,0.2305613
+Jurong Town Hall Road,primary,8.1455,1.662,1.625644,116,0.5467265

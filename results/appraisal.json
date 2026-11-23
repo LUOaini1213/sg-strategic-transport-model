@@ -1,6 +1,7 @@
 {
  "annual_benefits_sgd": {
   "car_non_fuel_operating": 400989.5982,
+  "car_user_fuel": 0.0,
   "car_user_time": 245740.1927,
   "co2": 44840.66182,
   "pt_user_time": 86390905.63,
@@ -8,6 +9,7 @@
  },
  "annual_shares": {
   "car_non_fuel_operating": 0.004604710571,
+  "car_user_fuel": 0.0,
   "car_user_time": 0.002821924728,
   "co2": 0.0005149217596,
   "pt_user_time": 0.9920584429
@@ -80,6 +82,7 @@
   "west_region_share": 0.6960137353,
   "west_region_share_of_commuters": 0.2615264669
  },
+ "fixed_demand": false,
  "land_use_test": {
   "pt_person_hours_per_day_one_way_2020_land_use": 9426.882192,
   "pt_user_time_sgd_per_year_2020_land_use": 77253299.56,
@@ -90,6 +93,7 @@
  },
  "present_values_sgd": {
   "car_non_fuel_operating": 9218274.374,
+  "car_user_fuel": 0.0,
   "car_user_time": 5649275.021,
   "co2": 1030833.532,
   "pt_user_time": 1986024264.0
@@ -101,6 +105,8 @@
   "car_trips_per_peak_hour_do_minimum": 166602.0496,
   "car_trips_per_peak_hour_do_something": 166076.4274,
   "car_vehicle_hours_per_peak_hour": 24.98883391,
+  "fixed_demand_vehicle_km_change_per_peak_hour": 0.0,
+  "fuel_cost_sgd_per_km": 0.2968,
   "pt_mean_saving_min_per_pt_trip": 0.5747616762,
   "pt_pairs_with_higher_cost": 0,
   "pt_person_hours_existing_users": 10221.07108,
