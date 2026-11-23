@@ -15,7 +15,9 @@ import pandas as pd
 REPO = Path(__file__).resolve().parents[1]
 RES = REPO / "results"
 DOCS = REPO / "docs"
-TARGETS = {"README.template.md": REPO / "README.md", "validation_report.template.md": DOCS / "validation_report.md"}
+TARGETS = {"README.template.md": REPO / "README.md", "validation_report.template.md": DOCS / "validation_report.md",
+           "survey_design.template.md": DOCS / "survey_design.md",
+           "land_use_transport_note.template.md": DOCS / "land_use_transport_note.md"}
 
 
 def i(v) -> str:
@@ -37,6 +39,16 @@ def pts(v, nd=1) -> str:
 
 def g(v, nd=3) -> str:
     return f"{float(v):.{nd}g}"
+
+
+def sm(v, nd=1) -> str:
+    """Singapore dollars shown in millions."""
+    return f"{float(v) / 1e6:,.{nd}f}"
+
+
+def pp(v, nd=1) -> str:
+    """A share shown as percentage points, with sign."""
+    return f"{float(v) * 100:+.{nd}f}"
 
 
 def table(header, rows) -> str:
@@ -248,6 +260,191 @@ def context() -> dict:
              jrl_n=i(pt["stations_with_jrl"] - pt["stations_base"]))
     c["assumption_table"] = table(["Parameter (config/model.json)", "Value", "Status", "Note / source"],
                                   _label_rows(cfg))
+    c["vht_dm_vs_base"] = i(a["dm_2030"]["vehicle_hours"] - a["base_2020"]["vehicle_hours"])
+    c["vht_dm_vs_base_pct"] = pct(a["dm_2030"]["vehicle_hours"] / a["base_2020"]["vehicle_hours"] - 1)
+    c["comm_growth_pct"] = pct(sc["commuters_daily_2030"] / gen["commuters_daily"] - 1)
+    c["car_growth_pct"] = pct(ms["dm_2030"]["car_trips_per_hour"] / ms["base_2020"]["car_trips_per_hour"] - 1)
+    c.update(_appraisal_context())
+    c.update(_survey_context())
+    if mut and mut.get("first_run"):
+        fr = mut["first_run"]
+        c.update(mut_first_killed=i(fr["killed"]), mut_first_total=i(fr["total"]), mut_first_date=fr["date"],
+                 mut_first_killed_ns=i(fr["killed_without_snapshot"]),
+                 mut_first_survivors=("none" if not fr["survivors"] else
+                                      "; ".join(f"{x['id']} ({x['what']})" for x in fr["survivors"])),
+                 mut_first_survivors_ns=("none" if not fr["survivors_without_snapshot"] else
+                                         "; ".join(f"{x['id']} ({x['what']})"
+                                                   for x in fr["survivors_without_snapshot"])))
+    else:
+        c.update(mut_first_killed="(not run)", mut_first_total="(not run)", mut_first_date="(not run)",
+                 mut_first_killed_ns="(not run)", mut_first_survivors="(not run)", mut_first_survivors_ns="(not run)")
+    return c
+
+
+def _appraisal_context() -> dict:
+    r = json.loads((RES / "appraisal.json").read_text(encoding="utf-8"))
+    ac = json.loads((REPO / "config" / "appraisal.json").read_text(encoding="utf-8"))
+    q, b, core, sw, d, lu = (r["quantities"], r["annual_benefits_sgd"], r["core"], r["switching"], r["distribution"],
+                             r["land_use_test"])
+    pvs = r["present_values_sgd"]
+    val, ann, sch, cst = ac["values"], ac["annualisation"], ac["scheme"], ac["costs"]
+    rates = ac["discounting"]["schedule"]["value"]
+    gb = ac["discounting"]["schedule_green_book_2026"]["value"]
+    c = dict(
+        ap_pvb=sm(core["pvb_sgd"], 0), ap_pvc=sm(core["pvc_sgd"], 0), ap_cap=sm(core["capital_sgd"], 0),
+        ap_opex_pv=sm(core["pv_operating_sgd"], 0), ap_npv=sm(core["npv_sgd"], 0), ap_bcr=f(core["bcr"], 2),
+        ap_annual=sm(b["total"]), ap_pt_annual=sm(b["pt_user_time"]), ap_car_annual=sm(b["car_user_time"], 2),
+        ap_nonfuel_annual=sm(b["car_non_fuel_operating"], 2), ap_co2_annual=sm(b["co2"], 2),
+        ap_pt_share=pct(r["annual_shares"]["pt_user_time"]),
+        ap_road_share=pct(1 - r["annual_shares"]["pt_user_time"]),
+        ap_pt_hours=i(q["pt_person_hours_per_day_one_way"]), ap_pt_hours_existing=i(q["pt_person_hours_existing_users"]),
+        ap_pt_existing_share=pct(q["pt_person_hours_existing_users"] / q["pt_person_hours_per_day_one_way"]),
+        ap_pt_trips_dm=i(q["pt_trips_per_day_one_way_do_minimum"]), ap_pt_trips_ds=i(q["pt_trips_per_day_one_way_do_something"]),
+        ap_pt_new=i(q["pt_trips_per_day_one_way_do_something"] - q["pt_trips_per_day_one_way_do_minimum"]),
+        ap_pt_saving_min=f(q["pt_mean_saving_min_per_pt_trip"], 2), ap_logsum_hours=i(q["pt_person_hours_logsum"]),
+        ap_logsum_ratio=f(q["rule_of_half_over_logsum"], 4), ap_car_vh=f(q["car_vehicle_hours_per_peak_hour"], 1),
+        ap_car_s=f(q["car_mean_time_saving_s_per_trip"], 2), ap_dvkm=i(-q["vehicle_km_change_per_peak_hour"]),
+        ap_dvh=i(q["vehicle_hours_do_minimum"] - q["vehicle_hours_do_something"]),
+        ap_dq=i(q["car_trips_per_peak_hour_do_minimum"] - q["car_trips_per_peak_hour_do_something"]),
+        ap_slower=i(q["car_od_pairs_slower"]), ap_faster=i(q["car_od_pairs_faster"]),
+        ap_factor=f(core["pv_per_annual_unit"], 2), ap_first=str(core["first_benefit_year"]),
+        ap_last=str(core["last_benefit_year"]), ap_years=i(sch["appraisal_years"]["value"]),
+        ap_base_year=str(sch["base_year"]["value"]), ap_vot=f(val["value_of_time_sgd_per_hour"]["value"], 2),
+        ap_vot_range=pct(val["value_of_time_range"]["value"], 0), ap_days=i(ann["working_days_per_year"]["value"]),
+        ap_peak_hours=g(ann["road_peak_hours_per_day"]["value"]), ap_cap_cfg=i(cst["capital_cost_pv_sgd_million"]["value"]),
+        ap_opex_cfg=i(cst["operating_cost_sgd_million_per_year"]["value"]),
+        ap_nonfuel_cfg=f(val["non_fuel_cost_sgd_per_km"]["value"], 2),
+        ap_co2_cfg=f(val["co2_kg_per_vehicle_km"]["value"] * 1000, 0), ap_carbon=i(val["carbon_price_sgd_per_tonne"]["value"]),
+        ap_rate1=pct(rates[0][1]), ap_rate1_to=i(rates[0][0]), ap_rate2=pct(rates[1][1]),
+        ap_gb_rate1=pct(gb[0][1], 2), ap_gb_rate2=pct(gb[1][1], 2),
+        ap_high_rate=pct(ac["discounting"]["high_rate"]["value"], 0),
+        ap_sw_mult=f(sw["benefit_multiple_for_bcr_1"], 2), ap_sw_cap=sm(sw["capital_cost_for_bcr_1_sgd"], 0),
+        ap_sw_vot=f(sw["value_of_time_for_bcr_1_sgd_per_hour"], 2), ap_sw_annual=sm(sw["annual_benefit_for_bcr_1_sgd"], 0),
+        ap_sw_vot_mult=f(sw["value_of_time_for_bcr_1_sgd_per_hour"] / val["value_of_time_sgd_per_hour"]["value"], 1),
+        ap_bcr_min=f(r["sensitivity"]["bcr_min"], 2), ap_bcr_max=f(r["sensitivity"]["bcr_max"], 2),
+        ap_n_tests=i(r["sensitivity"]["tests"]), ap_n_tests_ge1=i(r["sensitivity"]["tests_with_bcr_at_least_1"]),
+        ap_west_share=pct(d["west_region_share"], 0), ap_west_comm_share=pct(d["west_region_share_of_commuters"], 0),
+        ap_tengah_share=pct(d["tengah_share"]), ap_tengah_comm_share=pct(d["tengah_share_of_commuters"]),
+        ap_tengah_per=i(d["tengah_benefit_per_commuter_sgd"]), ap_all_per=i(d["all_benefit_per_commuter_sgd"]),
+        ap_top5_share=pct(d["top5_share"], 0), ap_n_pa=i(d["planning_areas_with_commuters"]),
+        ap_n_losing=i(d["planning_areas_losing"]), ap_unattributed=sm(d["not_attributed_sgd_per_year"], 2),
+        ap_lu_with=sm(lu["pt_user_time_sgd_per_year_with_tengah"]),
+        ap_lu_without=sm(lu["pt_user_time_sgd_per_year_2020_land_use"]),
+        ap_lu_diff=sm(lu["pt_user_time_sgd_per_year_with_tengah"] - lu["pt_user_time_sgd_per_year_2020_land_use"]),
+        ap_lu_share=pct(lu["share_of_pt_user_benefit_due_to_tengah"]),
+        ap_lu_pvb_with=sm(lu["pvb_pt_user_time_with_tengah_sgd"], 0),
+        ap_lu_pvb_without=sm(lu["pvb_pt_user_time_2020_land_use_sgd"], 0),
+        ap_lu_pvb_diff=sm(lu["pvb_pt_user_time_with_tengah_sgd"] - lu["pvb_pt_user_time_2020_land_use_sgd"], 0))
+    names = {"pt_user_time": "Public-transport users: generalised time (rule of a half)",
+             "car_user_time": "Road users: travel time on the less loaded network (rule of a half)",
+             "car_non_fuel_operating": "Car non-fuel operating costs avoided (not perceived by users; net change)",
+             "co2": "Tailpipe CO2 avoided, at the carbon tax rate"}
+    c["ap_component_table"] = table(
+        ["Component", "S$ million a year", "share", f"present value, S$ million ({c['ap_first']}-{c['ap_last']})"],
+        [[names[k], sm(b[k], 2), pct(r["annual_shares"][k]), sm(pvs[k], 0)] for k in names]
+        + [["**Total**", f"**{sm(b['total'], 2)}**", "100.0%", f"**{sm(core['pvb_sgd'], 0)}**"]])
+    sens = pd.read_csv(RES / "appraisal_sensitivity.csv")
+    c["ap_sens_table"] = table(
+        ["Test", "annual benefit (S$ m)", "PVB (S$ m)", "PVC (S$ m, illustrative)", "NPV (S$ m)", "BCR (illustrative)"],
+        [[x.test, f(x.annual_benefit_sgd_million, 1), i(x.pvb_sgd_million), i(x.pvc_sgd_million), i(x.npv_sgd_million),
+          f(x.bcr, 2)] for x in sens.itertuples()])
+    pa = pd.read_csv(RES / "appraisal_benefits_by_planning_area.csv")
+    c["ap_pa_table"] = table(
+        ["Planning area of residence", "Region", "commuters 2030", "user benefit (S$ m a year)", "share of benefit",
+         "share of commuters", "S$ per commuter a year"],
+        [[x.planning_area.title(), x.region.title().replace(" Region", ""), i(x.commuters_daily_2030),
+          sm(x.user_benefit_sgd_per_year, 2), pct(x.share_of_user_benefit), pct(x.share_of_commuters),
+          i(x.user_benefit_sgd_per_commuter_per_year)] for x in pa.head(10).itertuples()])
+    c["ap_region_table"] = table(
+        ["Region of residence", "share of user benefit", "S$ per commuter a year"],
+        [[k.title().replace(" Region", ""), pct(x["share"]), i(x["per_commuter_sgd"])]
+         for k, x in sorted(d["by_region"].items(), key=lambda kv: -kv[1]["share"])])
+    c["ap_param_table"] = table(["Parameter (config/appraisal.json)", "Value", "Status", "Note / source"], _label_rows(ac))
+    return c
+
+
+def _survey_context() -> dict:
+    r = json.loads((RES / "survey.json").read_text(encoding="utf-8"))
+    sc = json.loads((REPO / "config" / "survey.json").read_text(encoding="utf-8"))
+    de, sf, rs = r["design"], r["saved_file"], r["repeated_sampling"]
+    dc = sc["design"]
+    h = rs["headline"]
+    labels = {"car_share": "Car share of commuters", "pt_share": "Public-transport share of commuters",
+              "trip_rate": "Commuting trips per resident per weekday"}
+
+    def val(meas, x):
+        return f(x, 3) if meas == "trip_rate" else pct(x)
+
+    def dev(meas, x):
+        return f"{x:+.3f}" if meas == "trip_rate" else f"{pp(x)} pts"
+
+    c = dict(
+        sv_completed=i(de["completed_households"]), sv_issued=i(de["issued_households"]),
+        sv_rr_expected=pct(de["expected_response_rate"], 0), sv_margin_target=f(dc["target_margin_mode_share"]["value"] * 100, 1),
+        sv_trip_target=pct(dc["target_relative_margin_trip_rate"]["value"], 0), sv_binding=" and ".join(de["binding_targets"]),
+        sv_completed_min=i(de["completed_min"]), sv_completed_max=i(de["completed_max"]),
+        sv_frac_min=pct(de["sampling_fraction_min"], 2), sv_frac_max=pct(de["sampling_fraction_max"], 2),
+        sv_prop_worst=f(de["worst_margin_if_proportional"] * 100, 2),
+        sv_prop_region=de["worst_margin_region_if_proportional"].title().replace(" Region", ""),
+        sv_zones_under1=i(de["zones_expecting_under_one_household"]), sv_zones_res=i(de["zones_with_residents"]),
+        sv_zones_saved=i(de["zones_in_saved_file"]), sv_resp_hh=i(sf["responding_households"]),
+        sv_rr_saved=pct(sf["response_rate"]), sv_persons=i(sf["persons"]), sv_commuters=i(sf["commuters"]),
+        sv_rake_it=i(sf["raking_iterations"]), sv_deff_design=f(sf["kish_deff_design_weights"], 3),
+        sv_deff_raked=f(sf["kish_deff_raked_weights"], 3), sv_wmin=i(sf["raked_weight_min"]), sv_wmax=i(sf["raked_weight_max"]),
+        sv_priv_unw=pct(sf["unweighted_private_share"]), sv_priv_cen=pct(sf["census_private_share"]),
+        sv_age_unw=pct(sf["unweighted_working_age_share"]), sv_age_cen=pct(sf["census_working_age_share"]),
+        sv_inside=i(sf["intervals_containing_truth_raked"]), sv_intervals=i(sf["intervals_raked"]),
+        sv_R=i(rs["replicates"]), sv_rr_mean=pct(rs["mean_response_rate"]), sv_cells=i(rs["cells"]),
+        sv_cells_better=i(rs["cells_raked_rmse_below_unweighted"]), sv_cells_better_design=i(rs["cells_raked_rmse_below_design"]),
+        sv_worse_list=("none" if not rs["cells_raked_rmse_not_below_unweighted"]
+                       else "; ".join(rs["cells_raked_rmse_not_below_unweighted"])),
+        sv_car_truth=pct(h["car_share"]["truth"]), sv_car_bias_unw=pp(h["car_share"]["bias_unweighted"]),
+        sv_car_bias_raked=pp(h["car_share"]["bias_raked"]), sv_car_removed=pct(h["car_share"]["bias_removed_by_raking"], 0),
+        sv_pt_removed=pct(h["pt_share"]["bias_removed_by_raking"], 0),
+        sv_trip_removed=pct(h["trip_rate"]["bias_removed_by_raking"], 0),
+        sv_car_cov=pct(h["car_share"]["coverage_raked"], 0), sv_trip_cov=pct(h["trip_rate"]["coverage_raked"], 0),
+        sv_cov_min=pct(rs["raked_coverage_min"], 0), sv_cov_max=pct(rs["raked_coverage_max"], 0),
+        sv_regions_meeting=i(rs["regions_meeting_mode_share_margin"]),
+        sv_margin_lo=f(min(rs["achieved_margin_car_share_by_region_raked"].values()) * 100, 1),
+        sv_margin_hi=f(max(rs["achieved_margin_car_share_by_region_raked"].values()) * 100, 1),
+        sv_seed=str(sf["seed"]), sv_rho=g(dc["intra_household_correlation"]["value"]),
+        sv_pph=g(dc["persons_per_household"]["value"]),
+        sv_car_effect=g(sc["synthetic"]["response_per_car_commuter"]["value"]))
+    size = pd.read_csv(RES / "survey_sample_size.csv")
+    c["sv_size_table"] = table(
+        ["Region", "residents", "Census car share", "design effect (mode share)", "households for mode share",
+         "design effect (trip rate)", "households for trip rate", "completed households", "issued households",
+         "sampling fraction", "mode-share margin if the total were allocated in proportion (points)"],
+        [[x.region.title().replace(" Region", ""), i(x.residents), pct(x.census_car_share), f(x.deff_mode_share, 2),
+          i(x.households_for_mode_share), f(x.deff_trip_rate, 2), i(x.households_for_trip_rate), i(x.completed_households),
+          i(x.issued_households), pct(x.sampling_fraction, 2), f(x.margin_mode_share_if_proportional * 100, 2)]
+         for x in size.itertuples()]
+        + [["**Total**", i(size.residents.sum()), "", "", "", "", "", f"**{i(size.completed_households.sum())}**",
+            f"**{i(size.issued_households.sum())}**", "", ""]])
+    e = sf["estimates_all"]
+    c["sv_est_table"] = table(
+        ["Whole island, saved file", "truth", "unweighted", "design weights", "raked weights (95% interval)"],
+        [[labels[m], val(m, h[m]["truth"]), val(m, e[m]["unweighted"]["estimate"]), val(m, e[m]["design"]["estimate"]),
+          f"{val(m, e[m]['raked']['estimate'])} ({val(m, e[m]['raked']['lower'])} to {val(m, e[m]['raked']['upper'])})"]
+         for m in labels])
+    c["sv_acc_table"] = table(
+        ["Whole island, " + c["sv_R"] + " synthetic surveys", "truth", "bias: unweighted", "bias: design weights",
+         "bias: raked", "bias removed by raking", "RMSE: unweighted", "RMSE: raked", "95% interval coverage: raked"],
+        [[labels[m], val(m, h[m]["truth"]), dev(m, h[m]["bias_unweighted"]), dev(m, h[m]["bias_design"]),
+          dev(m, h[m]["bias_raked"]), pct(h[m]["bias_removed_by_raking"], 0),
+          f(h[m]["rmse_unweighted"], 4), f(h[m]["rmse_raked"], 4), pct(h[m]["coverage_raked"], 0)] for m in labels])
+    tr = rs["achieved_relative_margin_trip_rate_by_region_raked"]
+    c["sv_margin_table"] = table(
+        ["Region", "raked bias of the car share (points)", "car share: mean half-width of the 95% interval (points)",
+         "target (points)", "trip rate: mean half-width as a share of the truth", "target"],
+        [[k.title().replace(" Region", ""), pp(rs["regions_car_share_bias_raked"][k], 1),
+          f(x * 100, 2), c["sv_margin_target"], pct(tr[k]), c["sv_trip_target"]]
+         for k, x in rs["achieved_margin_car_share_by_region_raked"].items()])
+    c["sv_trip_regions_meeting"] = i(rs["regions_meeting_trip_rate_margin"])
+    c["sv_trip_margin_lo"] = pct(min(tr.values()))
+    c["sv_trip_margin_hi"] = pct(max(tr.values()))
+    c["sv_car_bias_unw_abs"] = f(abs(h["car_share"]["bias_unweighted"]) * 100, 1)
+    c["sv_param_table"] = table(["Parameter (config/survey.json)", "Value", "Status", "Note"], _label_rows(sc))
     return c
 
 

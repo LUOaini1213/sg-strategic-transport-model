@@ -94,6 +94,76 @@ MUTANTS = [
     ("M30", "stm/junction.py", "        T *= np.divide(a, r, out=np.zeros_like(a), where=r > 0)[:, None]",
      "        T *= np.divide(b, r, out=np.zeros_like(a), where=r > 0)[:, None]",
      "turning-flow Furness: rows scaled to the exit totals"),
+    ("M31", "stm/appraisal.py", "    return 0.5 * (T0 + T1) * (c0 - c1)", "    return (T0 + T1) * (c0 - c1)",
+     "rule of a half without the half"),
+    ("M32", "stm/appraisal.py", "    return 0.5 * (T0 + T1) * (c0 - c1)", "    return 0.5 * (T0 + T1) * (c1 - c0)",
+     "rule of a half: sign of the cost change flipped"),
+    ("M33", "stm/appraisal.py", "    return 0.5 * (T0 + T1) * (c0 - c1)", "    return 0.5 * (T0 + T0) * (c0 - c1)",
+     "rule of a half: new users given the full cost change of existing users (T1 ignored)"),
+    ("M34", "stm/appraisal.py", "(logsum(V1) - logsum(V0)) / (-cost_coefficient)", "(logsum(V1) - logsum(V0)) * (-cost_coefficient)",
+     "logsum benefit multiplied by the cost coefficient instead of divided"),
+    ("M35", "stm/appraisal.py", "        if year_from_base <= last:", "        if year_from_base < last:",
+     "discount schedule: the boundary year takes the next rate"),
+    ("M36", "stm/appraisal.py", "        f[k] = f[k - 1] / (1.0 + annual_rate(k, schedule))",
+     "        f[k] = f[k - 1] * (1.0 - annual_rate(k, schedule))", "discount factor (1 - r) instead of 1 / (1 + r)"),
+    ("M37", "stm/appraisal.py", "    s[first_year:] = annual * (1.0 + growth) ** np.arange(n_years)",
+     "    s[first_year:] = annual * (1.0 + growth) ** np.arange(1, n_years + 1)",
+     "benefit stream: growth already applied in the opening year"),
+    ("M38", "stm/appraisal.py", "    return base_value * (pvc - pv_other) / pv_part_linear",
+     "    return base_value * (pvc + pv_other) / pv_part_linear", "switching value: fixed benefits added to the costs"),
+    ("M39", "stm/appraisal.py", '        "car_user_time": day["car_vehicle_hours_per_peak_hour"] * occupancy * road * vot,',
+     '        "car_user_time": day["car_vehicle_hours_per_peak_hour"] / occupancy * road * vot,',
+     "vehicle-hours divided by car occupancy instead of multiplied"),
+    ("M40", "stm/appraisal.py", '        "car_non_fuel_operating": -day["vehicle_km_change_per_peak_hour"]',
+     '        "car_non_fuel_operating": day["vehicle_km_change_per_peak_hour"]',
+     "fewer vehicle-km counted as a cost"),
+    ("M41", "stm/appraisal.py", "    pvc = capital + pv_op", "    pvc = capital", "operating costs left out of the present value of costs"),
+    ("M42", "stm/appraisal.py", "    pv_op = present_value(benefit_stream(operating, first, years, 0.0), schedule)",
+     "    pv_op = operating * years", "operating costs not discounted"),
+    ("M43", "stm/appraisal.py", "    N1 = T_do_min * attendance * P1[1]", "    N1 = T_do_min * attendance * P0[1]",
+     "appraisal: with-scheme public-transport demand taken from the without-scheme mode shares"),
+    ("M44", "stm/appraisal.py", "    th, _ = skim(rm.net.graph, rm.net.time(flow), rm.origins, rm.dests)",
+     "    th, _ = skim(rm.net.graph, rm.net.t0, rm.origins, rm.dests)",
+     "appraisal: car times taken at free flow, so decongestion is never seen"),
+    ("M45", "stm/appraisal.py", "    zone_pt = pt_min.sum(axis=1) / 60.0", "    zone_pt = pt_min.sum(axis=0) / 60.0",
+     "benefits attributed to the workplace zone instead of the zone of residence"),
+    ("M46", "stm/survey.py", "    return 1.0 + (m - 1.0) * rho", "    return 1.0 + m * rho", "design effect 1 + m rho"),
+    ("M47", "stm/survey.py", "    e2 = float(np.sum(p * (s * q * (1.0 - q) + (s * q) ** 2)))", "    e2 = float(np.sum(p * (s * q) ** 2))",
+     "cluster size: binomial variance left out of E[m^2]"),
+    ("M48", "stm/survey.py", "    return float(w.size * np.sum(w ** 2) / np.sum(w) ** 2)", "    return float(np.sum(w ** 2) / np.sum(w) ** 2)",
+     "Kish design effect without n"),
+    ("M49", "stm/survey.py", "    return n0 if N is None else n0 / (1.0 + (n0 - 1.0) / N)", "    return n0 if N is None else n0 / (1.0 + n0 / N)",
+     "finite population correction with n0 instead of n0 - 1"),
+    ("M50", "stm/survey.py", "    return deff * fpc_adjust(z ** 2 * p * (1.0 - p) / margin ** 2, N)",
+     "    return deff * fpc_adjust(z * p * (1.0 - p) / margin ** 2, N)", "sample size for a proportion with z instead of z squared"),
+    ("M51", "stm/survey.py", "    return deff * fpc_adjust((z * cv / rel_margin) ** 2, N)", "    return deff * fpc_adjust(z * cv / rel_margin ** 2, N)",
+     "sample size for a mean: only the margin squared"),
+    ("M52", "stm/survey.py", "        order = np.argsort(-(exact - n), kind=\"stable\")", "        order = np.argsort(exact - n, kind=\"stable\")",
+     "allocation: spare units go to the smallest remainders"),
+    ("M53", "stm/survey.py", "            w *= np.divide(t, cur, out=np.ones_like(t), where=cur > 0)[c]",
+     "            w *= np.divide(cur, t, out=np.ones_like(t), where=cur > 0)[c]", "raking factor inverted"),
+    ("M54", "stm/survey.py", "    e = w * (y - R * x) / X", "    e = w * y / X", "linearised variance from y instead of the residual y - R x"),
+    ("M55", "stm/survey.py", "            var += t.size / (t.size - 1.0) * float(np.sum((t - t.mean()) ** 2))",
+     "            var += float(np.sum((t - t.mean()) ** 2))", "variance without the n / (n - 1) factor"),
+    ("M56", "stm/survey.py", "    tot = np.bincount(cidx, weights=e, minlength=cl.size)", "    tot = e\n    cidx = np.arange(e.size)\n    cl = cidx",
+     "clustering ignored: every person treated as an independent draw"),
+    ("M57", "stm/survey.py", '                         "trip_rate": float(2.0 * self.attendance * c.sum() / self.pop[mask].sum()),',
+     '                         "trip_rate": float(self.attendance * c.sum() / self.pop[mask].sum()),',
+     "truth of the trip rate counts one trip per commuter instead of two"),
+    ("M58", "stm/survey.py", "            share[:, m] = ((1.0 - self.private) * (self.dest * self.P[0][m]).sum(axis=1)\n                           + self.private * (self.dest * self.P[1][m]).sum(axis=1))",
+     "            share[:, m] = (self.dest * self.P[0][m]).sum(axis=1)",
+     "truth of the mode shares ignores private housing"),
+    ("M59", "stm/survey.py", "    mode[idx] = np.where(um < p_car, 0, np.where(um < p_car + p_pt, 1, 2))",
+     "    mode[idx] = np.where(um < p_car, 0, np.where(um < p_pt, 1, 2))", "synthetic mode draw: public transport cut at its own probability, not the cumulative one"),
+    ("M60", "stm/survey.py", "    base = (hh_frame / np.maximum(hh_resp, 1.0))[resp.region.values]",
+     "    base = (hh_resp / np.maximum(hh_frame, 1.0))[resp.region.values]", "design weight inverted"),
+    ("M61", "stm/survey.py", '                     "issued_households": int(math.ceil(complete / rr)),',
+     '                     "issued_households": int(math.ceil(complete * rr)),', "issued sample multiplied by the response rate"),
+    ("M62", "stm/survey.py", "        complete = int(math.ceil(max(hh_mode, hh_trip)))", "        complete = int(math.ceil(min(hh_mode, hh_trip)))",
+     "sample size set by the easier of the two precision targets"),
+    ("M63", "stm/survey.py", "        per_zone[m] = rng.multinomial(int(n_k), fr.households[m] / fr.households[m].sum())",
+     "        per_zone[m] = rng.multinomial(int(n_k), np.full(int(m.sum()), 1.0 / m.sum()))",
+     "households drawn equally from every subzone regardless of its size"),
 ]
 
 # Mutants that cannot change behaviour on any reachable input, with the reason. Reported as survivors, not hidden.
@@ -169,6 +239,20 @@ def main(workers: int) -> None:
     killed_ns = sum(r["killed_without_snapshot"] for r in results)
     report = {"date": datetime.date.today().isoformat(), "tests_collected": count_tests(), "total": len(results),
               "killed": killed, "killed_without_snapshot": killed_ns, "mutants": results}
+    # The first run after the list of mutants changes is kept, so that later runs (after tests were added for the
+    # survivors) do not erase what the suite missed at first.
+    path = REPO / "results" / "mutation_report.json"
+    old = json.loads(path.read_text(encoding="utf-8")) if path.exists() else {}
+    ids = [r["id"] for r in results]
+    if old.get("first_run") and old["first_run"].get("mutant_ids") == ids:
+        report["first_run"] = old["first_run"]
+    else:
+        brief = [{"id": r["id"], "file": r["file"], "what": r["what"]} for r in results]
+        report["first_run"] = {
+            "date": report["date"], "tests_collected": report["tests_collected"], "total": len(results),
+            "killed": killed, "killed_without_snapshot": killed_ns, "mutant_ids": ids,
+            "survivors": [b for b, r in zip(brief, results) if not r["killed"]],
+            "survivors_without_snapshot": [b for b, r in zip(brief, results) if not r["killed_without_snapshot"]]}
     (REPO / "results" / "mutation_report.json").write_text(json.dumps(report, indent=1) + "\n", encoding="utf-8",
                                                           newline="\n")
     print(f"{killed}/{len(results)} killed; {killed_ns}/{len(results)} without the snapshot tests")

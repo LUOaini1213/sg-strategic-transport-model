@@ -21,11 +21,13 @@ import numpy as np
 import pandas as pd
 from matplotlib.path import Path as MplPath
 
+from . import appraisal as A
 from . import gravity as G
 from . import junction as J
 from . import logit as L
 from . import model as M
 from . import stats as S
+from . import survey as SV
 from .assignment import assign, equilibrium_gap
 
 REPO = Path(__file__).resolve().parents[1]
@@ -572,6 +574,27 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     jres = junctions(rm, inp, cfg, lf, results_flows, link_region, out)
     summary["junctions"] = jres
     log("junctions")
+
+    # ---- h. economic appraisal of the Jurong Region Line (2030 with the line against 2030 without) -------------------
+    Vs = {name: L.utilities(theta, t_car, gpt, d, priv, cen, ind) for name, gpt in (("dm", g_pt0), ("ds", g_pt1))}
+    A.run(out, z=z, T_do_min=T30, T_2020=T, P0=scen["dm_2030"]["P"], P1=scen["ds_2030_jrl"]["P"], V0=Vs["dm"],
+          V1=Vs["ds"], b_time=float(theta[2]), g_pt0=g_pt0, g_pt1=g_pt1, Q0=np.load(out / "car_demand_dm_2030.npy"),
+          Q1=np.load(out / "car_demand_ds_2030_jrl.npy"), flow0=results_flows["dm_2030"],
+          flow1=results_flows["ds_2030_jrl"], rm=rm, attendance=att, occupancy=M.v(acfg["car_occupancy"]),
+          write_json=write_json, write_csv=write_csv)
+    log("appraisal")
+
+    # ---- i. household travel survey: design, synthetic respondents, weighting (no real survey) ---------------------
+    pa_reg = z.groupby("planning_area").region.first()
+    car_reg = np.zeros((len(M.REGIONS), 2))
+    for k, p_ in enumerate(res_rows):
+        if M.pa_title(p_) in pa_reg.index:
+            car_reg[M.REGIONS.index(pa_reg[M.pa_title(p_)])] += [obs_res[k, 0], obs_res[k].sum()]
+    SV.run(out, z=z, regions=M.REGIONS, O=O, T=T,
+           P_public=L.probabilities(L.utilities(theta, t_car, g_pt0, d, np.zeros(nz), cen, ind)),
+           P_private=L.probabilities(L.utilities(theta, t_car, g_pt0, d, np.ones(nz), cen, ind)),
+           attendance=att, census_car_share=car_reg[:, 0] / car_reg[:, 1], write_json=write_json, write_csv=write_csv)
+    log("survey")
 
     summary["runtime_s"] = None  # not recorded: it differs between machines
     write_json(out / "summary.json", summary)

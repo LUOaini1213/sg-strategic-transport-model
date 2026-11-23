@@ -1,0 +1,167 @@
+{
+ "design": {
+  "binding_targets": [
+   "trip rate"
+  ],
+  "completed_households": 6522,
+  "completed_max": 1426,
+  "completed_min": 1222,
+  "expected_response_rate": 0.55,
+  "issued_households": 11860,
+  "largest_region_sample": "CENTRAL REGION",
+  "sampling_fraction_max": 0.01264339195,
+  "sampling_fraction_min": 0.007466478782,
+  "worst_margin_if_proportional": 0.02621794445,
+  "worst_margin_region_if_proportional": "EAST REGION",
+  "zones_expecting_under_one_household": 71,
+  "zones_in_saved_file": 209,
+  "zones_with_residents": 286
+ },
+ "no_real_survey": true,
+ "repeated_sampling": {
+  "achieved_margin_car_share_by_region_raked": {
+   "CENTRAL REGION": 0.02757114194,
+   "EAST REGION": 0.02589287487,
+   "NORTH REGION": 0.02260232653,
+   "NORTH-EAST REGION": 0.0252033173,
+   "WEST REGION": 0.02414190896
+  },
+  "achieved_relative_margin_trip_rate_by_region_raked": {
+   "CENTRAL REGION": 0.04007776958,
+   "EAST REGION": 0.03693757322,
+   "NORTH REGION": 0.03594047065,
+   "NORTH-EAST REGION": 0.03652448444,
+   "WEST REGION": 0.03617722599
+  },
+  "cells": 18,
+  "cells_raked_rmse_below_design": 18,
+  "cells_raked_rmse_below_unweighted": 18,
+  "cells_raked_rmse_not_below_unweighted": [],
+  "headline": {
+   "car_share": {
+    "bias_design": -0.06196029896,
+    "bias_raked": -0.03505848408,
+    "bias_removed_by_raking": 0.443984019,
+    "bias_unweighted": -0.06305301516,
+    "coverage_design": 0.0,
+    "coverage_raked": 0.0,
+    "coverage_unweighted": 0.0,
+    "rmse_design": 0.06214695112,
+    "rmse_raked": 0.03539713685,
+    "rmse_unweighted": 0.06322806592,
+    "truth": 0.2799501747
+   },
+   "pt_share": {
+    "bias_design": 0.05444783332,
+    "bias_raked": 0.03100244632,
+    "bias_removed_by_raking": 0.4267682412,
+    "bias_unweighted": 0.05408361599,
+    "coverage_design": 0.0,
+    "coverage_raked": 0.0,
+    "coverage_unweighted": 0.0,
+    "rmse_design": 0.05470467761,
+    "rmse_raked": 0.0314524015,
+    "rmse_unweighted": 0.05432830407,
+    "truth": 0.6322352774
+   },
+   "trip_rate": {
+    "bias_design": -0.03647553022,
+    "bias_raked": -0.0100224951,
+    "bias_removed_by_raking": 0.7216991709,
+    "bias_unweighted": -0.0360131701,
+    "coverage_design": 0.0,
+    "coverage_raked": 0.735,
+    "coverage_unweighted": 0.0,
+    "rmse_design": 0.03712008337,
+    "rmse_raked": 0.01151785252,
+    "rmse_unweighted": 0.03665256488,
+    "truth": 0.8150790982
+   }
+  },
+  "mean_response_rate": 0.5640193929,
+  "raked_coverage_max": 0.95,
+  "raked_coverage_min": 0.0,
+  "regions_car_share_bias_raked": {
+   "CENTRAL REGION": -0.04662722922,
+   "EAST REGION": -0.03439933682,
+   "NORTH REGION": -0.02782358041,
+   "NORTH-EAST REGION": -0.03250847311,
+   "WEST REGION": -0.03150236364
+  },
+  "regions_meeting_mode_share_margin": 2,
+  "regions_meeting_trip_rate_margin": 5,
+  "replicates": 200
+ },
+ "saved_file": {
+  "census_private_share": 0.2118244262,
+  "census_working_age_share": 0.6494755634,
+  "commuters": 8912,
+  "estimates_all": {
+   "car_share": {
+    "design": {
+     "estimate": 0.2085690749,
+     "lower": 0.1987243968,
+     "upper": 0.2184137529
+    },
+    "raked": {
+     "estimate": 0.2364614667,
+     "lower": 0.225129747,
+     "upper": 0.2477931864
+    },
+    "unweighted": {
+     "estimate": 0.2073608618,
+     "lower": 0.1977220015,
+     "upper": 0.216999722
+    }
+   },
+   "pt_share": {
+    "design": {
+     "estimate": 0.699904647,
+     "lower": 0.6890498731,
+     "upper": 0.7107594209
+    },
+    "raked": {
+     "estimate": 0.6749422358,
+     "lower": 0.6630808202,
+     "upper": 0.6868036514
+    },
+    "unweighted": {
+     "estimate": 0.6989452424,
+     "lower": 0.68827322,
+     "upper": 0.7096172647
+    }
+   },
+   "trip_rate": {
+    "design": {
+     "estimate": 0.775647339,
+     "lower": 0.7621994292,
+     "upper": 0.7890952488
+    },
+    "raked": {
+     "estimate": 0.802195437,
+     "lower": 0.7883007344,
+     "upper": 0.8160901396
+    },
+    "unweighted": {
+     "estimate": 0.7758320433,
+     "lower": 0.7626915039,
+     "upper": 0.7889725828
+    }
+   }
+  },
+  "intervals_containing_truth_raked": 6,
+  "intervals_raked": 18,
+  "kish_deff_design_weights": 1.04218339,
+  "kish_deff_raked_weights": 1.087941644,
+  "persons": 20672,
+  "raked_weight_max": 364.2043056,
+  "raked_weight_min": 117.4886971,
+  "raking_iterations": 7,
+  "raking_max_relative_error": 1.618236566e-11,
+  "responding_households": 6617,
+  "response_rate": 0.557925801,
+  "seed": 20261123,
+  "unweighted_private_share": 0.136996904,
+  "unweighted_working_age_share": 0.6298374613
+ }
+}

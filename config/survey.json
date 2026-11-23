@@ -1,0 +1,28 @@
+{
+  "_about": "Parameters of the household travel survey design and of the SYNTHETIC respondent file (stm/survey.py). No survey was carried out. Same labels as config/model.json; SYNTHETIC marks a value that only shapes simulated respondents.",
+  "design": {
+    "confidence_z": {"value": 1.96, "label": "ASSUMPTION", "note": "two-sided 95% confidence"},
+    "target_margin_mode_share": {"value": 0.025, "label": "ASSUMPTION", "note": "half-width of the confidence interval of the car share of commuters in each region: 2.5 percentage points"},
+    "target_relative_margin_trip_rate": {"value": 0.05, "label": "ASSUMPTION", "note": "half-width of the confidence interval of commuting trips per resident per weekday in each region, as a share of the estimate"},
+    "strata": {"value": "the five URA planning regions", "label": "ASSUMPTION", "note": "households are drawn with equal probability within a region, so the expected sample of a subzone is proportional to its households"},
+    "persons_per_household": {"value": 3.1, "label": "ASSUMPTION", "note": "the same value as scenario_2030.persons_per_home in config/model.json; turns Census residents into a household frame"},
+    "household_size_distribution": {"value": [0.14, 0.22, 0.24, 0.25, 0.1, 0.05], "label": "ASSUMPTION", "note": "probabilities of households of 1 to 6 persons, mean 3.1; not taken from a Census table. Used for the design effect, where the cluster size that matters is E[m^2] / E[m], and to build the synthetic households"},
+    "intra_household_correlation": {"value": 0.3, "label": "ASSUMPTION", "note": "correlation of commuting mode between two commuters of one household, used in the design effect 1 + (m - 1) rho, also applied to the trip rate; no source"},
+    "expected_response_rate": {"value": 0.55, "label": "ASSUMPTION", "note": "share of issued households expected to complete the survey; no source"},
+    "allocation": {"value": "equal precision by region", "label": "ASSUMPTION", "note": "each region gets the sample that meets both precision targets; proportional allocation of the same total is reported for comparison"}
+  },
+  "synthetic": {
+    "seed": {"value": 20261123, "label": "SYNTHETIC", "note": "seed of the saved respondent file; replicate r of the repeated-sampling check uses seed + r"},
+    "replicates": {"value": 200, "label": "SYNTHETIC", "note": "independent synthetic surveys drawn to measure bias, root mean square error and confidence-interval coverage"},
+    "mode_copy_probability": {"value": 0.55, "label": "SYNTHETIC", "note": "probability that a commuter's mode is drawn with the household's random number instead of the commuter's own; two commuters of one household then share their draw with probability 0.55 squared, about 0.30"},
+    "response_intercept": {"value": 0.75, "label": "SYNTHETIC", "note": "logit of a household's response probability: intercept"},
+    "response_private_housing": {"value": -0.7, "label": "SYNTHETIC", "note": "added for households in condominiums and landed housing (harder to reach)"},
+    "response_central_region": {"value": -0.3, "label": "SYNTHETIC", "note": "added for households in the Central Region"},
+    "response_no_resident_outside_working_age": {"value": -0.5, "label": "SYNTHETIC", "note": "added when every member is aged 20-64 (nobody at home in the daytime)"},
+    "response_per_car_commuter": {"value": -0.3, "label": "SYNTHETIC", "note": "added for each member who commutes by car. This is the part of non-response that depends on the answer itself and that no census margin describes"}
+  },
+  "weighting": {
+    "margins": {"value": ["region", "dwelling type (public, private)", "age group (20-64, other)"], "label": "REAL", "note": "Census of Population 2020 residents by subzone, age group and type of dwelling (SingStat Table Builder 17560 and 17562), already in data/inputs/"},
+    "raking_tolerance": {"value": 1e-10, "label": "ASSUMPTION", "note": "largest relative difference between a weighted margin and its census total at which raking stops"}
+  }
+}

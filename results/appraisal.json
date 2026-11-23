@@ -1,0 +1,134 @@
+{
+ "annual_benefits_sgd": {
+  "car_non_fuel_operating": 400989.5982,
+  "car_user_time": 245740.1927,
+  "co2": 44840.66182,
+  "pt_user_time": 86390905.63,
+  "total": 87082476.09
+ },
+ "annual_shares": {
+  "car_non_fuel_operating": 0.004604710571,
+  "car_user_time": 0.002821924728,
+  "co2": 0.0005149217596,
+  "pt_user_time": 0.9920584429
+ },
+ "core": {
+  "bcr": 0.3721510168,
+  "capital_sgd": 4000000000.0,
+  "first_benefit_year": 2030,
+  "last_benefit_year": 2089,
+  "npv_sgd": -3377406056.0,
+  "pv_operating_sgd": 1379328703.0,
+  "pv_per_annual_unit": 22.98881172,
+  "pvb_sgd": 2001922647.0,
+  "pvc_sgd": 5379328703.0
+ },
+ "distribution": {
+  "all_benefit_per_commuter_sgd": 45.77701375,
+  "attributed_user_benefit_sgd_per_year": 86636645.83,
+  "by_region": {
+   "CENTRAL REGION": {
+    "per_commuter_sgd": 12.36777456,
+    "share": 0.05646470264
+   },
+   "EAST REGION": {
+    "per_commuter_sgd": 15.6982606,
+    "share": 0.05629142356
+   },
+   "NORTH REGION": {
+    "per_commuter_sgd": 45.07618042,
+    "share": 0.136843554
+   },
+   "NORTH-EAST REGION": {
+    "per_commuter_sgd": 10.9986631,
+    "share": 0.05438658456
+   },
+   "WEST REGION": {
+    "per_commuter_sgd": 121.8287033,
+    "share": 0.6960137353
+   }
+  },
+  "not_attributed_sgd_per_year": 445830.26,
+  "planning_areas_losing": 0,
+  "planning_areas_with_commuters": 43,
+  "tengah_benefit_per_commuter_sgd": 186.8897857,
+  "tengah_share": 0.1320503293,
+  "tengah_share_of_commuters": 0.03234456992,
+  "top5": [
+   {
+    "planning_area": "CHOA CHU KANG",
+    "share": 0.2071527533
+   },
+   {
+    "planning_area": "JURONG WEST",
+    "share": 0.1701598608
+   },
+   {
+    "planning_area": "TENGAH",
+    "share": 0.1320503293
+   },
+   {
+    "planning_area": "WOODLANDS",
+    "share": 0.0685754905
+   },
+   {
+    "planning_area": "BUKIT PANJANG",
+    "share": 0.06819923457
+   }
+  ],
+  "top5_share": 0.6461376685,
+  "west_region_share": 0.6960137353,
+  "west_region_share_of_commuters": 0.2615264669
+ },
+ "land_use_test": {
+  "pt_person_hours_per_day_one_way_2020_land_use": 9426.882192,
+  "pt_user_time_sgd_per_year_2020_land_use": 77253299.56,
+  "pt_user_time_sgd_per_year_with_tengah": 86390905.63,
+  "pvb_pt_user_time_2020_land_use_sgd": 1775961558.0,
+  "pvb_pt_user_time_with_tengah_sgd": 1986024264.0,
+  "share_of_pt_user_benefit_due_to_tengah": 0.1057704628
+ },
+ "present_values_sgd": {
+  "car_non_fuel_operating": 9218274.374,
+  "car_user_time": 5649275.021,
+  "co2": 1030833.532,
+  "pt_user_time": 1986024264.0
+ },
+ "quantities": {
+  "car_mean_time_saving_s_per_trip": 0.5408212932,
+  "car_od_pairs_faster": 63845,
+  "car_od_pairs_slower": 7729,
+  "car_trips_per_peak_hour_do_minimum": 166602.0496,
+  "car_trips_per_peak_hour_do_something": 166076.4274,
+  "car_vehicle_hours_per_peak_hour": 24.98883391,
+  "pt_mean_saving_min_per_pt_trip": 0.5747616762,
+  "pt_pairs_with_higher_cost": 0,
+  "pt_person_hours_existing_users": 10221.07108,
+  "pt_person_hours_logsum": 10544.52055,
+  "pt_person_hours_per_day_one_way": 10541.90429,
+  "pt_trips_per_day_one_way_do_minimum": 1099491.725,
+  "pt_trips_per_day_one_way_do_something": 1101470.112,
+  "rule_of_half_over_logsum": 0.999751884,
+  "vehicle_hours_do_minimum": 44957.30799,
+  "vehicle_hours_do_something": 44791.29155,
+  "vehicle_km_change_per_peak_hour": -8019.791964,
+  "vehicle_km_do_minimum": 2301876.803,
+  "vehicle_km_do_something": 2293857.011
+ },
+ "scenarios": {
+  "do_minimum": "dm_2030",
+  "do_something": "ds_2030_jrl"
+ },
+ "sensitivity": {
+  "bcr_max": 0.5924024629,
+  "bcr_min": 0.2128971333,
+  "tests": 12,
+  "tests_with_bcr_at_least_1": 0
+ },
+ "switching": {
+  "annual_benefit_for_bcr_1_sgd": 233997684.1,
+  "benefit_multiple_for_bcr_1": 2.687081198,
+  "capital_cost_for_bcr_1_sgd": 622593943.6,
+  "value_of_time_for_bcr_1_sgd_per_hour": 44.1835536
+ }
+}

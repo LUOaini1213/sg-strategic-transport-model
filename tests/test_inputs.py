@@ -60,6 +60,7 @@ def test_no_raw_datamall_rows_are_committed():
 
 def test_text_files_use_lf():
     files = list(INP.glob("*.csv")) + list(INP.glob("*.json")) + list((REPO / "results").glob("*.csv"))
-    files += list((REPO / "results").glob("*.json")) + [REPO / "README.md", REPO / "docs" / "validation_report.md"]
+    files += list((REPO / "results").glob("*.json")) + [REPO / "README.md"] + list((REPO / "docs").glob("*.md"))
+    files += list((REPO / "config").glob("*.json"))
     for p in files:
         assert b"\r\n" not in p.read_bytes(), p.name

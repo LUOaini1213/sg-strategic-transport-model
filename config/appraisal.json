@@ -1,0 +1,37 @@
+{
+  "_about": "Parameters of the economic appraisal (stm/appraisal.py). Same labels as config/model.json. REAL = a published value, quoted with its source and the date it was read; ASSUMPTION = chosen by the author; ILLUSTRATIVE = a placeholder with no source, used only so that a ratio can be shown. A REAL value from another country is still an ASSUMPTION when it is applied to Singapore, and the note says so.",
+  "scheme": {
+    "do_minimum": {"value": "dm_2030", "label": "ASSUMPTION", "note": "2030 with Tengah built out, rail network without the Jurong Region Line"},
+    "do_something": {"value": "ds_2030_jrl", "label": "ASSUMPTION", "note": "the same land use with the Jurong Region Line"},
+    "base_year": {"value": 2026, "label": "ASSUMPTION", "note": "year to which all values are discounted. Prices are not uprated: each unit value keeps the price year of its source (see the notes below), which mixes price years and is a stated simplification"},
+    "opening_year": {"value": 2030, "label": "ASSUMPTION", "note": "first full year with all three stages open (LTA's project page gives 2028 for stages 1 and 2 and 2029 for stage 3); benefits before 2030 are left out"},
+    "appraisal_years": {"value": 60, "label": "REAL", "note": "UK Department for Transport, TAG Unit A1.1 Cost-Benefit Analysis (May 2026), paragraph 2.1.1: impacts are assessed over a period 'typically ending 60 years after scheme opening'. https://www.gov.uk/government/publications/tag-unit-a1-1-cost-benefit-analysis, read 2026-11-23. Applying UK guidance to Singapore is an ASSUMPTION"},
+    "benefit_growth_per_year": {"value": 0.0, "label": "ASSUMPTION", "note": "the model has one forecast year (2030); demand and unit values are held constant in real terms over the appraisal period"}
+  },
+  "discounting": {
+    "schedule": {"value": [[30, 0.035], [75, 0.03]], "label": "REAL", "note": "[last year counted from the base year, annual rate]. TAG Unit A1.1 (May 2026), paragraph 2.7.6: '3.5% should be applied for years between the current year (the year the appraisal is taking place) and year 30 of an appraisal', '3% for years 31 to 75'. https://www.gov.uk/government/publications/tag-unit-a1-1-cost-benefit-analysis, read 2026-11-23. Singapore's public-sector discount rate is not published, so using the UK schedule is an ASSUMPTION"},
+    "schedule_green_book_2026": {"value": [[30, 0.03], [75, 0.025]], "label": "REAL", "note": "sensitivity test. HM Treasury, The Green Book (2026), HTML version updated 28 October 2026, chapter 6, 'Discounting': the social time preference rate 'is set at 3.00% in real terms for years 1 to 30 of an appraisal', 'It is 2.50% for years 31 to 75'. https://www.gov.uk/government/publications/the-green-book--2/the-green-book-2026, read 2026-11-23"},
+    "high_rate": {"value": 0.07, "label": "ASSUMPTION", "note": "sensitivity test with a flat high rate; not taken from a source that was opened"}
+  },
+  "values": {
+    "value_of_time_sgd_per_hour": {"value": 16.39, "label": "REAL", "note": "Hess, S., Murphy, P., Le, H. and Leong, W.Y. (2017), Estimation of new monetary valuations of travel time, quality of travel, and safety for Singapore, Transportation Research Record 2664, 79-90, a study commissioned by LTA with a survey in 2015: 'An equity value of travel time was also calculated ... the VTT was 27.32 cents/min or $16.39/h'. Author copy at https://eprints.whiterose.ac.uk/id/eprint/114956/, read 2026-11-23. 2015 values, not uprated to 2026 (ASSUMPTION; this understates today's value). The model's generalised public-transport minutes (walking and waiting weighted) are all valued at this rate (ASSUMPTION)"},
+    "value_of_time_range": {"value": 0.25, "label": "REAL", "note": "TAG Unit A1.3 User and Provider Impacts (May 2026), Table 1, recommended sensitivity testing range for non-work values of time: 'Commute +/- 25%'. https://www.gov.uk/government/publications/tag-unit-a1-3-user-and-provider-impacts, read 2026-11-23"},
+    "fuel": {"value": "not monetised", "label": "ASSUMPTION", "note": "the model has no relation between speed and fuel use, and trip distances by origin-destination pair are taken as unchanged by the scheme, so the perceived fuel cost per trip does not change. The fuel that travellers who switch to public transport no longer buy is not a separate benefit under the rule of a half: their gain is counted on the public-transport side"},
+    "non_fuel_cost_sgd_per_km": {"value": 0.1, "label": "ASSUMPTION", "note": "tyres, maintenance and mileage-related depreciation; no source opened. TAG Unit A1.3 (May 2026), paragraph 2.1.11: 'Non-working car drivers are assumed not to perceive non-fuel elements of cost', so the net change is added outside the rule of a half"},
+    "co2_kg_per_vehicle_km": {"value": 0.2485, "label": "DERIVED", "note": "400 g per mile / 1.609344 km per mile. US Environmental Protection Agency, Greenhouse Gas Emissions from a Typical Passenger Vehicle (page last updated 3 June 2026): 'The average passenger vehicle emits about 400 grams of CO2 per mile'. https://www.epa.gov/greenvehicles/greenhouse-gas-emissions-typical-passenger-vehicle, read 2026-11-23. Tailpipe CO2 only; a US fleet average applied to Singapore is an ASSUMPTION"},
+    "carbon_price_sgd_per_tonne": {"value": 45.0, "label": "REAL", "note": "National Climate Change Secretariat, Carbon Tax: 'It was raised to S$45/tCO2e with effect from 1 Jan 2026', 'with a view to reaching S$50-80/tCO2e by 2030'. https://www.nccs.gov.sg/singapores-climate-action/mitigation-efforts/carbontax/, read 2026-11-23. A tax rate, used here in place of a social cost of carbon (ASSUMPTION); held at S$45 for the whole period"},
+    "accidents": {"value": "not monetised", "label": "ASSUMPTION", "note": "Hess et al. (2017), Table 9, give Singapore values of risk reduction (fatality S$4,052,124 in 2015 dollars), but no public accident rate per vehicle-kilometre by road type was found, so the accident component is left out rather than built on a guessed rate"}
+  },
+  "annualisation": {
+    "working_days_per_year": {"value": 250, "label": "ASSUMPTION", "note": "about 52 weeks x 5 days less public holidays"},
+    "return_trip_factor": {"value": 2.0, "label": "ASSUMPTION", "note": "public-transport user benefits are computed on the daily home-to-work matrix and doubled for the journey home, taking the cost change as the same in both directions"},
+    "road_peak_hours_per_day": {"value": 2.0, "label": "ASSUMPTION", "note": "road decongestion is counted for the modelled AM peak hour and one mirrored PM peak hour only; no benefit is counted in any other hour. This is a low count"}
+  },
+  "costs": {
+    "capital_cost_pv_sgd_million": {"value": 4000.0, "label": "ILLUSTRATIVE", "note": "round placeholder, expressed as a present value in the base year. No total cost for the Jurong Region Line has been published; LTA's individual contract awards were not added up. Every ratio that uses it is illustrative"},
+    "operating_cost_sgd_million_per_year": {"value": 60.0, "label": "ILLUSTRATIVE", "note": "round placeholder for operation, maintenance and renewals, constant in real terms from the opening year; no source"}
+  },
+  "land_use_test": {
+    "note": {"value": "public-transport user benefits recomputed with 2020 land use (no Tengah)", "label": "ASSUMPTION", "note": "road decongestion is not recomputed for this test: it would need a fourth equilibrium assignment (2020 land use with the line), which is not part of the saved results"}
+  }
+}
