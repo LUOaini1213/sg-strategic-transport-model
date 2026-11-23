@@ -287,7 +287,7 @@ python mutation/run_mutants.py    # optional: mutation test of the test suite
 
 `mutation/run_mutants.py` copies the repository, plants one deliberate bug at a time in the core logic and runs the suite. **{{mut_killed}} of {{mut_total}} mutants killed** ({{mut_killed_ns}} of {{mut_total}} also with the snapshot tests switched off, i.e. by the hand-worked and property tests alone; the snapshot tests compare a fresh run with the committed results and README). Survivors: {{mutation_survivors}}. Details: `results/mutation_report.json`.
 
-The harness was extended from 30 to {{mut_total}} mutants when the appraisal and survey modules were added. First run of the extended harness ({{mut_first_date}}): {{mut_first_killed}} of {{mut_first_total}} killed, {{mut_first_killed_ns}} without the snapshot tests; survivors of the full suite: {{mut_first_survivors}}; not killed without the snapshot tests: {{mut_first_survivors_ns}}. The figures above are the final run.
+The harness was extended from 30 to {{mut_total}} mutants when the appraisal and survey modules were added. First run of the extended harness ({{mut_first_date}}): {{mut_first_killed}} of {{mut_first_total}} killed, {{mut_first_killed_ns}} without the snapshot tests; survivors of the full suite: {{mut_first_survivors}}; not killed without the snapshot tests: {{mut_first_survivors_ns}}. The figures in the paragraph above are from the latest run (`date` in `results/mutation_report.json`).
 
 ## Licence
 
