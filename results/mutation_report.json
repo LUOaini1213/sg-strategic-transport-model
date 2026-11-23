@@ -1,9 +1,9 @@
 {
- "date": "2026-11-23",
- "tests_collected": 106,
- "total": 63,
- "killed": 63,
- "killed_without_snapshot": 63,
+ "date": "2026-11-24",
+ "tests_collected": 120,
+ "total": 78,
+ "killed": 78,
+ "killed_without_snapshot": 78,
  "mutants": [
   {
    "id": "M01",
@@ -697,14 +697,179 @@
    "killed_without_snapshot": true,
    "pytest_without_snapshot": "FAILED tests/test_survey.py::test_generator_agrees_with_its_truth_when_response_is_unrelated_to_anything",
    "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M64",
+   "file": "stm/road_scheme.py",
+   "what": "road scheme: direction of the links reversed",
+   "original": "    return sign * (node_xy[b, axis] - node_xy[a, axis]) > 0",
+   "mutated": "    return sign * (node_xy[b, axis] - node_xy[a, axis]) < 0",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_pipeline.py::test_committed_road_scheme_flows_are_a_user_equilibrium_on_the_widened_network",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M65",
+   "file": "stm/road_scheme.py",
+   "what": "road scheme: every link heading that way is selected, whatever its name",
+   "original": "    m &= heading(links, node_xy, v(s[\"direction\"]))",
+   "mutated": "    m |= heading(links, node_xy, v(s[\"direction\"]))",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_pipeline.py::test_committed_road_scheme_flows_are_a_user_equilibrium_on_the_widened_network",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M66",
+   "file": "stm/road_scheme.py",
+   "what": "corridor ranking: a link exactly at the threshold counts as over capacity",
+   "original": "    d[\"over\"] = d.length_km * (d[vc_column] > threshold)",
+   "mutated": "    d[\"over\"] = d.length_km * (d[vc_column] >= threshold)",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_corridor_ranking_hand - assert [4.0, 4...",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M67",
+   "file": "stm/road_scheme.py",
+   "what": "corridor ranking: the least congested road comes first",
+   "original": "ascending=[False, True, True],",
+   "mutated": "ascending=[True, True, True],",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_corridor_ranking_hand - AssertionError...",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M68",
+   "file": "stm/road_scheme.py",
+   "what": "widening applied to every road link",
+   "original": "    add = added_lanes * links.highway.map(capacity_per_lane).astype(float).values * mask",
+   "mutated": "    add = added_lanes * links.highway.map(capacity_per_lane).astype(float).values",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_pipeline.py::test_committed_road_scheme_flows_are_a_user_equilibrium_on_the_widened_network",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M69",
+   "file": "stm/road_scheme.py",
+   "what": "widening changes the link table but not the network used by the assignment",
+   "original": "    cap[: rm.n_road_links] = cap[: rm.n_road_links] + add",
+   "mutated": "    cap[: rm.n_road_links] = cap[: rm.n_road_links]",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_pipeline.py::test_committed_road_scheme_flows_are_a_user_equilibrium_on_the_widened_network",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M70",
+   "file": "stm/road_scheme.py",
+   "what": "road scheme appraised with the rail line's costs",
+   "original": "    out[\"costs\"] = copy.deepcopy(rc[\"costs\"])",
+   "mutated": "    out[\"costs\"] = copy.deepcopy(ac[\"costs\"])",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_two_route_appraisal_with_fixed_demand_by_hand",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M71",
+   "file": "stm/road_scheme.py",
+   "what": "traffic growth reported as a ratio",
+   "original": "            \"corridor_traffic_growth\": float(np.dot(f1[mask], k) / np.dot(f0[mask], k) - 1.0),",
+   "mutated": "            \"corridor_traffic_growth\": float(np.dot(f1[mask], k) / np.dot(f0[mask], k)),",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_two_route_equilibrium_and_summary_by_hand",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M72",
+   "file": "stm/road_scheme.py",
+   "what": "with-scheme travel times computed on the network without the scheme",
+   "original": "    t0, t1 = rm0.net.time(flow0)[:n], rm1.net.time(flow1)[:n]",
+   "mutated": "    t0, t1 = rm0.net.time(flow0)[:n], rm0.net.time(flow1)[:n]",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_two_route_equilibrium_and_summary_by_hand",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M73",
+   "file": "stm/road_scheme.py",
+   "what": "first-round mode response: faster roads treated as slower",
+   "original": "L.utilities(theta, t_car + dt_min, g_pt, dist, private, central, industrial)",
+   "mutated": "L.utilities(theta, t_car - dt_min, g_pt, dist, private, central, industrial)",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_first_round_mode_response_by_hand - as...",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M74",
+   "file": "stm/appraisal.py",
+   "what": "appraisal: with-scheme road times taken on the network without the scheme",
+   "original": "    car_h = rule_of_half(Q0, Q1, road_times(rm, flow0), road_times(rm1, flow1))",
+   "mutated": "    car_h = rule_of_half(Q0, Q1, road_times(rm, flow0), road_times(rm, flow1))",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_single_route_appraisal_uses_the_widened_network",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M75",
+   "file": "stm/appraisal.py",
+   "what": "more vehicle-km counted as a fuel saving",
+   "original": "        \"car_user_fuel\": -day.get(\"fixed_demand_vehicle_km_change_per_peak_hour\", 0.0)",
+   "mutated": "        \"car_user_fuel\": day.get(\"fixed_demand_vehicle_km_change_per_peak_hour\", 0.0)",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_two_route_appraisal_with_fixed_demand_by_hand",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M76",
+   "file": "stm/appraisal.py",
+   "what": "fuel counted even when demand varies",
+   "original": "           \"fixed_demand_vehicle_km_change_per_peak_hour\": (vkm1 - vkm0) if fixed_demand else 0.0}",
+   "mutated": "           \"fixed_demand_vehicle_km_change_per_peak_hour\": (vkm1 - vkm0)}",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_appraisal.py::test_two_zone_example_by_hand - assert 120000...",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M77",
+   "file": "stm/appraisal.py",
+   "what": "appraisal: with-scheme vehicle-hours at the times of the network without the scheme",
+   "original": "    vh1 = float(np.dot(flow1[:nrl], rm1.net.time(flow1)[:nrl]))",
+   "mutated": "    vh1 = float(np.dot(flow1[:nrl], rm.net.time(flow1)[:nrl]))",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_two_route_appraisal_with_fixed_demand_by_hand",
+   "pytest_full": "(killed already without the snapshot tests)"
+  },
+  {
+   "id": "M78",
+   "file": "stm/appraisal.py",
+   "what": "fixed-demand appraisal accepts two different demand matrices",
+   "original": "    if fixed_demand and not np.array_equal(Q0, Q1):",
+   "mutated": "    if False:",
+   "killed": true,
+   "killed_without_snapshot": true,
+   "pytest_without_snapshot": "FAILED tests/test_road_scheme.py::test_two_route_appraisal_with_fixed_demand_by_hand",
+   "pytest_full": "(killed already without the snapshot tests)"
   }
  ],
  "first_run": {
-  "date": "2026-11-23",
-  "tests_collected": 106,
-  "total": 63,
-  "killed": 63,
-  "killed_without_snapshot": 63,
+  "date": "2026-11-24",
+  "tests_collected": 119,
+  "total": 78,
+  "killed": 78,
+  "killed_without_snapshot": 77,
   "mutant_ids": [
    "M01",
    "M02",
@@ -768,9 +933,30 @@
    "M60",
    "M61",
    "M62",
-   "M63"
+   "M63",
+   "M64",
+   "M65",
+   "M66",
+   "M67",
+   "M68",
+   "M69",
+   "M70",
+   "M71",
+   "M72",
+   "M73",
+   "M74",
+   "M75",
+   "M76",
+   "M77",
+   "M78"
   ],
   "survivors": [],
-  "survivors_without_snapshot": []
+  "survivors_without_snapshot": [
+   {
+    "id": "M74",
+    "file": "stm/appraisal.py",
+    "what": "appraisal: with-scheme road times taken on the network without the scheme"
+   }
+  ]
  }
 }

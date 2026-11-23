@@ -197,6 +197,33 @@ def test_two_route_appraisal_with_fixed_demand_by_hand(tmp_path):
         A.run(tmp_path, Q0=Q, Q1=0.9 * Q, fixed_demand=True, **kw)
 
 
+def test_single_route_appraisal_uses_the_widened_network(tmp_path):
+    """Added after the first mutation run: in the two-route example the quickest time with the scheme is the same
+    on the old and on the widened network (the unwidened Side Road ties with the Fast Road at equilibrium), so that
+    example cannot tell which network the appraisal reads its with-scheme times from. A road with no alternative
+    can: widen the Back Road, the only route from zone 1 to zone 0."""
+    rm = _toy()
+    rc = _rc(road="Back Road", highway="primary", direction="northbound")
+    mask = RS.select_links(rm.links, XY, rc)
+    rm1 = RS.widen(rm, mask, 1, CAP)
+    f0, f1 = _solve(rm), _solve(rm1)
+    assert f0[:3] == pytest.approx(f1[:3], rel=1e-9)                # nothing can re-route
+    z = pd.DataFrame({"planning_area": ["NORTHTOWN", "SOUTHTOWN"], "region": ["NORTH REGION", "CENTRAL REGION"]})
+    P = np.array([np.full((2, 2), 0.3), np.full((2, 2), 0.6), np.full((2, 2), 0.1)])
+    g_pt = np.full((2, 2), 40.0)
+    r = A.run(tmp_path, z=z, T_do_min=np.array([[0.0, 9000.0], [1000.0, 0.0]]), T_2020=None, P0=P, P1=P, V0=np.log(P),
+              V1=np.log(P), b_time=-0.1, g_pt0=g_pt, g_pt1=g_pt, Q0=Q, Q1=Q, flow0=f0, flow1=f1, rm=rm, rm1=rm1,
+              attendance=0.9, occupancy=1.2, write_json=write_json, write_csv=write_csv,
+              ac=RS.appraisal_config(_toy_ac(), rc), out_name="toy_back", fixed_demand=True)
+    q, b = r["quantities"], r["annual_benefits_sgd"]
+    # 300 pcu/h: 0.30 (1 + 300 / 1000) = 0.390 h before, 0.30 (1 + 300 / 2000) = 0.345 h after: 300 x 0.045 = 13.5
+    assert q["car_vehicle_hours_per_peak_hour"] == pytest.approx(13.5, rel=1e-9)
+    assert q["vehicle_km_change_per_peak_hour"] == pytest.approx(0.0, abs=1e-6)
+    assert b["car_user_time"] == pytest.approx(13.5 * 1.2 * 400 * 10)                       # 64,800
+    assert b["car_user_fuel"] == pytest.approx(0.0, abs=1e-3) and b["co2"] == pytest.approx(0.0, abs=1e-3)
+    assert r["distribution"]["by_region"]["CENTRAL REGION"]["share"] == pytest.approx(1.0)  # zone 1 makes these trips
+
+
 def test_first_round_mode_response_by_hand():
     # one zone pair; utilities V_car = -0.1 t_car, V_pt = -0.1 g_pt, "other" switched off with a constant of -50.
     # Equal times of 30 minutes: car probability 0.5. Car 10 minutes faster: 1 / (1 + exp(-1)) = 0.731059
