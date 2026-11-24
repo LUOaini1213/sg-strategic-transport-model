@@ -21,11 +21,14 @@ import numpy as np
 import pandas as pd
 from matplotlib.path import Path as MplPath
 
+from . import appraisal as A
 from . import gravity as G
 from . import junction as J
 from . import logit as L
 from . import model as M
+from . import road_scheme as RS
 from . import stats as S
+from . import survey as SV
 from .assignment import assign, equilibrium_gap
 
 REPO = Path(__file__).resolve().parents[1]
@@ -572,6 +575,87 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     jres = junctions(rm, inp, cfg, lf, results_flows, link_region, out)
     summary["junctions"] = jres
     log("junctions")
+
+    # ---- h. economic appraisal of the Jurong Region Line (2030 with the line against 2030 without) -------------------
+    Vs = {name: L.utilities(theta, t_car, gpt, d, priv, cen, ind) for name, gpt in (("dm", g_pt0), ("ds", g_pt1))}
+    A.run(out, z=z, T_do_min=T30, T_2020=T, P0=scen["dm_2030"]["P"], P1=scen["ds_2030_jrl"]["P"], V0=Vs["dm"],
+          V1=Vs["ds"], b_time=float(theta[2]), g_pt0=g_pt0, g_pt1=g_pt1, Q0=np.load(out / "car_demand_dm_2030.npy"),
+          Q1=np.load(out / "car_demand_ds_2030_jrl.npy"), flow0=results_flows["dm_2030"],
+          flow1=results_flows["ds_2030_jrl"], rm=rm, attendance=att, occupancy=M.v(acfg["car_occupancy"]),
+          write_json=write_json, write_csv=write_csv)
+    log("appraisal")
+
+    # ---- k. a stylised road scheme, appraised on the same basis (fixed demand; ILLUSTRATIVE) -------------------------
+    rc = RS.load_config()
+    thr = M.v(rc["selection"]["threshold_vc"])
+    rank = RS.corridor_ranking(lf, "vc_dm_2030", thr)
+    write_csv(out / "road_scheme_corridor_ranking.csv", rank.head(10))
+    mask = RS.select_links(rm.links, node_xy, rc)
+    rm_road = RS.widen(rm, mask, M.v(rc["scheme"]["added_lanes"]), M.v(acfg["capacity_per_lane"]))
+    Q_dm = np.load(out / "car_demand_dm_2030.npy")
+    g = rm.net.graph
+    # solved with the other assignments, or on its own if its saved flows are missing
+    if assign_scenarios or not (out / "road_scheme_flows.csv").exists():
+        r = assign(rm_road.net, rm.origins, rm.dests, Q_dm, method="bfw", rgap_target=target,
+                   max_iter=M.v(acfg["max_iter"]), x0=results_flows["dm_2030"])
+        flow_road = np.array([float(f"{x:.10g}") for x in r.flow])
+        write_csv(out / "road_scheme_flows.csv", pd.DataFrame(
+            {"kind": np.where(np.arange(g.n_links) < nrl, "road", "connector"), "tail": g.tail, "head": g.head,
+             "flow_ds_2030_road": flow_road}), sig=10)
+        write_csv(out / "road_scheme_convergence.csv", pd.DataFrame(
+            {"iteration": np.arange(1, len(r.history) + 1), "relative_gap": r.history}))
+        log(f"assignment ds_2030_road: {r.iterations} iterations, gap {r.relative_gap:.2e}")
+    else:
+        flow_road = pd.read_csv(out / "road_scheme_flows.csv").flow_ds_2030_road.values
+    conv_road = pd.read_csv(out / "road_scheme_convergence.csv")
+    chk = equilibrium_gap(rm_road.net, flow_road, rm.origins, rm.dests, Q_dm)
+    chk0 = equilibrium_gap(rm.net, results_flows["dm_2030"], rm.origins, rm.dests, Q_dm)
+    # first-round mode response to the faster car times; not fed back into the assignment
+    dt_min = (A.road_times(rm_road, flow_road) - A.road_times(rm, results_flows["dm_2030"])) * 60.0
+    Q_ind = car_demand(T30, RS.car_probability_after_time_change(theta, t_car, dt_min, g_pt0, d, priv, cen, ind),
+                       cfg, phf)
+    sel = rank[(rank.name == M.v(rc["scheme"]["road_name"])) & (rank.highway == M.v(rc["scheme"]["highway"]))]
+    on_road = (lf.name.values == M.v(rc["scheme"]["road_name"])) & (lf.highway.values == M.v(rc["scheme"]["highway"]))
+    over = lf.length_km.values * (lf.vc_dm_2030.values > thr)
+    road_res = RS.summarise(rm, rm_road, mask, results_flows["dm_2030"], flow_road, thr)
+    road_res.update({
+        "illustrative": True, "road_name": M.v(rc["scheme"]["road_name"]), "direction": M.v(rc["scheme"]["direction"]),
+        "added_lanes": M.v(rc["scheme"]["added_lanes"]),
+        "selection": {"rule_picks": str(rank.name.iloc[0]), "rule_picks_highway": str(rank.highway.iloc[0]),
+                      "km_over_threshold": float(sel.km_over_threshold.iloc[0]),
+                      "km_over_threshold_in_scheme_direction": float(over[on_road & mask].sum()),
+                      "km_over_threshold_other_direction": float(over[on_road & ~mask].sum()),
+                      "runner_up": str(rank.name.iloc[1]), "runner_up_highway": str(rank.highway.iloc[1]),
+                      "runner_up_km_over_threshold": float(rank.km_over_threshold.iloc[1]),
+                      "network_km_over_threshold": float(over.sum())},
+        "assignment": {"iterations": int(conv_road.iteration.max()), "relative_gap": float(conv_road.relative_gap.iloc[-1]),
+                       "relative_gap_recomputed": chk["relative_gap"], "converged": bool(chk["relative_gap"] <= target * 1.001),
+                       "car_trips_per_hour": float(Q_dm.sum()),
+                       "total_travel_time_change_vehicle_hours": chk["tstt"] - chk0["tstt"],
+                       "shortest_path_travel_time_change_vehicle_hours": chk["sptt"] - chk0["sptt"]},
+        "first_round_mode_response": {
+            "car_trips_per_hour": float(Q_ind.sum() - scen["dm_2030"]["Q"].sum()),
+            "share_of_car_trips": float(Q_ind.sum() / scen["dm_2030"]["Q"].sum() - 1.0),
+            "mean_car_time_change_min": float((scen["dm_2030"]["Q"] * dt_min).sum() / scen["dm_2030"]["Q"].sum())}})
+    write_json(out / "road_scheme.json", road_res)
+    A.run(out, z=z, T_do_min=T30, T_2020=None, P0=scen["dm_2030"]["P"], P1=scen["dm_2030"]["P"], V0=Vs["dm"],
+          V1=Vs["dm"], b_time=float(theta[2]), g_pt0=g_pt0, g_pt1=g_pt0, Q0=Q_dm, Q1=Q_dm,
+          flow0=results_flows["dm_2030"], flow1=flow_road, rm=rm, rm1=rm_road, attendance=att,
+          occupancy=M.v(acfg["car_occupancy"]), write_json=write_json, write_csv=write_csv,
+          ac=RS.appraisal_config(A.load_config(), rc), out_name="road_scheme_appraisal", fixed_demand=True)
+    log("road scheme")
+
+    # ---- i. household travel survey: design, synthetic respondents, weighting (no real survey) ---------------------
+    pa_reg = z.groupby("planning_area").region.first()
+    car_reg = np.zeros((len(M.REGIONS), 2))
+    for k, p_ in enumerate(res_rows):
+        if M.pa_title(p_) in pa_reg.index:
+            car_reg[M.REGIONS.index(pa_reg[M.pa_title(p_)])] += [obs_res[k, 0], obs_res[k].sum()]
+    SV.run(out, z=z, regions=M.REGIONS, O=O, T=T,
+           P_public=L.probabilities(L.utilities(theta, t_car, g_pt0, d, np.zeros(nz), cen, ind)),
+           P_private=L.probabilities(L.utilities(theta, t_car, g_pt0, d, np.ones(nz), cen, ind)),
+           attendance=att, census_car_share=car_reg[:, 0] / car_reg[:, 1], write_json=write_json, write_csv=write_csv)
+    log("survey")
 
     summary["runtime_s"] = None  # not recorded: it differs between machines
     write_json(out / "summary.json", summary)

@@ -1,0 +1,65 @@
+{
+ "added_lanes": 1,
+ "assignment": {
+  "car_trips_per_hour": 166602.0496,
+  "converged": true,
+  "iterations": 226,
+  "relative_gap": 9.21038e-07,
+  "relative_gap_recomputed": 9.210438941e-07,
+  "shortest_path_travel_time_change_vehicle_hours": -277.7068431,
+  "total_travel_time_change_vehicle_hours": -277.7014966
+ },
+ "capacity_added_share": 0.24,
+ "corridor_traffic_growth": 0.1507965638,
+ "corridor_with": {
+  "km_over_threshold": 11.6377,
+  "max_vc": 1.448278433,
+  "mean_speed_kmh_flow_weighted": 67.77944743,
+  "mean_vc_km_weighted": 1.084084986,
+  "vehicle_km": 159949.8394
+ },
+ "corridor_without": {
+  "km_over_threshold": 12.5476,
+  "max_vc": 1.609515908,
+  "mean_speed_kmh_flow_weighted": 62.41269965,
+  "mean_vc_km_weighted": 1.187756121,
+  "vehicle_km": 138990.5431
+ },
+ "directed_km": 15.7456,
+ "direction": "southbound",
+ "first_round_mode_response": {
+  "car_trips_per_hour": 106.603027,
+  "mean_car_time_change_min": -0.1000132389,
+  "share_of_car_trips": 0.0006398662392
+ },
+ "illustrative": true,
+ "lane_km_added": 15.7456,
+ "lanes_before_max": 6.0,
+ "lanes_before_min": 2.0,
+ "links": 36,
+ "network_with": {
+  "km_over_threshold": 87.8515,
+  "vehicle_hours": 44678.09131,
+  "vehicle_km": 2305524.088
+ },
+ "network_without": {
+  "km_over_threshold": 94.3157,
+  "vehicle_hours": 44957.30799,
+  "vehicle_km": 2301876.803
+ },
+ "other_links_vc_down_by_0_05": 252,
+ "other_links_vc_up_by_0_05": 153,
+ "road_name": "Central Expressway",
+ "selection": {
+  "km_over_threshold": 12.5476,
+  "km_over_threshold_in_scheme_direction": 12.5476,
+  "km_over_threshold_other_direction": 0.0,
+  "network_km_over_threshold": 94.3157,
+  "rule_picks": "Central Expressway",
+  "rule_picks_highway": "motorway",
+  "runner_up": "Tanah Merah Coast Road",
+  "runner_up_highway": "primary",
+  "runner_up_km_over_threshold": 9.3956
+ },
+ "vehicle_km_moved_off_other_roads": 17312.01097
+}
