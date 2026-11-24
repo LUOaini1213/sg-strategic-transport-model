@@ -305,8 +305,12 @@ def run(out: Path = RESULTS, assign_scenarios: bool = True, verbose: bool = True
     summary["distribution_bus"] = bus_summary
     write_csv(out / "tld_bus.csv", pd.DataFrame(tld_rows, columns=["month", "km_from", "km_to", "observed_trips",
                                                                    "modelled_trips_gamma", "modelled_trips_exponential"]))
-    write_csv(out / "bus_pa_pairs_202608.csv", pair_tables["202608"].sort_values(
-        ["observed_trips", "origin_pa", "dest_pa"], ascending=[False, True, True], kind="mergesort"))
+    # sort on the value as written (7 significant figures), so rows that print the same are ordered by name and not
+    # by float noise in the last bits, which differs between platforms
+    pairs = pair_tables["202608"]
+    key = pairs.observed_trips.map(lambda v: float(f"{v:.7g}"))
+    write_csv(out / "bus_pa_pairs_202608.csv", pairs.assign(_key=key).sort_values(
+        ["_key", "origin_pa", "dest_pa"], ascending=[False, True, True], kind="mergesort").drop(columns="_key"))
     log(f"bus gravity a={a_b:.3f} b={b_b:.4f}")
 
     # ---- PT skims --------------------------------------------------------------------------------------------------
